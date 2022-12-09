@@ -1,0 +1,20 @@
+{
+  "name": "@rotki/eslint-config-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@7.28.0",
+  "license": "AGPL-3.0",
+  "author": "Rotki Solutions GmbH <info@rotki.com>",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "release": "bumpp -r --no-push && pnpm -r publish"
+  },
+  "devDependencies": {
+    "@rotki/eslint-config": "*",
+    "bumpp": "9.0.0",
+    "eslint": "8.35.0",
+    "rimraf": "4.3.0",
+    "typescript": "4.9.5"
+  }
+}
