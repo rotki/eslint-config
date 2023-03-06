@@ -21,7 +21,6 @@ module.exports = defineConfig({
     {
       files: ["*.vue"],
       parser: "vue-eslint-parser",
-      extends: ["plugin:vuetify/recommended"],
       parserOptions: {
         parser: "@typescript-eslint/parser",
         extraFileExtensions: [".vue"],
