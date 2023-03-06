@@ -14,10 +14,13 @@
   "peerDependencies": {
     "eslint": ">=8.10.0",
     "vue": ">=2.7.0 || ^3.0.0",
-    "vuetify": "2.6.12"
+    "vuetify": ">=2.6.0 <3.0.0"
   },
   "peerDependenciesMeta": {
     "vue": {
+      "optional": true
+    },
+    "vuetify": {
       "optional": true
     }
   },
