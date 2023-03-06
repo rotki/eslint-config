@@ -1,5 +1,7 @@
 # @rotki/eslint-config
 
+[![npm (scoped)](https://img.shields.io/npm/v/@rotki/eslint-config?style=flat-square)](https://www.npmjs.com/package/@rotki/eslint-config)
+
 Inspired by [@antfu/eslint-config](https://github.com/antfu/eslint-config) and [@sxzz/eslint-config](https://github.com/sxzz/eslint-config).
 
 A common configuration to be used across the different [rotki](https://github.com/rotki) TypeScript and JavaScript repositories.
