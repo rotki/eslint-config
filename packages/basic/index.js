@@ -284,5 +284,6 @@ module.exports = defineConfig({
 
     // extras
     curly: ["error", "all"],
+    "arrow-body-style": ["error", "as-needed"],
   },
 });
