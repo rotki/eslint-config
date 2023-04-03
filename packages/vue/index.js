@@ -132,5 +132,6 @@ module.exports = defineConfig({
         order: ["script", "template", "style"],
       },
     ],
+    "vue/padding-line-between-blocks": ["error", "always"],
   },
 });
