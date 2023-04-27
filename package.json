@@ -11,17 +11,25 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "release": "bumpp -r --no-push && pnpm -r publish"
+    "release": "bumpp -r --no-push && pnpm -r publish",
+    "prepare": "husky install"
   },
   "devDependencies": {
+    "@commitlint/cli": "17.6.1",
+    "@commitlint/config-conventional": "17.6.1",
     "@rotki/eslint-config": "*",
     "bumpp": "9.1.0",
     "eslint": "8.39.0",
+    "husky": "8.0.3",
+    "lint-staged": "13.2.2",
     "rimraf": "5.0.0",
     "typescript": "5.0.4"
   },
   "engines": {
     "node": ">=16 <19",
     "pnpm": ">=8 <9"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue,json,md}": "eslint"
   }
 }
