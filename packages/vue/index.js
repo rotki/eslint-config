@@ -133,5 +133,12 @@ module.exports = defineConfig({
       },
     ],
     'vue/padding-line-between-blocks': ['error', 'always'],
+    'vue/v-on-handler-style': [
+      'error',
+      'inline',
+      {
+        ignoreIncludesComment: false,
+      },
+    ],
   },
 });
