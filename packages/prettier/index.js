@@ -1,15 +1,15 @@
-const { defineConfig } = require("eslint-define-config");
-const { rules: prettierRules } = require("eslint-config-prettier");
+const { defineConfig } = require('eslint-define-config');
+const { rules: prettierRules } = require('eslint-config-prettier');
 
-delete prettierRules["vue/html-self-closing"];
-delete prettierRules["curly"];
+delete prettierRules['vue/html-self-closing'];
+delete prettierRules['curly'];
 
 module.exports = defineConfig({
-  extends: ["plugin:yml/prettier"],
-  plugins: ["prettier"],
+  extends: ['plugin:yml/prettier'],
+  plugins: ['prettier'],
   rules: {
     ...prettierRules,
-    "prettier/prettier": "error",
+    'prettier/prettier': 'error',
   },
-  ignorePatterns: ["auto-imports.d.ts", "components.d.ts"],
+  ignorePatterns: ['auto-imports.d.ts', 'components.d.ts'],
 });
