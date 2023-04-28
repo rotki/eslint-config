@@ -15,8 +15,55 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.x
+          node-version-file: .nvmrc
 
       - run: npx changelogithub
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: publish to npm
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+          echo "always-auth=true" >> ~/.npmrc
+          npm whoami
+
+          pnpm -r publish --access=public --no-git-checks
+          rm ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
