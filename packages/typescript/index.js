@@ -16,7 +16,7 @@ module.exports = defineConfig({
         rules: {
           'no-undef': 'off',
           'max-lines': [
-            'warn',
+            'error',
             {
               max: 400,
             },
