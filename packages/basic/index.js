@@ -285,5 +285,14 @@ module.exports = defineConfig({
     // extras
     curly: ['error', 'all'],
     'arrow-body-style': ['error', 'as-needed'],
+
+    'padding-line-between-statements': [
+      'error',
+      {
+        blankLine: 'always',
+        prev: '*',
+        next: ['class', 'function', 'export'],
+      },
+    ],
   },
 });

@@ -148,5 +148,15 @@ module.exports = defineConfig({
         ignoreTypeImports: false,
       },
     ],
+
+    'padding-line-between-statements': 'off',
+    '@typescript-eslint/padding-line-between-statements': [
+      'error',
+      {
+        blankLine: 'always',
+        prev: '*',
+        next: ['interface', 'type', 'class', 'function', 'export'],
+      },
+    ],
   },
 });
