@@ -114,7 +114,7 @@ module.exports = defineConfig({
     ],
     'vue/component-name-in-template-casing': [
       'error',
-      'kebab-case',
+      'PascalCase',
       {
         registeredComponentsOnly: false,
         ignores: [],
