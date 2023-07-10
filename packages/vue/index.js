@@ -140,5 +140,6 @@ module.exports = defineConfig({
         ignoreIncludesComment: false,
       },
     ],
+    'vue/define-props-declaration': ['warn', 'type-based'],
   },
 });
