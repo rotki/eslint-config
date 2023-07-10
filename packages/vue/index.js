@@ -141,5 +141,11 @@ module.exports = defineConfig({
       },
     ],
     'vue/define-props-declaration': ['warn', 'type-based'],
+    'vue/define-macros-order': [
+      'error',
+      {
+        order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'],
+      },
+    ],
   },
 });
