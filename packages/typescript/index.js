@@ -120,7 +120,6 @@ module.exports = defineConfig({
     '@typescript-eslint/no-redeclare': 'off',
 
     '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/consistent-type-imports': [
       'error',
       { fixStyle: 'inline-type-imports', disallowTypeAnnotations: false },
