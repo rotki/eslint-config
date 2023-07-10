@@ -140,8 +140,7 @@ module.exports = defineConfig({
 
     // Imports
     'import/max-dependencies': [
-      // TODO: Raise the severity to 'error'
-      'warn',
+      'error',
       {
         max: 20,
         ignoreTypeImports: false,
