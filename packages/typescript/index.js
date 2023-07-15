@@ -108,7 +108,7 @@ module.exports = defineConfig({
                 ],
               },
             },
-          ]
+          ],
     ),
   rules: {
     'import/named': 'off',
