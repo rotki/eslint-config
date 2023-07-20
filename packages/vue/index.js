@@ -127,7 +127,7 @@ module.exports = defineConfig({
       'PascalCase',
       {
         registeredComponentsOnly: false,
-        ignores: [],
+        ignores: ['i18n', 'i18n-t', 'i18n-d', 'i18n-n'],
       },
     ],
     'vue/no-static-inline-styles': [
