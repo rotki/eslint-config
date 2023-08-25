@@ -2,7 +2,7 @@
   "name": "@rotki/eslint-config-monorepo",
   "version": "1.1.1",
   "private": true,
-  "packageManager": "pnpm@8.6.7",
+  "packageManager": "pnpm@8.6.12",
   "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/rotki/eslint-config/issues"
@@ -22,15 +22,15 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.6.6",
-    "@commitlint/config-conventional": "17.6.6",
+    "@commitlint/cli": "17.7.1",
+    "@commitlint/config-conventional": "17.7.0",
     "@rotki/eslint-config": "*",
-    "bumpp": "9.1.1",
-    "eslint": "8.45.0",
+    "bumpp": "9.2.0",
+    "eslint": "8.47.0",
     "husky": "8.0.3",
-    "lint-staged": "13.2.3",
+    "lint-staged": "14.0.1",
     "rimraf": "5.0.1",
-    "typescript": "5.1.6"
+    "typescript": "5.2.2"
   },
   "engines": {
     "node": ">=16 <19",

@@ -30,12 +30,12 @@
   },
   "dependencies": {
     "@rotki/eslint-config-ts": "workspace:*",
-    "eslint-define-config": "1.21.0",
-    "eslint-plugin-vue": "9.15.1",
+    "eslint-define-config": "1.23.0",
+    "eslint-plugin-vue": "9.17.0",
     "local-pkg": "0.4.3"
   },
   "devDependencies": {
-    "eslint": "8.45.0",
+    "eslint": "8.47.0",
     "vue": "2.7.14"
   }
 }
