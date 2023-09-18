@@ -26,10 +26,10 @@
     "eslint-config-prettier": "9.0.0",
     "eslint-define-config": "1.23.0",
     "eslint-plugin-prettier": "5.0.0",
-    "eslint-plugin-yml": "1.8.0",
-    "prettier": "3.0.2"
+    "eslint-plugin-yml": "1.9.0",
+    "prettier": "3.0.3"
   },
   "devDependencies": {
-    "eslint": "8.47.0"
+    "eslint": "8.49.0"
   }
 }

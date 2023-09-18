@@ -26,7 +26,7 @@
     "@commitlint/config-conventional": "17.7.0",
     "@rotki/eslint-config": "*",
     "bumpp": "9.2.0",
-    "eslint": "8.47.0",
+    "eslint": "8.49.0",
     "husky": "8.0.3",
     "lint-staged": "14.0.1",
     "rimraf": "5.0.1",

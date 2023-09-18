@@ -106,6 +106,13 @@ module.exports = defineConfig({
                     format: ['PascalCase'],
                   },
                 ],
+                '@typescript-eslint/consistent-type-assertions': [
+                  'error',
+                  {
+                    assertionStyle: 'as',
+                    objectLiteralTypeAssertions: 'allow',
+                  },
+                ],
               },
             },
           ],
@@ -123,13 +130,6 @@ module.exports = defineConfig({
     '@typescript-eslint/consistent-type-imports': [
       'error',
       { fixStyle: 'inline-type-imports', disallowTypeAnnotations: false },
-    ],
-    '@typescript-eslint/consistent-type-assertions': [
-      'error',
-      {
-        assertionStyle: 'as',
-        objectLiteralTypeAssertions: 'allow',
-      },
     ],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
