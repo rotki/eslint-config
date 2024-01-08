@@ -22,15 +22,15 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.7.1",
-    "@commitlint/config-conventional": "17.7.0",
+    "@commitlint/cli": "18.4.4",
+    "@commitlint/config-conventional": "18.4.4",
     "@rotki/eslint-config": "*",
-    "bumpp": "9.2.0",
-    "eslint": "8.49.0",
+    "bumpp": "9.2.1",
+    "eslint": "8.56.0",
     "husky": "8.0.3",
-    "lint-staged": "14.0.1",
-    "rimraf": "5.0.1",
-    "typescript": "5.2.2"
+    "lint-staged": "15.2.0",
+    "rimraf": "5.0.5",
+    "typescript": "5.3.3"
   },
   "engines": {
     "node": ">=16 <19",
