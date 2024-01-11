@@ -18,6 +18,8 @@ export * from './node';
 
 export * from './perfectionist';
 
+export * from './rotki-plugin';
+
 export * from './sort';
 
 export * from './stylistic';

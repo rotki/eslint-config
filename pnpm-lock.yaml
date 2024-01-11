@@ -20,6 +20,9 @@ importers:
       '@eslint-types/unicorn':
         specifier: 50.0.1
         version: 50.0.1
+      '@rotki/eslint-plugin':
+        specifier: '>=0.0.3'
+        version: 0.0.3(eslint@8.56.0)(typescript@5.3.3)
       '@stylistic/eslint-plugin':
         specifier: 1.5.3
         version: 1.5.3(eslint@8.56.0)(typescript@5.3.3)
@@ -837,6 +840,22 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@rotki/eslint-plugin@0.0.3(eslint@8.56.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-e4js452HdzS28X0kDfuN9r6z/d4XYfGUevJCooDHA/FSKUMyAmg6XIfuAcZOy9JMDjJogCB7DPc7gMGiN9GLGw==}
+    engines: {node: '>=18.0.0', pnpm: '>=8 <9'}
+    peerDependencies:
+      eslint: ^8.0.0
+    dependencies:
+      '@typescript-eslint/utils': 6.18.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      jsonc-eslint-parser: 2.4.0
+      vue-eslint-parser: 9.4.0(eslint@8.56.0)
+      yaml-eslint-parser: 1.2.2
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+    dev: false
 
   /@stylistic/eslint-plugin-js@1.5.3(eslint@8.56.0):
     resolution: {integrity: sha512-XlKnm82fD7Sw9kQ6FFigE0tobvptNBXZWsdfoKmUyK7bNxHsAHOFT8zJGY3j3MjZ0Fe7rLTu86hX/vOl0bRRdQ==}

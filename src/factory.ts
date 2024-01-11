@@ -12,6 +12,7 @@ import {
   markdown,
   node,
   perfectionist,
+  rotkiPlugin,
   sortPackageJson,
   sortTsconfig,
   stylistic,
@@ -55,6 +56,7 @@ export async function rotki(
     cypress: enableCypress,
     gitignore: enableGitignore = true,
     isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
+    rotki: enableRotki = false,
     typescript: enableTypeScript = isPackageExists('typescript'),
     vue: enableVue = VuePackages.some(i => isPackageExists(i)),
   } = options;
@@ -134,6 +136,13 @@ export async function rotki(
     configs.push(cypress({
       ...resolveSubOptions(options, 'cypress'),
       overrides: getOverrides(options, 'cypress'),
+      typescript: !!enableTypeScript,
+    }));
+  }
+
+  if (enableRotki) {
+    configs.push(rotkiPlugin({
+      overrides: getOverrides(options, 'rotki'),
       typescript: !!enableTypeScript,
     }));
   }

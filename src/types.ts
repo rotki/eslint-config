@@ -53,6 +53,8 @@ export type Rules = WrapRuleConfig<
       'cypress/no-force': RuleConfig<[]>;
       'cypress/no-async-tests': RuleConfig<[]>;
       'cypress/no-pause': RuleConfig<[]>;
+    } & {
+      '@rotki/no-deprecated-classes': RuleConfig<[]>;
     }
     >
 >;
@@ -291,6 +293,16 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @default false
    */
   cypress?: boolean | OptionsCypress;
+
+  /**
+   * Enable rotki linting
+   * Requires installing:
+   * - `@rotki/eslint-plugin`
+   *
+   *
+   * @default false
+   */
+  rotki?: boolean;
 
   /**
      * Control to disable some rules in editors.
