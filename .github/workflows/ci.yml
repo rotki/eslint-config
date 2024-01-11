@@ -87,3 +87,6 @@ jobs:
 
       - name: Run linter 👀
         run: pnpm run lint
+
+      - name: Build 🏗️
+        run: pnpm run build
