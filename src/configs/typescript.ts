@@ -204,8 +204,8 @@ export async function typescript(
     {
       files: ['**/*.js', '**/*.cjs'],
       rules: {
-        'ts/no-require-imports': 'off',
-        'ts/no-var-requires': 'off',
+        '@typescript-eslint/no-require-imports': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
       },
     },
   ];
