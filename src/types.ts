@@ -1,4 +1,4 @@
-import type { VuetifyRules } from './vendor/rules/vuetify';
+import type { VueI18nRules, VuetifyRules } from './vendor/rules';
 import type { VendoredPrettierOptions } from './vendor/prettier';
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 import type { ParserOptions } from '@typescript-eslint/parser';
@@ -57,6 +57,7 @@ export type Rules = WrapRuleConfig<
     } & {
       '@rotki/no-deprecated-classes': RuleConfig<[]>;
     } & VuetifyRules
+    & Prefix<VueI18nRules, '@intlify/vue-i18n/'>
     >
 >;
 
@@ -135,6 +136,24 @@ export interface OptionsVue extends OptionsOverrides {
 
 export interface OptionsCypress extends OptionsOverrides {
   testDirectory?: string;
+}
+
+export interface OptionsVueI18n extends OptionsOverrides {
+
+  /**
+   * The source directory where of the project where vue-i18n is setup.
+   */
+  src?: string;
+  /**
+   * The locales directory under the source directory
+   *
+   * @default locales
+   */
+  localesDirectory?: string;
+  /**
+   * Patterns that will be ignored by @intlify/vue-i18n/no-unused-keys.
+   */
+  ignores?: string[];
 }
 
 export interface OptionsOverrides {
@@ -307,6 +326,16 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @default false
    */
   vuetify?: boolean | OptionsOverrides;
+
+  /**
+   * Enable vue-i18n linting support.
+   * Requires installing:
+   * - `eslint-plugin-vuetify`
+   *
+   *
+   * @default false
+   */
+  vueI18n?: boolean | OptionsVueI18n;
 
   /**
      * Control to disable some rules in editors.

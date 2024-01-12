@@ -20,6 +20,7 @@ import {
   typescript,
   unicorn,
   vue,
+  vueI18n,
   vuetify,
   yaml,
 } from './configs';
@@ -60,6 +61,7 @@ export async function rotki(
     rotki: enableRotki,
     typescript: enableTypeScript = isPackageExists('typescript'),
     vue: enableVue = VuePackages.some(i => isPackageExists(i)),
+    vueI18n: enableVueI18n,
     vuetify: enableVuetify,
   } = options;
 
@@ -153,6 +155,14 @@ export async function rotki(
     configs.push(vuetify({
       ...resolveSubOptions(options, 'vuetify'),
       overrides: getOverrides(options, 'vuetify'),
+      typescript: !!enableTypeScript,
+    }));
+  }
+
+  if (enableVueI18n) {
+    configs.push(vueI18n({
+      ...resolveSubOptions(options, 'vueI18n'),
+      overrides: getOverrides(options, 'vueI18n'),
       typescript: !!enableTypeScript,
     }));
   }

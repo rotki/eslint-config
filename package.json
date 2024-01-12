@@ -36,12 +36,16 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
+    "@intlify/eslint-plugin-vue-i18n": "^2.0.0",
     "@rotki/eslint-plugin": ">=0.0.3",
     "eslint": ">=8.56.0",
     "eslint-plugin-cypress": ">=2.15.0",
     "eslint-plugin-vuetify": "^1 || ^2"
   },
   "peerDependenciesMeta": {
+    "@intlify/eslint-plugin-vue-i18n": {
+      "optional": true
+    },
     "@rotki/eslint-plugin": {
       "optional": true
     },

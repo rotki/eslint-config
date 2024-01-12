@@ -46,6 +46,22 @@ For example:
 }
 ```
 
+### @intlify/eslint-plugin-vue-i18n
+
+```js
+// eslint.config.js
+import rotki from '@rotki/eslint-config';
+
+// eslint-disable-next-line import/no-default-export
+export default rotki({
+  vueI18n: {
+    src: path.join('app', 'src'), // defaults to src for @intlify/vue-i18n/no-unused-keys,
+    localeDir: 'locales', // that would be under app/src/
+    ignores: [], // for @intlify/vue-i18n/no-unused-keys
+  },
+});
+```
+
 ### TypeScript Aware Rules
 
 ```js
