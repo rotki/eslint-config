@@ -32,4 +32,6 @@ export * from './unicorn';
 
 export * from './vue';
 
+export * from './vuetify';
+
 export * from './yaml';

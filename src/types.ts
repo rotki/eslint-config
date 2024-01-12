@@ -1,3 +1,4 @@
+import type { VuetifyRules } from './vendor/rules/vuetify';
 import type { VendoredPrettierOptions } from './vendor/prettier';
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 import type { ParserOptions } from '@typescript-eslint/parser';
@@ -55,7 +56,7 @@ export type Rules = WrapRuleConfig<
       'cypress/no-pause': RuleConfig<[]>;
     } & {
       '@rotki/no-deprecated-classes': RuleConfig<[]>;
-    }
+    } & VuetifyRules
     >
 >;
 
@@ -249,13 +250,6 @@ export interface OptionsConfig extends OptionsComponentExts {
   yaml?: boolean | OptionsOverrides;
 
   /**
-     * Enable TOML support.
-     *
-     * @default true
-     */
-  toml?: boolean | OptionsOverrides;
-
-  /**
      * Enable linting for **code snippets** in Markdown.
      *
      * For formatting Markdown content, enable also `formatters.markdown`.
@@ -303,6 +297,16 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @default false
    */
   rotki?: boolean;
+
+  /**
+   * Enable vuetify linting support.
+   * Requires installing:
+   * - `eslint-plugin-vuetify`
+   *
+   *
+   * @default false
+   */
+  vuetify?: boolean | OptionsOverrides;
 
   /**
      * Control to disable some rules in editors.

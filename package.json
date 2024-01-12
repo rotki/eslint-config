@@ -38,13 +38,17 @@
   "peerDependencies": {
     "@rotki/eslint-plugin": ">=0.0.3",
     "eslint": ">=8.56.0",
-    "eslint-plugin-cypress": ">=2.15.0"
+    "eslint-plugin-cypress": ">=2.15.0",
+    "eslint-plugin-vuetify": "^1 || ^2"
   },
   "peerDependenciesMeta": {
     "@rotki/eslint-plugin": {
       "optional": true
     },
     "eslint-plugin-cypress": {
+      "optional": true
+    },
+    "eslint-plugin-vuetify": {
       "optional": true
     }
   },

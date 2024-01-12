@@ -20,6 +20,7 @@ import {
   typescript,
   unicorn,
   vue,
+  vuetify,
   yaml,
 } from './configs';
 import { combine, interopDefault } from './utils';
@@ -56,9 +57,10 @@ export async function rotki(
     cypress: enableCypress,
     gitignore: enableGitignore = true,
     isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
-    rotki: enableRotki = false,
+    rotki: enableRotki,
     typescript: enableTypeScript = isPackageExists('typescript'),
     vue: enableVue = VuePackages.some(i => isPackageExists(i)),
+    vuetify: enableVuetify,
   } = options;
 
   const stylisticOptions = options.stylistic === false
@@ -143,6 +145,14 @@ export async function rotki(
   if (enableRotki) {
     configs.push(rotkiPlugin({
       overrides: getOverrides(options, 'rotki'),
+      typescript: !!enableTypeScript,
+    }));
+  }
+
+  if (enableVuetify) {
+    configs.push(vuetify({
+      ...resolveSubOptions(options, 'vuetify'),
+      overrides: getOverrides(options, 'vuetify'),
       typescript: !!enableTypeScript,
     }));
   }

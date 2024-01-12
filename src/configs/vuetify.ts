@@ -3,25 +3,23 @@ import { ensurePackages, interopDefault } from '../utils';
 import { GLOB_SRC, GLOB_VUE } from '../globs';
 import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides } from '../types';
 
-export async function rotkiPlugin(options: OptionsOverrides & OptionsHasTypeScript & OptionsFiles = {}): Promise<FlatConfigItem[]> {
+export async function vuetify(options: OptionsOverrides & OptionsHasTypeScript & OptionsFiles = {}): Promise<FlatConfigItem[]> {
   const {
     files = [GLOB_SRC, GLOB_VUE],
-    overrides = {},
+    overrides = { },
   } = options;
 
-  await ensurePackages([
-    '@rotki/eslint-plugin',
-  ]);
+  await ensurePackages(['eslint-plugin-vuetify']);
 
-  const [pluginRotki, parserVue] = await Promise.all([
-    interopDefault(import('@rotki/eslint-plugin')),
+  const [pluginVuetify, parserVue] = await Promise.all([
+    interopDefault(import('eslint-plugin-vuetify')),
     interopDefault(import('vue-eslint-parser')),
   ] as const);
 
   return [
     {
       plugins: {
-        '@rotki': pluginRotki,
+        vuetify: pluginVuetify,
       },
     },
     {
@@ -45,7 +43,8 @@ export async function rotkiPlugin(options: OptionsOverrides & OptionsHasTypeScri
         },
       },
       rules: {
-        ...pluginRotki.configs.recommended.rules,
+        ...pluginVuetify.configs.base.rules,
+        ...pluginVuetify.configs.recommended.rules,
         ...overrides,
       },
     },
