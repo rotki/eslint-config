@@ -11,15 +11,26 @@ A common configuration to be used across the different [rotki](https://github.co
 ### Install
 
 ```
-pnpm add -D eslint @rotki/eslint-config
+pnpm i -D eslint @rotki/eslint-config
 ```
 
-### Config `.eslintrc`
+### Config `eslint.config.js`
 
-```json
-{
-  "extends": "@rotki"
-}
+With `"type":"module"`
+
+```js
+import rotki from '@rotki/eslint-config';
+
+// eslint-disable-next-line import/no-default-export
+export default rotki();
+```
+
+With CommonJS
+
+```js
+const rotki = require('@rotki/eslint-config').default;
+
+module.exports = rotki();
 ```
 
 ### Add script for package.json
@@ -37,14 +48,16 @@ For example:
 
 ### TypeScript Aware Rules
 
-Type aware rules are enabled when a `tsconfig.eslint.json` is found in the project root, which will introduce some stricter rules into your project. If you want to enable it while have no `tsconfig.eslint.json` in the project root, you can change tsconfig name by modifying `ESLINT_TSCONFIG` env.
-
 ```js
-// .eslintrc.js
-process.env.ESLINT_TSCONFIG = 'tsconfig.json';
-module.exports = {
-  extends: '@rotki',
-};
+// eslint.config.js
+import rotki from '@rotki/eslint-config';
+
+// eslint-disable-next-line import/no-default-export
+export default rotki({
+  typescript: {
+    tsconfigPath: 'tsconfig.json',
+  },
+});
 ```
 
 ## License
