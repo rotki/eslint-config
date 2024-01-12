@@ -150,7 +150,7 @@ export async function typescript(
         '@typescript-eslint/no-invalid-void-type': 'off',
         '@typescript-eslint/no-loss-of-precision': 'error',
         '@typescript-eslint/no-non-null-assertion': 'off',
-        '@typescript-eslint/no-redeclare': 'error',
+        '@typescript-eslint/no-redeclare': 'off',
         '@typescript-eslint/no-require-imports': 'error',
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-use-before-define': ['error', { classes: false, functions: false, variables: true }],
