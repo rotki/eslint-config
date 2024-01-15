@@ -1,6 +1,6 @@
 {
   "name": "@rotki/eslint-config",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0",
   "private": true,
   "packageManager": "pnpm@8.14.0",
   "type": "module",
