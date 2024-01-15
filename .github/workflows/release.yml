@@ -65,7 +65,7 @@ jobs:
           echo "always-auth=true" >> ~/.npmrc
           npm whoami
 
-          pnpm -r publish --access=public --no-git-checks
+          pnpm publish --access=public --no-git-checks
           rm ~/.npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
