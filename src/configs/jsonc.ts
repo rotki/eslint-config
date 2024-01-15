@@ -23,6 +23,10 @@ export async function jsonc(
     interopDefault(import('jsonc-eslint-parser')),
   ] as const);
 
+  const customRules: FlatConfigItem['rules'] = {
+    'max-lines': 'off',
+  };
+
   return [
     {
       files,
@@ -75,6 +79,7 @@ export async function jsonc(
             }
           : {},
 
+        ...customRules,
         ...overrides,
       },
     },

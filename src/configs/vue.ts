@@ -40,6 +40,7 @@ export async function vue(
   ] as const);
 
   const customRules: typeof pluginVue['rules'] = {
+    'max-lines': ['warn', { max: 800 }],
     // migration
     'vue/component-api-style': ['error', ['script-setup']],
     'vue/define-props-declaration': ['error', 'type-based'],
@@ -100,7 +101,6 @@ export async function vue(
         allowModifiers: true,
       },
     ],
-
   };
 
   return [
@@ -165,7 +165,7 @@ export async function vue(
           },
         ],
         'vue/component-options-name-casing': ['error', 'PascalCase'],
-        'vue/custom-event-name-casing': ['error', 'camelCase'],
+        'vue/custom-event-name-casing': ['error', 'kebab-case'],
         'vue/define-macros-order': ['error', {
           order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'],
         }],

@@ -67,12 +67,12 @@ export async function typescript(
   };
 
   const typeAwareRules: FlatConfigItem['rules'] = {
-    '@typescript-eslint/await-thenable': 'error',
+    '@typescript-eslint/await-thenable': 'warn',
     '@typescript-eslint/dot-notation': ['error', { allowKeywords: true }],
     '@typescript-eslint/no-floating-promises': ['error', { ignoreIIFE: true }],
     '@typescript-eslint/no-for-in-array': 'error',
     '@typescript-eslint/no-implied-eval': 'error',
-    '@typescript-eslint/no-misused-promises': 'error',
+    '@typescript-eslint/no-misused-promises': 'warn',
     '@typescript-eslint/no-throw-literal': 'error',
     '@typescript-eslint/no-unnecessary-type-assertion': 'error',
     '@typescript-eslint/no-unsafe-argument': isInEditor ? 'warn' : 'off',
@@ -82,7 +82,7 @@ export async function typescript(
     '@typescript-eslint/no-unsafe-return': isInEditor ? 'warn' : 'off',
     '@typescript-eslint/restrict-plus-operands': 'error',
     '@typescript-eslint/restrict-template-expressions': 'error',
-    '@typescript-eslint/unbound-method': 'error',
+    '@typescript-eslint/unbound-method': 'warn',
     'dot-notation': 'off',
     'no-implied-eval': 'off',
     'no-throw-literal': 'off',
@@ -100,7 +100,7 @@ export async function typescript(
     ],
     '@typescript-eslint/prefer-as-const': 'warn',
     '@typescript-eslint/prefer-literal-enum-member': [
-      'error',
+      'warn',
       { allowBitwiseExpressions: true },
     ],
     'max-lines': ['error', { max: 400 }],
@@ -140,7 +140,7 @@ export async function typescript(
       rules: {
         ...pluginTs.configs['eslint-recommended'].overrides![0].rules,
         ...pluginTs.configs.strict.rules,
-        '@typescript-eslint/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
+        '@typescript-eslint/ban-ts-comment': ['warn', { 'ts-ignore': 'allow-with-description' }],
         '@typescript-eslint/ban-types': ['error', { types: { Function: false } }],
         '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
         '@typescript-eslint/consistent-type-imports': ['error', { disallowTypeAnnotations: false, fixStyle: 'inline-type-imports', prefer: 'type-imports' }],
@@ -155,7 +155,7 @@ export async function typescript(
         '@typescript-eslint/no-redeclare': 'off',
         '@typescript-eslint/no-require-imports': 'error',
         '@typescript-eslint/no-unused-vars': 'off',
-        '@typescript-eslint/no-use-before-define': ['error', { classes: false, functions: false, variables: true }],
+        '@typescript-eslint/no-use-before-define': ['warn', { classes: false, functions: false, variables: true }],
         '@typescript-eslint/no-useless-constructor': 'off',
         '@typescript-eslint/prefer-ts-expect-error': 'error',
         '@typescript-eslint/triple-slash-reference': 'off',
