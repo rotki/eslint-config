@@ -44,6 +44,10 @@ export async function vue(
     // migration
     'vue/component-api-style': ['error', ['script-setup']],
     'vue/define-props-declaration': ['error', 'type-based'],
+    'vue/first-attribute-linebreak': ['error', {
+      multiline: 'below',
+      singleline: 'ignore',
+    }],
     'vue/html-self-closing': [
       'error',
       {
