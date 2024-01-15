@@ -109,6 +109,7 @@ export async function rotki(
     configs.push(typescript({
       ...resolveSubOptions(options, 'typescript'),
       componentExts,
+      isInEditor,
       overrides: getOverrides(options, 'typescript'),
     }));
   }

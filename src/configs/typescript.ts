@@ -7,16 +7,18 @@ import type {
   FlatConfigItem,
   OptionsComponentExts,
   OptionsFiles,
+  OptionsIsInEditor,
   OptionsOverrides,
   OptionsTypeScriptParserOptions,
   OptionsTypeScriptWithTypes,
 } from '../types';
 
 export async function typescript(
-  options: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions = {},
+  options: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions & OptionsIsInEditor = {},
 ): Promise<FlatConfigItem[]> {
   const {
     componentExts = [],
+    isInEditor = false,
     overrides = {},
     parserOptions = {},
   } = options;
@@ -73,11 +75,11 @@ export async function typescript(
     '@typescript-eslint/no-misused-promises': 'error',
     '@typescript-eslint/no-throw-literal': 'error',
     '@typescript-eslint/no-unnecessary-type-assertion': 'error',
-    '@typescript-eslint/no-unsafe-argument': 'error',
-    '@typescript-eslint/no-unsafe-assignment': 'error',
-    '@typescript-eslint/no-unsafe-call': 'error',
-    '@typescript-eslint/no-unsafe-member-access': 'error',
-    '@typescript-eslint/no-unsafe-return': 'error',
+    '@typescript-eslint/no-unsafe-argument': isInEditor ? 'warn' : 'off',
+    '@typescript-eslint/no-unsafe-assignment': isInEditor ? 'warn' : 'off',
+    '@typescript-eslint/no-unsafe-call': isInEditor ? 'warn' : 'off',
+    '@typescript-eslint/no-unsafe-member-access': isInEditor ? 'warn' : 'off',
+    '@typescript-eslint/no-unsafe-return': isInEditor ? 'warn' : 'off',
     '@typescript-eslint/restrict-plus-operands': 'error',
     '@typescript-eslint/restrict-template-expressions': 'error',
     '@typescript-eslint/unbound-method': 'error',
