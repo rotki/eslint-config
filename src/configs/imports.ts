@@ -1,5 +1,5 @@
 import { pluginAntfu, pluginImport } from '../plugins';
-import { GLOB_SRC_EXT, GLOB_TESTS } from '../globs';
+import { GLOB_SRC, GLOB_SRC_EXT, GLOB_TESTS } from '../globs';
 import type { FlatConfigItem, OptionsStylistic } from '../types';
 
 export function imports(
@@ -69,7 +69,7 @@ export function imports(
       },
     },
     {
-      files: [`**/*.config.${GLOB_SRC_EXT}`, `**/*.config.*.${GLOB_SRC_EXT}`],
+      files: [`**/*.config.${GLOB_SRC_EXT}`, `**/*.config.*.${GLOB_SRC_EXT}`, `**/.vitepress/config.${GLOB_SRC}`],
       rules: {
         'import/no-default-export': 'off',
         'no-console': 'off',
