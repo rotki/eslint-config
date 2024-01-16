@@ -70,5 +70,11 @@ export function unicorn(): FlatConfigItem[] {
         'unicorn/throw-new-error': 'error',
       },
     },
+    {
+      files: ['.github/**/*.md'],
+      rules: {
+        'unicorn/filename-case': 'off',
+      },
+    },
   ];
 }
