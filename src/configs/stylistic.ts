@@ -53,7 +53,7 @@ export async function stylistic(
       'error',
       {
         blankLine: 'always',
-        next: ['interface', 'type', 'class', 'function', 'export'],
+        next: ['interface', 'type', 'class', 'function', 'export'] as any,
         prev: '*',
       },
     ],

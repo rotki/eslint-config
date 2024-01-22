@@ -37,7 +37,7 @@ export type Rules = WrapRuleConfig<
     RenamePrefix<VitestRules, 'vitest/', 'test/'> &
     RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
     RenamePrefix<NRules, 'n/', 'node/'> &
-    Prefix<StylisticRules, '@stylestic'> &
+    Prefix<StylisticRules, '@stylistic/'> &
     Prefix<AntfuRules, 'antfu/'> &
     ImportRules &
     EslintRules &
