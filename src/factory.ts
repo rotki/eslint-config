@@ -25,6 +25,7 @@ import {
   yaml,
 } from './configs';
 import { combine, interopDefault } from './utils';
+import { storybook } from './configs/storybook';
 import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types';
 
 const flatConfigProps: (keyof FlatConfigItem)[] = [
@@ -59,6 +60,7 @@ export async function rotki(
     gitignore: enableGitignore = true,
     isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
     rotki: enableRotki,
+    storybook: enableStorybook,
     typescript: enableTypeScript = isPackageExists('typescript'),
     vue: enableVue = VuePackages.some(i => isPackageExists(i)),
     vueI18n: enableVueI18n,
@@ -165,6 +167,12 @@ export async function rotki(
       ...resolveSubOptions(options, 'vueI18n'),
       overrides: getOverrides(options, 'vueI18n'),
       typescript: !!enableTypeScript,
+    }));
+  }
+
+  if (enableStorybook) {
+    configs.push(storybook({
+      overrides: getOverrides(options, 'storybook'),
     }));
   }
 

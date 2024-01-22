@@ -1,3 +1,4 @@
+import type { StorybookRules } from './vendor/rules/storybook';
 import type { VueI18nRules, VuetifyRules } from './vendor/rules';
 import type { VendoredPrettierOptions } from './vendor/prettier';
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
@@ -58,6 +59,7 @@ export type Rules = WrapRuleConfig<
       '@rotki/no-deprecated-classes': RuleConfig<[]>;
     } & VuetifyRules
     & Prefix<VueI18nRules, '@intlify/vue-i18n/'>
+    & Prefix<StorybookRules, 'storybook/'>
     >
 >;
 
@@ -336,6 +338,15 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @default false
    */
   vueI18n?: boolean | OptionsVueI18n;
+
+  /**
+   * Enable storybook linting support
+   *
+   * Requires installing
+   * - `eslint-plugin-storybook
+   *
+   */
+  storybook?: boolean | OptionsOverrides;
 
   /**
      * Control to disable some rules in editors.
