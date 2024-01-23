@@ -57,6 +57,9 @@ export type Rules = WrapRuleConfig<
       'cypress/no-pause': RuleConfig<[]>;
     } & {
       '@rotki/no-deprecated-classes': RuleConfig<[]>;
+      '@rotki/no-deprecated-props': RuleConfig<[]>;
+      '@rotki/no-deprecated-components': RuleConfig<[{ legacy?: boolean }]>;
+      '@rotki/no-legacy-library-import': RuleConfig<[]>;
     } & VuetifyRules
     & Prefix<VueI18nRules, '@intlify/vue-i18n/'>
     & Prefix<StorybookRules, 'storybook/'>

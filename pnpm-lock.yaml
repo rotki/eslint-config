@@ -24,8 +24,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(eslint@8.56.0)
       '@rotki/eslint-plugin':
-        specifier: '>=0.0.3'
-        version: 0.0.3(eslint@8.56.0)(typescript@5.3.3)
+        specifier: '>=0.2.0'
+        version: 0.2.0(eslint@8.56.0)(typescript@5.3.3)
       '@stylistic/eslint-plugin':
         specifier: 1.5.4
         version: 1.5.4(eslint@8.56.0)(typescript@5.3.3)
@@ -921,16 +921,19 @@ packages:
     dev: true
     optional: true
 
-  /@rotki/eslint-plugin@0.0.3(eslint@8.56.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-e4js452HdzS28X0kDfuN9r6z/d4XYfGUevJCooDHA/FSKUMyAmg6XIfuAcZOy9JMDjJogCB7DPc7gMGiN9GLGw==}
+  /@rotki/eslint-plugin@0.2.0(eslint@8.56.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-X3qWl3mvAzgNqFtSYZ5Ab0QRMmN1PAVHVD/qWwZkGDUgyPXhCeWIOv2w7AzJdRBYJLTtVJMx3hZC6AcEYi0wbg==}
     engines: {node: '>=18.0.0', pnpm: '>=8 <9'}
     peerDependencies:
-      eslint: ^8.0.0
+      eslint: ^8.0.0 || ^9.0.0
     dependencies:
-      '@typescript-eslint/utils': 6.18.1(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/utils': 6.19.0(eslint@8.56.0)(typescript@5.3.3)
+      debug: 4.3.4
       eslint: 8.56.0
+      eslint-compat-utils: 0.4.1(eslint@8.56.0)
       jsonc-eslint-parser: 2.4.0
-      vue-eslint-parser: 9.4.0(eslint@8.56.0)
+      scule: 1.2.0
+      vue-eslint-parser: 9.4.1(eslint@8.56.0)
       yaml-eslint-parser: 1.2.2
     transitivePeerDependencies:
       - supports-color
@@ -3986,6 +3989,10 @@ packages:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
     dev: true
 
+  /scule@1.2.0:
+    resolution: {integrity: sha512-CRCmi5zHQnSoeCik9565PONMg0kfkvYmcSqrbOJY4txFfy1wvVULV4FDaiXhUblUgahdqz3F2NwHZ8i4eBTwUw==}
+    dev: false
+
   /semver@5.7.2:
     resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
     hasBin: true
@@ -4420,24 +4427,6 @@ packages:
     dependencies:
       ufo: 1.3.2
     dev: true
-
-  /vue-eslint-parser@9.4.0(eslint@8.56.0):
-    resolution: {integrity: sha512-7KsNBb6gHFA75BtneJsoK/dbZ281whUIwFYdQxA68QrCrGMXYzUMbPDHGcOQ0OocIVKrWSKWXZ4mL7tonCXoUw==}
-    engines: {node: ^14.17.0 || >=16.0.0}
-    peerDependencies:
-      eslint: '>=6.0.0'
-    dependencies:
-      debug: 4.3.4
-      eslint: 8.56.0
-      eslint-scope: 7.2.2
-      eslint-visitor-keys: 3.4.3
-      espree: 9.6.1
-      esquery: 1.5.0
-      lodash: 4.17.21
-      semver: 7.5.4
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
 
   /vue-eslint-parser@9.4.1(eslint@8.56.0):
     resolution: {integrity: sha512-EmIbJ5cCI/E06SlI8K5sldVZ+Ef5vy26Ck0lNALxgY7FEAMOjNR32qcsVM3FUJUbvVWTBEiOy5lQvbhPK/ynBw==}

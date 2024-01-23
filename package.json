@@ -1,7 +1,7 @@
 {
   "name": "@rotki/eslint-config",
   "version": "2.3.0",
-  "packageManager": "pnpm@8.14.1",
+  "packageManager": "pnpm@8.14.3",
   "type": "module",
   "license": "AGPL-3.0",
   "bugs": {
@@ -36,7 +36,7 @@
   },
   "peerDependencies": {
     "@intlify/eslint-plugin-vue-i18n": "^2.0.0",
-    "@rotki/eslint-plugin": ">=0.0.3",
+    "@rotki/eslint-plugin": ">=0.2.0",
     "eslint": ">=8.56.0",
     "eslint-plugin-cypress": ">=2.15.0",
     "eslint-plugin-storybook": "^0.6.15",

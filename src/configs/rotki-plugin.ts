@@ -45,7 +45,8 @@ export async function rotkiPlugin(options: OptionsOverrides & OptionsHasTypeScri
         },
       },
       rules: {
-        ...pluginRotki.configs.recommended.rules,
+        '@rotki/no-depreacted-classes': 'error',
+
         ...overrides,
       },
     },
