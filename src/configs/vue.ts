@@ -169,7 +169,9 @@ export async function vue(
           },
         ],
         'vue/component-options-name-casing': ['error', 'PascalCase'],
-        'vue/custom-event-name-casing': ['error', 'kebab-case'],
+        'vue/custom-event-name-casing': ['error', 'kebab-case', {
+          ignores: [/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u],
+        }],
         'vue/define-macros-order': ['error', {
           order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'],
         }],
