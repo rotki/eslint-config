@@ -112,7 +112,7 @@
     "typescript": "5.4.2"
   },
   "engines": {
-    "node": ">=16 <19",
+    "node": ">=20 <21",
     "pnpm": ">=8 <9"
   },
   "lint-staged": {
