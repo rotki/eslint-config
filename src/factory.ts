@@ -24,7 +24,7 @@ import {
   vuetify,
   yaml,
 } from './configs';
-import { combine, interopDefault } from './utils';
+import { combine, interopDefault, renamePluginInConfigs } from './utils';
 import { storybook } from './configs/storybook';
 import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types';
 
@@ -46,10 +46,17 @@ const VuePackages = [
   '@slidev/cli',
 ];
 
+export const defaultPluginRenaming = {
+  'import-x': 'import',
+  'n': 'node',
+  'vitest': 'test',
+  'yml': 'yaml',
+};
+
 /**
  * Construct an array of ESLint flat config items.
  */
-// eslint-disable-next-line require-await
+
 export async function rotki(
   options: OptionsConfig & FlatConfigItem = {},
   ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
@@ -222,12 +229,12 @@ export async function rotki(
   if (Object.keys(fusedConfig).length > 0)
     configs.push([fusedConfig]);
 
-  const merged = combine(
+  const merged = await combine(
     ...configs,
     ...userConfigs,
   );
 
-  return merged;
+  return renamePluginInConfigs(merged, defaultPluginRenaming);
 }
 
 export type ResolvedOptions<T> = T extends boolean
