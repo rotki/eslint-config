@@ -73,6 +73,22 @@ export function sortPackageJson(): FlatConfigItem[] {
             order: ['types', 'require', 'import', 'default'],
             pathPattern: '^exports.*$',
           },
+          {
+            order: [
+              // client hooks only
+              'pre-commit',
+              'prepare-commit-msg',
+              'commit-msg',
+              'post-commit',
+              'pre-rebase',
+              'post-rewrite',
+              'post-checkout',
+              'post-merge',
+              'pre-push',
+              'pre-auto-gc',
+            ],
+            pathPattern: '^(?:gitHooks|husky|simple-git-hooks)$',
+          },
         ],
       },
     },
