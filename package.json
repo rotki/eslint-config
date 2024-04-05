@@ -1,6 +1,6 @@
 {
   "name": "@rotki/eslint-config",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "packageManager": "pnpm@8.15.6",
   "type": "module",
   "license": "AGPL-3.0",
