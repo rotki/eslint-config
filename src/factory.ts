@@ -21,7 +21,6 @@ import {
   unicorn,
   vue,
   vueI18n,
-  vuetify,
   yaml,
 } from './configs';
 import { combine, interopDefault, renamePluginInConfigs } from './utils';
@@ -71,7 +70,6 @@ export async function rotki(
     typescript: enableTypeScript = isPackageExists('typescript'),
     vue: enableVue = VuePackages.some(i => isPackageExists(i)),
     vueI18n: enableVueI18n,
-    vuetify: enableVuetify,
   } = options;
 
   const stylisticOptions = options.stylistic === false
@@ -157,14 +155,6 @@ export async function rotki(
   if (enableRotki) {
     configs.push(rotkiPlugin({
       overrides: getOverrides(options, 'rotki'),
-      typescript: !!enableTypeScript,
-    }));
-  }
-
-  if (enableVuetify) {
-    configs.push(vuetify({
-      ...resolveSubOptions(options, 'vuetify'),
-      overrides: getOverrides(options, 'vuetify'),
       typescript: !!enableTypeScript,
     }));
   }

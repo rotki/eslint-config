@@ -1,5 +1,5 @@
 import type { StorybookRules } from './vendor/rules/storybook';
-import type { VueI18nRules, VuetifyRules } from './vendor/rules';
+import type { VueI18nRules } from './vendor/rules';
 import type { VendoredPrettierOptions } from './vendor/prettier';
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 import type { ParserOptions } from '@typescript-eslint/parser';
@@ -60,7 +60,7 @@ export type Rules = WrapRuleConfig<
       '@rotki/no-deprecated-props': RuleConfig<[]>;
       '@rotki/no-deprecated-components': RuleConfig<[{ legacy?: boolean }]>;
       '@rotki/no-legacy-library-import': RuleConfig<[]>;
-    } & VuetifyRules
+    }
     & Prefix<VueI18nRules, '@intlify/vue-i18n/'>
     & Prefix<StorybookRules, 'storybook/'>
     >
@@ -323,19 +323,9 @@ export interface OptionsConfig extends OptionsComponentExts {
   rotki?: boolean;
 
   /**
-   * Enable vuetify linting support.
-   * Requires installing:
-   * - `eslint-plugin-vuetify`
-   *
-   *
-   * @default false
-   */
-  vuetify?: boolean | OptionsOverrides;
-
-  /**
    * Enable vue-i18n linting support.
    * Requires installing:
-   * - `eslint-plugin-vuetify`
+   * - `@intlify/eslint-plugin-vue-i18n`
    *
    *
    * @default false

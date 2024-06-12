@@ -34,6 +34,4 @@ export * from './vue';
 
 export * from './vue-i18n';
 
-export * from './vuetify';
-
 export * from './yaml';

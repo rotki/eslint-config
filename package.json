@@ -39,8 +39,7 @@
     "@rotki/eslint-plugin": ">=0.2.1",
     "eslint": ">=8.57.0",
     "eslint-plugin-cypress": ">=2.15.0",
-    "eslint-plugin-storybook": "^0.6.15 || ^0.8.0",
-    "eslint-plugin-vuetify": "^1 || ^2"
+    "eslint-plugin-storybook": "^0.6.15 || ^0.8.0"
   },
   "peerDependenciesMeta": {
     "@intlify/eslint-plugin-vue-i18n": {
@@ -53,9 +52,6 @@
       "optional": true
     },
     "eslint-plugin-storybook": {
-      "optional": true
-    },
-    "eslint-plugin-vuetify": {
       "optional": true
     }
   },
