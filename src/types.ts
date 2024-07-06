@@ -63,7 +63,7 @@ export type Rules = WrapRuleConfig<
     }
     & Prefix<VueI18nRules, '@intlify/vue-i18n/'>
     & Prefix<StorybookRules, 'storybook/'>
-    >
+  >
 >;
 
 export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
