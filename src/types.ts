@@ -123,6 +123,12 @@ export interface OptionsVueI18n extends OptionsOverrides {
    * Patterns that will be ignored by @intlify/vue-i18n/no-unused-keys.
    */
   ignores?: string[];
+  /**
+   * Vue18n version. Apply different rules set from `@intlify/vue-i18n`.
+   *
+   * @default 9
+   */
+  version?: 8 | 9;
 }
 
 export interface OptionsOverrides {

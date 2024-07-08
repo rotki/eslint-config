@@ -1,6 +1,5 @@
 import path from 'node:path';
 import process from 'node:process';
-import fs from 'node:fs';
 import globals from 'globals';
 import { GLOB_JSON, GLOB_JSON5, GLOB_TS, GLOB_VUE, GLOB_YAML } from '../globs';
 import { ensurePackages, interopDefault } from '../utils';
@@ -15,6 +14,7 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
     localesDirectory = 'locales',
     overrides = {},
     src = 'src',
+    version = 9,
   } = options;
 
   const fileGlobs = files.map(x => `**/${src}/${x}`);
@@ -47,21 +47,6 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
       : null,
     sourceType: 'module',
   };
-
-  // needed for @intlify/vue-i18n/no-unused-keys that depends on legacy conf
-  // https://github.com/intlify/eslint-plugin-vue-i18n/blob/7042275c88eb8a3619a802354eb4f298a6d3e284/lib/utils/collect-keys.ts#L140
-  // if the plugin adds official support for flat config we can drop this.
-  const projectDir = path.join(process.cwd(), src, '..');
-  const legacyConfig = path.join(projectDir, '.eslintrc.json');
-  if (!fs.existsSync(legacyConfig)) {
-    fs.writeFileSync(legacyConfig, JSON.stringify({
-      parser: 'vue-eslint-parser',
-      parserOptions: {
-        ...parserOptions,
-        ...(options.typescript ? { parser: '@typescript-eslint/parser' } : {}),
-      },
-    }, null, 2));
-  }
 
   return [
     {
@@ -108,6 +93,12 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
             src: path.join('.', src),
           },
         ],
+
+        ...(version === 8
+          ? {
+              '@intlify/vue-i18n/no-deprecated-i18n-component': 'off',
+            }
+          : {}),
 
         ...overrides,
 
