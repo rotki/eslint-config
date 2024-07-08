@@ -92,7 +92,7 @@ export async function typescript(
     '@typescript-eslint/restrict-plus-operands': 'error',
     '@typescript-eslint/restrict-template-expressions': 'error',
     '@typescript-eslint/return-await': ['error', 'in-try-catch'],
-    '@typescript-eslint/strict-boolean-expressions': ['error', { allowNullableBoolean: true, allowNullableObject: true }],
+    // '@typescript-eslint/strict-boolean-expressions': ['error', { allowNullableBoolean: true, allowNullableObject: true }],
     '@typescript-eslint/switch-exhaustiveness-check': 'error',
     '@typescript-eslint/unbound-method': 'warn',
     'dot-notation': 'off',
