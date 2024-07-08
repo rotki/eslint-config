@@ -1,3 +1,4 @@
+/* eslint-disable import/max-dependencies */
 export * from './comments';
 
 export * from './cypress';
@@ -18,6 +19,8 @@ export * from './node';
 
 export * from './perfectionist';
 
+export * from './regexp';
+
 export * from './rotki-plugin';
 
 export * from './sort';
@@ -29,6 +32,8 @@ export * from './test';
 export * from './typescript';
 
 export * from './unicorn';
+
+export * from './storybook';
 
 export * from './vue';
 

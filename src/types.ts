@@ -1,29 +1,13 @@
-import type { StorybookRules } from './vendor/rules/storybook';
-import type { VueI18nRules } from './vendor/rules';
 import type { VendoredPrettierOptions } from './vendor/prettier';
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 import type { ParserOptions } from '@typescript-eslint/parser';
 import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks';
 import type { Linter } from 'eslint';
 import type {
-  EslintCommentsRules,
-  EslintRules,
-  FlatESLintConfigItem,
-  ImportRules,
-  JsoncRules,
-  MergeIntersection,
-  NRules,
-  Prefix,
-  RenamePrefix,
   RuleConfig,
-  VitestRules,
-  VueRules,
-  YmlRules,
 } from '@antfu/eslint-define-config';
-import type { RuleOptions as TypeScriptRules } from '@eslint-types/typescript-eslint/types';
-import type { RuleOptions as UnicornRules } from '@eslint-types/unicorn/types';
-import type { Rules as AntfuRules } from 'eslint-plugin-antfu';
-import type { StylisticCustomizeOptions, UnprefixedRuleOptions as StylisticRules } from '@stylistic/eslint-plugin';
+import type { ConfigNames, RuleOptions } from './typegen';
+import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
 
 export type WrapRuleConfig<T extends { [key: string]: any }> = {
   [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>
@@ -31,47 +15,19 @@ export type WrapRuleConfig<T extends { [key: string]: any }> = {
 
 export type Awaitable<T> = T | Promise<T>;
 
-export type Rules = WrapRuleConfig<
-  MergeIntersection<
-    Prefix<TypeScriptRules, '@typescript-eslint/'> &
-    RenamePrefix<VitestRules, 'vitest/', 'test/'> &
-    RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
-    RenamePrefix<NRules, 'n/', 'node/'> &
-    Prefix<StylisticRules, '@stylistic/'> &
-    Prefix<AntfuRules, 'antfu/'> &
-    ImportRules &
-    EslintRules &
-    JsoncRules &
-    VueRules &
-    UnicornRules &
-    EslintCommentsRules &
-    {
-      'test/no-only-tests': RuleConfig<[]>;
-    }
-    & {
-      'cypress/no-assigning-return-values': RuleConfig<[]>;
-      'cypress/no-unnecessary-waiting': RuleConfig<[]>;
-      'cypress/assertion-before-screenshot': RuleConfig<[]>;
-      'cypress/no-force': RuleConfig<[]>;
-      'cypress/no-async-tests': RuleConfig<[]>;
-      'cypress/no-pause': RuleConfig<[]>;
-    } & {
-      '@rotki/no-deprecated-classes': RuleConfig<[]>;
-      '@rotki/no-deprecated-props': RuleConfig<[]>;
-      '@rotki/no-deprecated-components': RuleConfig<[{ legacy?: boolean }]>;
-      '@rotki/no-legacy-library-import': RuleConfig<[]>;
-      '@rotki/consistent-ref-type-annotation': RuleConfig<[{ allowInference?: boolean }]>;
-    }
-    & Prefix<VueI18nRules, '@intlify/vue-i18n/'>
-    & Prefix<StorybookRules, 'storybook/'>
-  >
->;
+export type Rules = RuleOptions;
 
-export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
+export type { ConfigNames };
+
+export type TypedFlatConfigItem = Omit<Linter.FlatConfig<Linter.RulesRecord & Rules>, 'plugins'> & {
+  // Relax plugins type limitation, as most of the plugins did not have correct type info yet.
+  /**
+   * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
+   *
+   * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
+   */
   plugins?: Record<string, any>;
 };
-
-export type UserConfigItem = FlatConfigItem | Linter.FlatConfig;
 
 export type OptionsTypescript =
   (OptionsTypeScriptWithTypes & OptionsOverrides)
@@ -91,6 +47,13 @@ export interface OptionsFormatters {
      * Currently only support Prettier.
      */
   html?: 'prettier' | boolean;
+
+  /**
+   * Enable formatting support for XML.
+   *
+   * Currently only support Prettier.
+   */
+  xml?: 'prettier' | boolean;
 
   /**
      * Enable formatting support for Markdown.
@@ -163,7 +126,14 @@ export interface OptionsVueI18n extends OptionsOverrides {
 }
 
 export interface OptionsOverrides {
-  overrides?: FlatConfigItem['rules'];
+  overrides?: TypedFlatConfigItem['rules'];
+}
+
+export interface OptionsRegExp {
+  /**
+   * Override rulelevels
+   */
+  level?: 'error' | 'warn';
 }
 
 export interface OptionsComponentExts {
@@ -187,6 +157,12 @@ export interface OptionsTypeScriptParserOptions {
      * @default ['**\/*.{ts,tsx}']
      */
   filesTypeAware?: string[];
+
+  /**
+   * Glob patterns for files that should not be type aware.
+   * @default ['**\/*.md\/**', '**\/*.astro/*.ts']
+   */
+  ignoresTypeAware?: string[];
 }
 
 export interface OptionsTypeScriptWithTypes {
@@ -222,6 +198,17 @@ export interface OptionsConfig extends OptionsComponentExts {
      * @default true
      */
   gitignore?: boolean | FlatGitignoreOptions;
+
+  /**
+   * Disable some opinionated rules to Anthony's preference.
+   *
+   * Including:
+   * - `antfu/top-level-function`
+   * - `antfu/if-newline`
+   *
+   * @default false
+   */
+  lessOpinionated?: boolean;
 
   /**
      * Core rules. Can't be disabled.
@@ -286,9 +273,18 @@ export interface OptionsConfig extends OptionsComponentExts {
   /**
      * Enable stylistic rules.
      *
+     * @see https://eslint.style/
      * @default true
      */
   stylistic?: boolean | StylisticConfig;
+
+  /**
+   * Enable regexp rules.
+   *
+   * @see https://ota-meshi.github.io/eslint-plugin-regexp/
+   * @default true
+   */
+  regexp?: boolean | (OptionsRegExp & OptionsOverrides);
 
   /**
      * Use external formatters to format files.
@@ -347,4 +343,11 @@ export interface OptionsConfig extends OptionsComponentExts {
      * @default auto-detect based on the process.env
      */
   isInEditor?: boolean;
+
+  /**
+   * Automatically rename plugins in the config.
+   *
+   * @default true
+   */
+  autoRenamePlugins?: boolean;
 }

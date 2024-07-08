@@ -1,20 +1,18 @@
 import globals from 'globals';
 import { pluginAntfu, pluginUnusedImports } from '../plugins';
 import { GLOB_SRC, GLOB_SRC_EXT, GLOB_TESTS } from '../globs';
-import type { FlatConfigItem, OptionsIsInEditor, OptionsOverrides } from '../types';
+import type { OptionsIsInEditor, OptionsOverrides, TypedFlatConfigItem } from '../types';
 
-export function javascript(
+export async function javascript(
   options: OptionsIsInEditor & OptionsOverrides = {},
-): FlatConfigItem[] {
+): Promise<TypedFlatConfigItem[]> {
   const {
     isInEditor = false,
     overrides = {},
   } = options;
 
-  const customRules: FlatConfigItem['rules'] = {
+  const customRules: TypedFlatConfigItem['rules'] = {
     'arrow-body-style': ['error', 'as-needed'],
-    'curly': ['error', 'all'],
-
     'max-lines': ['error', { max: 400 }],
   };
 
@@ -42,6 +40,10 @@ export function javascript(
       linterOptions: {
         reportUnusedDisableDirectives: true,
       },
+      name: 'rotki/javascript/setup',
+    },
+    {
+      name: 'rotki/javascript/rules',
       plugins: {
         'antfu': pluginAntfu,
         'unused-imports': pluginUnusedImports,
@@ -102,7 +104,7 @@ export function javascript(
         'no-multi-str': 'error',
         'no-new': 'error',
         'no-new-func': 'error',
-        'no-new-symbol': 'error',
+        'no-new-native-nonconstructor': 'error',
         'no-new-wrappers': 'error',
         'no-nonoctal-decimal-escape': 'error',
         'no-obj-calls': 'error',
@@ -238,6 +240,7 @@ export function javascript(
     },
     {
       files: [`**/scripts/${GLOB_SRC}`, `**/cli.${GLOB_SRC_EXT}`],
+      name: 'rotki/javascript/disables/cli',
       rules: {
         'max-lines': 'off',
         'no-console': 'off',
@@ -245,6 +248,7 @@ export function javascript(
     },
     {
       files: [...GLOB_TESTS],
+      name: 'rotki/javascript/disables/tests',
       rules: {
         'max-lines': 'off',
         'no-unused-expressions': 'off',

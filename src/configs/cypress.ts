@@ -1,9 +1,15 @@
 import globals from 'globals';
 import { ensurePackages, interopDefault } from '../utils';
 import { GLOB_CYPRESS, GLOB_SRC } from '../globs';
-import type { FlatConfigItem, OptionsCypress, OptionsFiles, OptionsHasTypeScript, OptionsOverrides } from '../types';
+import type {
+  OptionsCypress,
+  OptionsFiles,
+  OptionsHasTypeScript,
+  OptionsOverrides,
+  TypedFlatConfigItem,
+} from '../types';
 
-export async function cypress(options: OptionsOverrides & OptionsFiles & OptionsHasTypeScript & OptionsCypress = {}): Promise<FlatConfigItem[]> {
+export async function cypress(options: OptionsOverrides & OptionsFiles & OptionsHasTypeScript & OptionsCypress = {}): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_CYPRESS, GLOB_SRC],
     overrides = {},
@@ -20,6 +26,7 @@ export async function cypress(options: OptionsOverrides & OptionsFiles & Options
 
   return [
     {
+      name: 'rotki/cypress/setup',
       plugins: {
         cypress: pluginCypress,
       },
@@ -46,6 +53,7 @@ export async function cypress(options: OptionsOverrides & OptionsFiles & Options
           sourceType: 'module',
         },
       },
+      name: 'rotki/cypress/rules',
 
       rules: {
         ...pluginCypress.configs.recommended.rules,

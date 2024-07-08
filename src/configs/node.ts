@@ -1,9 +1,10 @@
 import { pluginNode } from '../plugins';
-import type { FlatConfigItem } from '../types';
+import type { TypedFlatConfigItem } from '../types';
 
-export function node(): FlatConfigItem[] {
+export async function node(): Promise<TypedFlatConfigItem[]> {
   return [
     {
+      name: 'rotki/node/rules',
       plugins: {
         node: pluginNode,
       },

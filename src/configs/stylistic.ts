@@ -1,6 +1,6 @@
 import { interopDefault } from '../utils';
 import { pluginAntfu } from '../plugins';
-import type { FlatConfigItem, OptionsOverrides, StylisticConfig } from '../types';
+import type { OptionsOverrides, StylisticConfig, TypedFlatConfigItem } from '../types';
 
 export const StylisticConfigDefaults: StylisticConfig = {
   indent: 2,
@@ -9,12 +9,17 @@ export const StylisticConfigDefaults: StylisticConfig = {
   semi: true,
 };
 
+export interface StylisticOptions extends StylisticConfig, OptionsOverrides {
+  lessOpinionated?: boolean;
+}
+
 export async function stylistic(
-  options: StylisticConfig & OptionsOverrides = {},
-): Promise<FlatConfigItem[]> {
+  options: StylisticOptions = {},
+): Promise<TypedFlatConfigItem[]> {
   const {
     indent,
     jsx,
+    lessOpinionated = false,
     overrides = {},
     quotes,
     semi,
@@ -33,7 +38,7 @@ export async function stylistic(
     semi,
   });
 
-  const customRules: FlatConfigItem['rules'] = {
+  const customRules: TypedFlatConfigItem['rules'] = {
     '@stylistic/member-delimiter-style': [
       'error',
       {
@@ -62,6 +67,7 @@ export async function stylistic(
 
   return [
     {
+      name: 'rotki/stylistic/rules',
       plugins: {
         '@stylistic': pluginStylistic,
         'antfu': pluginAntfu,
@@ -70,10 +76,17 @@ export async function stylistic(
         ...config.rules,
 
         'antfu/consistent-list-newline': 'error',
-        'antfu/if-newline': 'error',
-        'antfu/top-level-function': 'error',
 
-        'curly': ['error', 'multi-or-nest', 'consistent'],
+        ...(lessOpinionated
+          ? {
+              curly: ['error', 'all'],
+            }
+          : {
+              'antfu/curly': 'error',
+              'antfu/if-newline': 'error',
+              'antfu/top-level-function': 'error',
+            }
+        ),
 
         ...customRules,
         ...overrides,

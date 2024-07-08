@@ -78,3 +78,11 @@ dist
 .idea
 
 *.lerna_backup
+_fixtures
+
+.temp
+.history
+
+src/typegen.d.ts
+.eslint-config-inspector
+.eslintrc.json

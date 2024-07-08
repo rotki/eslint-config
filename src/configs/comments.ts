@@ -1,9 +1,10 @@
 import { pluginComments } from '../plugins';
-import type { FlatConfigItem } from '../types';
+import type { TypedFlatConfigItem } from '../types';
 
-export function comments(): FlatConfigItem[] {
+export async function comments(): Promise<TypedFlatConfigItem[]> {
   return [
     {
+      name: 'rotki/eslint-comments/rules',
       plugins: {
         'eslint-comments': pluginComments,
       },

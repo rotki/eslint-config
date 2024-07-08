@@ -34,6 +34,8 @@ export const GLOB_VUE = '**/*.vue';
 
 export const GLOB_YAML = '**/*.y?(a)ml';
 
+export const GLOB_XML = '**/*.xml';
+
 export const GLOB_HTML = '**/*.htm?(l)';
 
 export const GLOB_MARKDOWN_CODE = `${GLOB_MARKDOWN}/${GLOB_SRC}`;
@@ -57,6 +59,7 @@ export const GLOB_ALL_SRC = [
   GLOB_MARKDOWN,
   GLOB_VUE,
   GLOB_YAML,
+  GLOB_XML,
   GLOB_HTML,
 ];
 
@@ -82,6 +85,10 @@ export const GLOB_EXCLUDE = [
   '**/output',
   '**/coverage',
   '**/temp',
+  '**/.temp',
+  '**/tmp',
+  '**/.tmp',
+  '**/.history',
   '**/logs',
   '**/build',
   '**/fixtures',
@@ -90,8 +97,13 @@ export const GLOB_EXCLUDE = [
   '**/.vercel',
   '**/.changeset',
   '**/.idea',
+  '**/.cache',
   '**/.output',
   '**/.vite-inspect',
+  '**/.yarn',
+  '**/vite.config.*.timestamp-*',
+  '**/.nyc_output',
+  '**/.e2e',
 
   '**/CHANGELOG*.md',
   '**/*.min.*',

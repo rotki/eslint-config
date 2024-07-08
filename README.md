@@ -14,23 +14,13 @@ A common configuration to be used across the different [rotki](https://github.co
 pnpm i -D eslint @rotki/eslint-config
 ```
 
-### Config `eslint.config.js`
-
-With `"type":"module"`
+### Config `eslint.config.mjs`
 
 ```js
 import rotki from '@rotki/eslint-config';
 
 // eslint-disable-next-line import/no-default-export
 export default rotki();
-```
-
-With CommonJS
-
-```js
-const rotki = require('@rotki/eslint-config').default;
-
-module.exports = rotki();
 ```
 
 ### Add script for package.json
@@ -49,7 +39,7 @@ For example:
 ### @intlify/eslint-plugin-vue-i18n
 
 ```js
-// eslint.config.js
+// eslint.config.mjs
 import rotki from '@rotki/eslint-config';
 
 // eslint-disable-next-line import/no-default-export
@@ -65,7 +55,7 @@ export default rotki({
 ### TypeScript Aware Rules
 
 ```js
-// eslint.config.js
+// eslint.config.mjs
 import rotki from '@rotki/eslint-config';
 
 // eslint-disable-next-line import/no-default-export

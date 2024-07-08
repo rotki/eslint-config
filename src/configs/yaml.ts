@@ -1,10 +1,10 @@
 import { GLOB_YAML } from '../globs';
 import { interopDefault } from '../utils';
-import type { FlatConfigItem, OptionsFiles, OptionsOverrides, OptionsStylistic } from '../types';
+import type { OptionsFiles, OptionsOverrides, OptionsStylistic, TypedFlatConfigItem } from '../types';
 
 export async function yaml(
   options: OptionsOverrides & OptionsStylistic & OptionsFiles = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_YAML],
     overrides = {},
@@ -26,6 +26,7 @@ export async function yaml(
 
   return [
     {
+      name: 'rotki/yaml/setup',
       plugins: {
         yaml: pluginYaml,
       },
@@ -35,6 +36,7 @@ export async function yaml(
       languageOptions: {
         parser: parserYaml,
       },
+      name: 'rotki/yaml/rules',
       rules: {
         'style/spaced-comment': 'off',
 
@@ -62,6 +64,8 @@ export async function yaml(
               'yaml/spaced-comment': 'error',
             }
           : {},
+
+        'max-lines': 'off',
 
         ...overrides,
       },

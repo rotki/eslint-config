@@ -1,24 +1,27 @@
-import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs';
+import { isPackageExists } from 'local-pkg';
+import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_XML } from '../globs';
 import { ensurePackages, interopDefault, parserPlain } from '../utils';
 import { StylisticConfigDefaults } from './stylistic';
 import type { VendoredPrettierOptions } from '../vendor/prettier';
-import type { FlatConfigItem, OptionsFormatters, StylisticConfig } from '../types';
+import type { OptionsFormatters, StylisticConfig, TypedFlatConfigItem } from '../types';
 
 export async function formatters(
   options: OptionsFormatters | true = {},
   stylistic: StylisticConfig = {},
-): Promise<FlatConfigItem[]> {
-  await ensurePackages([
-    'eslint-plugin-format',
-  ]);
-
+): Promise<TypedFlatConfigItem[]> {
   if (options === true) {
     options = {
       css: true,
       html: true,
       markdown: true,
+      xml: isPackageExists('@prettier/plugin-xml'),
     };
   }
+
+  await ensurePackages([
+    'eslint-plugin-format',
+    options.xml ? '@prettier/plugin-xml' : undefined,
+  ]);
 
   const {
     indent,
@@ -50,10 +53,18 @@ export async function formatters(
     options.dprintOptions || {},
   );
 
+  const prettierXmlOptions = {
+    xmlQuoteAttributes: 'double',
+    xmlSelfClosingSpace: true,
+    xmlSortAttributesByKey: false,
+    xmlWhitespaceSensitivity: 'ignore',
+  };
+
   const pluginFormat = await interopDefault(import('eslint-plugin-format'));
 
-  const configs: FlatConfigItem[] = [
+  const configs: TypedFlatConfigItem[] = [
     {
+      name: 'rotki/formatter/setup',
       plugins: {
         format: pluginFormat,
       },
@@ -67,6 +78,7 @@ export async function formatters(
         languageOptions: {
           parser: parserPlain,
         },
+        name: 'rotki/formatter/css',
         rules: {
           'format/prettier': [
             'error',
@@ -82,6 +94,7 @@ export async function formatters(
         languageOptions: {
           parser: parserPlain,
         },
+        name: 'rotki/formatter/scss',
         rules: {
           'format/prettier': [
             'error',
@@ -97,6 +110,7 @@ export async function formatters(
         languageOptions: {
           parser: parserPlain,
         },
+        name: 'rotki/formatter/less',
         rules: {
           'format/prettier': [
             'error',
@@ -116,12 +130,36 @@ export async function formatters(
       languageOptions: {
         parser: parserPlain,
       },
+      name: 'rotki/formatter/html',
       rules: {
         'format/prettier': [
           'error',
           {
             ...prettierOptions,
             parser: 'html',
+          },
+        ],
+      },
+    });
+  }
+
+  if (options.xml) {
+    configs.push({
+      files: [GLOB_XML],
+      languageOptions: {
+        parser: parserPlain,
+      },
+      name: 'rotki/formatter/xml',
+      rules: {
+        'format/prettier': [
+          'error',
+          {
+            ...prettierXmlOptions,
+            ...prettierOptions,
+            parser: 'xml',
+            plugins: [
+              '@prettier/plugin-xml',
+            ],
           },
         ],
       },
@@ -138,6 +176,7 @@ export async function formatters(
       languageOptions: {
         parser: parserPlain,
       },
+      name: 'rotki/formatter/markdown',
       rules: {
         [`format/${formater}`]: [
           'error',

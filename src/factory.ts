@@ -1,6 +1,7 @@
 import process from 'node:process';
 import fs from 'node:fs';
 import { isPackageExists } from 'local-pkg';
+import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import {
   comments,
   cypress,
@@ -23,11 +24,13 @@ import {
   vueI18n,
   yaml,
 } from './configs';
-import { combine, interopDefault, renamePluginInConfigs } from './utils';
+import { interopDefault } from './utils';
 import { storybook } from './configs/storybook';
-import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types';
+import { regexp } from './configs/regexp';
+import type { Awaitable, ConfigNames, OptionsConfig, TypedFlatConfigItem } from './types';
+import type { Linter } from 'eslint';
 
-const flatConfigProps: (keyof FlatConfigItem)[] = [
+const flatConfigProps: (keyof TypedFlatConfigItem)[] = [
   'files',
   'ignores',
   'languageOptions',
@@ -56,15 +59,17 @@ export const defaultPluginRenaming = {
  * Construct an array of ESLint flat config items.
  */
 
-export async function rotki(
-  options: OptionsConfig & FlatConfigItem = {},
-  ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
-): Promise<UserConfigItem[]> {
+export function rotki(
+  options: OptionsConfig & TypedFlatConfigItem = {},
+  ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.FlatConfig[]>[]
+): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
   const {
+    autoRenamePlugins = true,
     componentExts = [],
     cypress: enableCypress,
     gitignore: enableGitignore = true,
-    isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
+    isInEditor = !!((process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM || process.env.NVIM) && !process.env.CI),
+    regexp: enableRegexp = true,
     rotki: enableRotki,
     storybook: enableStorybook,
     typescript: enableTypeScript = isPackageExists('typescript'),
@@ -78,18 +83,22 @@ export async function rotki(
       ? options.stylistic
       : {};
 
-  if (stylisticOptions && !('jsx' in stylisticOptions))
+  if (stylisticOptions && !('jsx' in stylisticOptions)) {
     stylisticOptions.jsx = options.jsx ?? true;
+  }
 
-  const configs: Awaitable<FlatConfigItem[]>[] = [];
+  const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
 
   if (enableGitignore) {
-    if (typeof enableGitignore !== 'boolean')
+    if (typeof enableGitignore !== 'boolean') {
       configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r(enableGitignore)]));
-
-    else if (fs.existsSync('.gitignore'))
+    }
+    else if (fs.existsSync('.gitignore')) {
       configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r()]));
+    }
   }
+
+  const typescriptOptions = resolveSubOptions(options, 'typescript');
 
   // Base configs
   configs.push(
@@ -109,12 +118,13 @@ export async function rotki(
     perfectionist(),
   );
 
-  if (enableVue)
+  if (enableVue) {
     componentExts.push('vue');
+  }
 
   if (enableTypeScript) {
     configs.push(typescript({
-      ...resolveSubOptions(options, 'typescript'),
+      ...typescriptOptions,
       componentExts,
       isInEditor,
       overrides: getOverrides(options, 'typescript'),
@@ -126,6 +136,10 @@ export async function rotki(
       ...stylisticOptions,
       overrides: getOverrides(options, 'stylistic'),
     }));
+  }
+
+  if (enableRegexp) {
+    configs.push(regexp(typeof enableRegexp === 'boolean' ? {} : enableRegexp));
   }
 
   if (options.test ?? true) {
@@ -212,19 +226,27 @@ export async function rotki(
   // User can optionally pass a flat config item to the first argument
   // We pick the known keys as ESLint would do schema validation
   const fusedConfig = flatConfigProps.reduce((acc, key) => {
-    if (key in options)
+    if (key in options) {
       acc[key] = options[key] as any;
+    }
     return acc;
-  }, {} as FlatConfigItem);
-  if (Object.keys(fusedConfig).length > 0)
+  }, {} as TypedFlatConfigItem);
+  if (Object.keys(fusedConfig).length > 0) {
     configs.push([fusedConfig]);
+  }
 
-  const merged = await combine(
+  let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();
+
+  composer = composer.append(
     ...configs,
-    ...userConfigs,
+    ...userConfigs as any,
   );
 
-  return renamePluginInConfigs(merged, defaultPluginRenaming);
+  if (autoRenamePlugins) {
+    composer = composer.renamePlugins(defaultPluginRenaming);
+  }
+
+  return composer;
 }
 
 export type ResolvedOptions<T> = T extends boolean

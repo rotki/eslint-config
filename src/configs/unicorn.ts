@@ -1,9 +1,10 @@
 import { pluginUnicorn } from '../plugins';
-import type { FlatConfigItem } from '../types';
+import type { TypedFlatConfigItem } from '../types';
 
-export function unicorn(): FlatConfigItem[] {
+export async function unicorn(): Promise<TypedFlatConfigItem[]> {
   return [
     {
+      name: 'rotki/unicorn/rules',
       plugins: {
         unicorn: pluginUnicorn,
       },
@@ -72,6 +73,7 @@ export function unicorn(): FlatConfigItem[] {
     },
     {
       files: ['.github/**/*.md'],
+      name: 'rotki/unicorn/github-markdown',
       rules: {
         'unicorn/filename-case': 'off',
       },

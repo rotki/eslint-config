@@ -1,10 +1,10 @@
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs';
 import { interopDefault } from '../utils';
-import type { FlatConfigItem, OptionsFiles, OptionsOverrides, OptionsStylistic } from '../types';
+import type { OptionsFiles, OptionsOverrides, OptionsStylistic, TypedFlatConfigItem } from '../types';
 
 export async function jsonc(
   options: OptionsFiles & OptionsStylistic & OptionsOverrides = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
     overrides = {},
@@ -23,19 +23,23 @@ export async function jsonc(
     interopDefault(import('jsonc-eslint-parser')),
   ] as const);
 
-  const customRules: FlatConfigItem['rules'] = {
+  const customRules: TypedFlatConfigItem['rules'] = {
     'max-lines': 'off',
   };
 
   return [
     {
+      name: 'rotki/jsonc/setup',
+      plugins: {
+        jsonc: pluginJsonc as any,
+      },
+    },
+    {
       files,
       languageOptions: {
         parser: parserJsonc,
       },
-      plugins: {
-        jsonc: pluginJsonc as any,
-      },
+      name: 'rotki/jsonc/rules',
       rules: {
         'jsonc/no-bigint-literals': 'error',
         'jsonc/no-binary-expression': 'error',

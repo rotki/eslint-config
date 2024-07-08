@@ -1,8 +1,8 @@
 import { ensurePackages, interopDefault } from '../utils';
 import { GLOB_SRC_EXT } from '../globs';
-import type { FlatConfigItem, OptionsOverrides } from '../types';
+import type { OptionsOverrides, TypedFlatConfigItem } from '../types';
 
-export async function storybook(options: OptionsOverrides = {}): Promise<FlatConfigItem[]> {
+export async function storybook(options: OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
   const {
     overrides = { },
   } = options;
@@ -15,6 +15,7 @@ export async function storybook(options: OptionsOverrides = {}): Promise<FlatCon
 
   return [
     {
+      name: 'rotki/storybook/setup',
       plugins: {
         storybook: pluginStorybook,
       },
@@ -24,6 +25,7 @@ export async function storybook(options: OptionsOverrides = {}): Promise<FlatCon
         `*.stories.${GLOB_SRC_EXT}`,
         `*.story.${GLOB_SRC_EXT}`,
       ],
+      name: 'rotki/storybook/rules',
       rules: {
         'import/no-anonymous-default-export': 'off',
         'storybook/await-interactions': 'error',
@@ -41,6 +43,7 @@ export async function storybook(options: OptionsOverrides = {}): Promise<FlatCon
     },
     {
       files: [`.storybook/main.${GLOB_SRC_EXT}`],
+      name: 'rotki/storybook/main',
       rules: {
         'storybook/no-uninstalled-addons': 'error',
       },

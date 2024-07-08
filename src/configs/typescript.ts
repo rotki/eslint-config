@@ -1,21 +1,20 @@
 import process from 'node:process';
-import { GLOB_SRC, GLOB_TS, GLOB_TSX } from '../globs';
+import { GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '../globs';
 import { pluginAntfu } from '../plugins';
 import { interopDefault, toArray } from '../utils';
-import type { ParserOptions } from '@antfu/eslint-define-config';
 import type {
-  FlatConfigItem,
   OptionsComponentExts,
   OptionsFiles,
   OptionsIsInEditor,
   OptionsOverrides,
   OptionsTypeScriptParserOptions,
   OptionsTypeScriptWithTypes,
+  TypedFlatConfigItem,
 } from '../types';
 
 export async function typescript(
   options: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions & OptionsIsInEditor = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   const {
     componentExts = [],
     isInEditor = false,
@@ -24,13 +23,22 @@ export async function typescript(
   } = options;
 
   const files = options.files ?? [
-    GLOB_SRC,
+    GLOB_TS,
+    GLOB_TSX,
     ...componentExts.map(ext => `**/*.${ext}`),
   ];
 
   const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
+  const ignoresTypeAware = options.ignoresTypeAware ?? [
+    `${GLOB_MARKDOWN}/**`,
+  ];
 
-  const typeAwareCustom: FlatConfigItem['rules'] = {
+  const tsconfigPath = options?.tsconfigPath
+    ? toArray(options.tsconfigPath)
+    : undefined;
+  const isTypeAware = !!tsconfigPath;
+
+  const typeAwareCustom: TypedFlatConfigItem['rules'] = {
     // customizations
     '@typescript-eslint/naming-convention': [
       'error',
@@ -66,7 +74,7 @@ export async function typescript(
     ],
   };
 
-  const typeAwareRules: FlatConfigItem['rules'] = {
+  const typeAwareRules: TypedFlatConfigItem['rules'] = {
     '@typescript-eslint/await-thenable': 'warn',
     '@typescript-eslint/dot-notation': ['error', { allowKeywords: true }],
     '@typescript-eslint/no-floating-promises': ['error', { ignoreIIFE: true }],
@@ -80,8 +88,12 @@ export async function typescript(
     '@typescript-eslint/no-unsafe-call': isInEditor ? 'warn' : 'off',
     '@typescript-eslint/no-unsafe-member-access': isInEditor ? 'warn' : 'off',
     '@typescript-eslint/no-unsafe-return': isInEditor ? 'warn' : 'off',
+    '@typescript-eslint/promise-function-async': 'error',
     '@typescript-eslint/restrict-plus-operands': 'error',
     '@typescript-eslint/restrict-template-expressions': 'error',
+    '@typescript-eslint/return-await': ['error', 'in-try-catch'],
+    '@typescript-eslint/strict-boolean-expressions': ['error', { allowNullableBoolean: true, allowNullableObject: true }],
+    '@typescript-eslint/switch-exhaustiveness-check': 'error',
     '@typescript-eslint/unbound-method': 'warn',
     'dot-notation': 'off',
     'no-implied-eval': 'off',
@@ -90,7 +102,7 @@ export async function typescript(
     ...typeAwareCustom,
   };
 
-  const customRules: FlatConfigItem['rules'] = {
+  const customRules: TypedFlatConfigItem['rules'] = {
     '@typescript-eslint/consistent-type-assertions': [
       'error',
       {
@@ -106,10 +118,6 @@ export async function typescript(
     'max-lines': ['error', { max: 400 }],
   };
 
-  const tsconfigPath = options?.tsconfigPath
-    ? toArray(options.tsconfigPath)
-    : undefined;
-
   const [
     pluginTs,
     parserTs,
@@ -118,25 +126,48 @@ export async function typescript(
     interopDefault(import('@typescript-eslint/parser')),
   ] as const);
 
-  const commonParserOptions: ParserOptions = {
-    extraFileExtensions: componentExts.map(ext => `.${ext}`),
-    sourceType: 'module',
-    ...parserOptions as any,
-  };
+  function makeParser(typeAware: boolean, files: string[], ignores?: string[]): TypedFlatConfigItem {
+    return {
+      files,
+      ...ignores ? { ignores } : {},
+      languageOptions: {
+        parser: parserTs,
+        parserOptions: {
+          extraFileExtensions: componentExts.map(ext => `.${ext}`),
+          sourceType: 'module',
+          ...typeAware
+            ? {
+                project: tsconfigPath,
+                tsconfigRootDir: process.cwd(),
+              }
+            : {},
+          ...parserOptions as any,
+        },
+      },
+      name: `rotki/typescript/${typeAware ? 'type-aware-parser' : 'parser'}`,
+    };
+  }
 
   return [
     {
+      name: 'rotki/typescript/setup',
       plugins: {
         '@typescript-eslint': pluginTs,
         'antfu': pluginAntfu,
       },
     },
+    // assign type-aware parser for type-aware files and type-unaware parser for the rest
+    ...isTypeAware
+      ? [
+          makeParser(true, filesTypeAware, ignoresTypeAware),
+          makeParser(false, files, filesTypeAware),
+        ]
+      : [
+          makeParser(false, files),
+        ],
     {
       files,
-      languageOptions: {
-        parser: parserTs,
-        parserOptions: commonParserOptions,
-      },
+      name: 'rotki/typescript/rules',
       rules: {
         ...pluginTs.configs['eslint-recommended'].overrides![0].rules,
         ...pluginTs.configs.strict.rules,
@@ -170,26 +201,20 @@ export async function typescript(
         ...overrides,
       },
     },
+    ...isTypeAware
+      ? [{
+          files: filesTypeAware,
+          ignores: ignoresTypeAware,
+          name: 'rotki/typescript/rules-type-aware',
+          rules: {
+            ...tsconfigPath ? typeAwareRules : {},
+            ...overrides,
+          },
+        }]
+      : [],
     {
-      files: filesTypeAware,
-      languageOptions: {
-        parserOptions: {
-          ...commonParserOptions,
-          ...tsconfigPath
-            ? {
-                project: tsconfigPath,
-                tsconfigRootDir: process.cwd(),
-              }
-            : {},
-        },
-      },
-      rules: {
-        ...tsconfigPath ? typeAwareRules : {},
-        ...overrides,
-      },
-    },
-    {
-      files: ['**/*.d.ts'],
+      files: ['**/*.d.?([cm])ts'],
+      name: 'rotki/typescript/disables/dts',
       rules: {
         'eslint-comments/no-unlimited-disable': 'off',
         'import/no-duplicates': 'off',
@@ -199,6 +224,7 @@ export async function typescript(
     },
     {
       files: ['**/*.{test,spec,cy}.ts?(x)'],
+      name: 'rotki/typescript/disables/test',
       rules: {
         'max-lines': 'off',
         'no-unused-expressions': 'off',
@@ -206,6 +232,7 @@ export async function typescript(
     },
     {
       files: ['**/*.js', '**/*.cjs'],
+      name: 'rotki/typescript/disables/cjs',
       rules: {
         '@typescript-eslint/no-require-imports': 'off',
         '@typescript-eslint/no-var-requires': 'off',

@@ -5,9 +5,9 @@ import globals from 'globals';
 import { GLOB_JSON, GLOB_JSON5, GLOB_TS, GLOB_VUE, GLOB_YAML } from '../globs';
 import { ensurePackages, interopDefault } from '../utils';
 import type { ParserOptions } from '@antfu/eslint-define-config';
-import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsIsInEditor, OptionsVueI18n } from '../types';
+import type { OptionsFiles, OptionsHasTypeScript, OptionsIsInEditor, OptionsVueI18n, TypedFlatConfigItem } from '../types';
 
-export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor & OptionsFiles & OptionsVueI18n = {}): Promise<FlatConfigItem[]> {
+export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor & OptionsFiles & OptionsVueI18n = {}): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_TS, GLOB_VUE],
     ignores = [],
@@ -65,6 +65,7 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
 
   return [
     {
+      name: 'rotki/vue-i18n/setup',
       plugins: {
         '@intlify/vue-i18n': pluginVueI18n,
       },
@@ -79,6 +80,7 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
         parser: parserVue,
         parserOptions,
       },
+      name: 'rotki/vue-i18n/rules',
       rules: {
         ...pluginVueI18n.configs.recommended.rules,
 

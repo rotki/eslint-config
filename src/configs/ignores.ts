@@ -1,6 +1,9 @@
 import { GLOB_EXCLUDE } from '../globs';
-import type { FlatConfigItem } from '../types';
+import type { TypedFlatConfigItem } from '../types';
 
-export function ignores(): FlatConfigItem[] {
-  return [{ ignores: GLOB_EXCLUDE }];
+export async function ignores(): Promise<TypedFlatConfigItem[]> {
+  return [{
+    ignores: GLOB_EXCLUDE,
+    name: 'rotki/ignores/glob',
+  }];
 }

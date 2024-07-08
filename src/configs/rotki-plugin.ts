@@ -1,9 +1,9 @@
 import globals from 'globals';
 import { ensurePackages, interopDefault } from '../utils';
 import { GLOB_SRC, GLOB_VUE } from '../globs';
-import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides } from '../types';
+import type { OptionsFiles, OptionsHasTypeScript, OptionsOverrides, TypedFlatConfigItem } from '../types';
 
-export async function rotkiPlugin(options: OptionsOverrides & OptionsHasTypeScript & OptionsFiles = {}): Promise<FlatConfigItem[]> {
+export async function rotkiPlugin(options: OptionsOverrides & OptionsHasTypeScript & OptionsFiles = {}): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_SRC, GLOB_VUE],
     overrides = {},
@@ -20,6 +20,7 @@ export async function rotkiPlugin(options: OptionsOverrides & OptionsHasTypeScri
 
   return [
     {
+      name: 'rotki/rotki/setup',
       plugins: {
         '@rotki': pluginRotki,
       },
@@ -45,7 +46,9 @@ export async function rotkiPlugin(options: OptionsOverrides & OptionsHasTypeScri
         },
       },
       rules: {
+        '@rotki/consistent-ref-type-annotation': ['error', { allowInference: true }],
         '@rotki/no-deprecated-classes': 'error',
+        '@rotki/no-deprecated-props': 'error',
 
         ...overrides,
       },

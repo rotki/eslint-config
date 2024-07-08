@@ -2,17 +2,17 @@ import { mergeProcessors } from 'eslint-merge-processors';
 import { GLOB_VUE } from '../globs';
 import { interopDefault } from '../utils';
 import type {
-  FlatConfigItem,
   OptionsFiles,
   OptionsHasTypeScript,
   OptionsOverrides,
   OptionsStylistic,
   OptionsVue,
+  TypedFlatConfigItem,
 } from '../types';
 
 export async function vue(
   options: OptionsVue & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_VUE],
     overrides = {},
@@ -109,7 +109,6 @@ export async function vue(
 
   return [
     {
-      // This allows Vue plugin to work with auto imports
       // https://github.com/vuejs/eslint-plugin-vue/pull/2422
       languageOptions: {
         globals: {
@@ -129,6 +128,8 @@ export async function vue(
           watchEffect: 'readonly',
         },
       },
+      // This allows Vue plugin to work with auto imports
+      name: 'rotki/vue/setup',
       plugins: {
         vue: pluginVue,
       },
@@ -148,6 +149,7 @@ export async function vue(
           sourceType: 'module',
         },
       },
+      name: 'rotki/vue/rules',
       processor: sfcBlocks === false
         ? pluginVue.processors['.vue']
         : mergeProcessors([

@@ -1,9 +1,10 @@
-import type { FlatConfigItem } from '../types';
+import type { TypedFlatConfigItem } from '../types';
 
-export function sortPackageJson(): FlatConfigItem[] {
+export async function sortPackageJson(): Promise<TypedFlatConfigItem[]> {
   return [
     {
       files: ['**/package.json'],
+      name: 'rotki/sort/package-json',
       rules: {
         'jsonc/sort-array-values': [
           'error',
@@ -95,10 +96,11 @@ export function sortPackageJson(): FlatConfigItem[] {
   ];
 }
 
-export function sortTsconfig(): FlatConfigItem[] {
+export function sortTsconfig(): TypedFlatConfigItem[] {
   return [
     {
       files: ['**/tsconfig.json', '**/tsconfig.*.json'],
+      name: 'rotki/sort/tsconfig-json',
       rules: {
         'jsonc/sort-keys': [
           'error',
