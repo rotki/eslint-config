@@ -60,6 +60,7 @@ export type Rules = WrapRuleConfig<
       '@rotki/no-deprecated-props': RuleConfig<[]>;
       '@rotki/no-deprecated-components': RuleConfig<[{ legacy?: boolean }]>;
       '@rotki/no-legacy-library-import': RuleConfig<[]>;
+      '@rotki/consistent-ref-type-annotation': RuleConfig<[{ allowInference?: boolean }]>;
     }
     & Prefix<VueI18nRules, '@intlify/vue-i18n/'>
     & Prefix<StorybookRules, 'storybook/'>
