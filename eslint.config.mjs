@@ -11,10 +11,4 @@ export default rotki({
   rules: {
     'perfectionist/sort-objects': 'error',
   },
-}, {
-  name: 'config/require-await/disable',
-  files: ['src/configs/*.ts'],
-  rules: {
-    'require-await': 'off',
-  },
 });

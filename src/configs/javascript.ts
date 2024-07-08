@@ -208,7 +208,6 @@ export async function javascript(
         'prefer-rest-params': 'error',
         'prefer-spread': 'error',
         'prefer-template': 'error',
-        'require-await': 'warn',
         'require-yield': 'error',
         'sort-imports': [
           'error',
