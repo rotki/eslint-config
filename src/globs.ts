@@ -63,27 +63,19 @@ export const GLOB_ALL_SRC = [
   GLOB_HTML,
 ];
 
-export const GLOB_NODE_MODULES = '**/node_modules' as const;
+export const GLOB_EXCLUDE = [
+  '**/node_modules',
+  '**/dist',
+  '**/lib',
 
-export const GLOB_DIST = '**/dist' as const;
-
-export const GLOB_LIB = '**/lib' as const;
-
-export const GLOB_LOCKFILE = [
   '**/package-lock.json',
   '**/yarn.lock',
   '**/pnpm-lock.yaml',
   '**/bun.lockb',
-];
-
-export const GLOB_EXCLUDE = [
-  GLOB_NODE_MODULES,
-  GLOB_DIST,
-  GLOB_LIB,
-  ...GLOB_LOCKFILE,
 
   '**/output',
   '**/coverage',
+  '**/coverage-final.json',
   '**/temp',
   '**/.temp',
   '**/tmp',
@@ -104,6 +96,8 @@ export const GLOB_EXCLUDE = [
   '**/vite.config.*.timestamp-*',
   '**/.nyc_output',
   '**/.e2e',
+  '**/*.patch',
+  '**/*.log',
 
   '**/CHANGELOG*.md',
   '**/*.min.*',

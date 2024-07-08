@@ -4,6 +4,6 @@ import type { TypedFlatConfigItem } from '../types';
 export async function ignores(): Promise<TypedFlatConfigItem[]> {
   return [{
     ignores: GLOB_EXCLUDE,
-    name: 'rotki/ignores/glob',
+    name: 'rotki/ignores',
   }];
 }
