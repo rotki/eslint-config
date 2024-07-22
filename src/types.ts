@@ -19,7 +19,7 @@ export type Rules = RuleOptions;
 
 export type { ConfigNames };
 
-export type TypedFlatConfigItem = Omit<Linter.FlatConfig<Linter.RulesRecord & Rules>, 'plugins'> & {
+export type TypedFlatConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'plugins'> & {
   // Relax plugins type limitation, as most of the plugins did not have correct type info yet.
   /**
    * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
@@ -135,6 +135,15 @@ export interface OptionsOverrides {
   overrides?: TypedFlatConfigItem['rules'];
 }
 
+export interface OptionsProjectType {
+  /**
+   * Type of the project. `lib` will enable more strict rules for libraries.
+   *
+   * @default 'app'
+   */
+  type?: 'app' | 'lib';
+}
+
 export interface OptionsRegExp {
   /**
    * Override rulelevels
@@ -176,7 +185,7 @@ export interface OptionsTypeScriptWithTypes {
      * When this options is provided, type aware rules will be enabled.
      * @see https://typescript-eslint.io/linting/typed-linting/
      */
-  tsconfigPath?: string | string[];
+  tsconfigPath?: string;
 }
 
 export interface OptionsHasTypeScript {
@@ -187,14 +196,15 @@ export interface OptionsStylistic {
   stylistic?: boolean | StylisticConfig;
 }
 
-export interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'indent' | 'quotes' | 'jsx' | 'semi'> {
+export interface StylisticConfig
+  extends Pick<StylisticCustomizeOptions, 'indent' | 'quotes' | 'jsx' | 'semi'> {
 }
 
 export interface OptionsIsInEditor {
   isInEditor?: boolean;
 }
 
-export interface OptionsConfig extends OptionsComponentExts {
+export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType {
   /**
      * Enable gitignore support.
      *

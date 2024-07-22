@@ -43,13 +43,15 @@ export async function test(
       files,
       name: 'rotki/test/rules',
       rules: {
-        'node/prefer-global/process': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
 
+        'node/prefer-global/process': 'off',
         'test/consistent-test-it': ['error', { fn: 'it', withinDescribe: 'it' }],
         'test/no-identical-title': 'error',
         'test/no-import-node-test': 'error',
         'test/no-only-tests': isInEditor ? 'off' : 'error',
         'test/prefer-hooks-in-order': 'error',
+
         'test/prefer-lowercase-title': 'error',
 
         ...overrides,

@@ -1,25 +1,27 @@
 import process from 'node:process';
 import { GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '../globs';
 import { pluginAntfu } from '../plugins';
-import { interopDefault, toArray } from '../utils';
+import { interopDefault } from '../utils';
 import type {
   OptionsComponentExts,
   OptionsFiles,
   OptionsIsInEditor,
   OptionsOverrides,
+  OptionsProjectType,
   OptionsTypeScriptParserOptions,
   OptionsTypeScriptWithTypes,
   TypedFlatConfigItem,
 } from '../types';
 
 export async function typescript(
-  options: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions & OptionsIsInEditor = {},
+  options: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions & OptionsIsInEditor & OptionsProjectType = {},
 ): Promise<TypedFlatConfigItem[]> {
   const {
     componentExts = [],
     isInEditor = false,
     overrides = {},
     parserOptions = {},
+    type = 'app',
   } = options;
 
   const files = options.files ?? [
@@ -34,11 +36,18 @@ export async function typescript(
   ];
 
   const tsconfigPath = options?.tsconfigPath
-    ? toArray(options.tsconfigPath)
+    ? options.tsconfigPath
     : undefined;
   const isTypeAware = !!tsconfigPath;
 
   const typeAwareCustom: TypedFlatConfigItem['rules'] = {
+    '@typescript-eslint/consistent-type-assertions': [
+      'error',
+      {
+        assertionStyle: 'as',
+        objectLiteralTypeAssertions: 'allow-as-parameter',
+      },
+    ],
     // customizations
     '@typescript-eslint/naming-convention': [
       'error',
@@ -81,13 +90,13 @@ export async function typescript(
     '@typescript-eslint/no-for-in-array': 'error',
     '@typescript-eslint/no-implied-eval': 'error',
     '@typescript-eslint/no-misused-promises': 'warn',
-    '@typescript-eslint/no-throw-literal': 'error',
     '@typescript-eslint/no-unnecessary-type-assertion': 'error',
     '@typescript-eslint/no-unsafe-argument': isInEditor ? 'warn' : 'off',
     '@typescript-eslint/no-unsafe-assignment': isInEditor ? 'warn' : 'off',
     '@typescript-eslint/no-unsafe-call': isInEditor ? 'warn' : 'off',
     '@typescript-eslint/no-unsafe-member-access': isInEditor ? 'warn' : 'off',
     '@typescript-eslint/no-unsafe-return': isInEditor ? 'warn' : 'off',
+    '@typescript-eslint/only-throw-error': 'error',
     '@typescript-eslint/promise-function-async': 'error',
     '@typescript-eslint/restrict-plus-operands': 'error',
     '@typescript-eslint/restrict-template-expressions': 'error',
@@ -103,13 +112,6 @@ export async function typescript(
   };
 
   const customRules: TypedFlatConfigItem['rules'] = {
-    '@typescript-eslint/consistent-type-assertions': [
-      'error',
-      {
-        assertionStyle: 'as',
-        objectLiteralTypeAssertions: 'allow-as-parameter',
-      },
-    ],
     '@typescript-eslint/prefer-as-const': 'warn',
     '@typescript-eslint/prefer-literal-enum-member': [
       'warn',
@@ -137,7 +139,10 @@ export async function typescript(
           sourceType: 'module',
           ...typeAware
             ? {
-                project: tsconfigPath,
+                projectService: {
+                  allowDefaultProject: ['./*.js'],
+                  defaultProject: tsconfigPath,
+                },
                 tsconfigRootDir: process.cwd(),
               }
             : {},
@@ -171,13 +176,17 @@ export async function typescript(
       rules: {
         ...pluginTs.configs['eslint-recommended'].overrides![0].rules,
         ...pluginTs.configs.strict.rules,
-        '@typescript-eslint/ban-ts-comment': ['warn', { 'ts-ignore': 'allow-with-description' }],
-        '@typescript-eslint/ban-types': ['error', { types: { Function: false } }],
+        '@typescript-eslint/ban-ts-comment': ['warn', { 'ts-expect-error': 'allow-with-description' }],
         '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
-        '@typescript-eslint/consistent-type-imports': ['error', { disallowTypeAnnotations: false, fixStyle: 'inline-type-imports', prefer: 'type-imports' }],
+        '@typescript-eslint/consistent-type-imports': ['error', {
+          disallowTypeAnnotations: false,
+          fixStyle: 'inline-type-imports',
+          prefer: 'type-imports',
+        }],
         '@typescript-eslint/method-signature-style': ['error', 'property'], // https://www.totaltypescript.com/method-shorthand-syntax-considered-harmful
         '@typescript-eslint/no-dupe-class-members': 'error',
         '@typescript-eslint/no-dynamic-delete': 'off',
+        '@typescript-eslint/no-empty-object-type': ['error', { allowInterfaces: 'always' }],
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-extraneous-class': 'off',
         '@typescript-eslint/no-import-type-side-effects': 'error',
@@ -189,7 +198,7 @@ export async function typescript(
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-use-before-define': ['warn', { classes: false, functions: false, variables: true }],
         '@typescript-eslint/no-useless-constructor': 'off',
-        '@typescript-eslint/prefer-ts-expect-error': 'error',
+        '@typescript-eslint/no-wrapper-object-types': 'error',
         '@typescript-eslint/triple-slash-reference': 'off',
         '@typescript-eslint/unified-signatures': 'off',
         'no-dupe-class-members': 'off',
@@ -197,6 +206,16 @@ export async function typescript(
         'no-redeclare': 'off',
         'no-use-before-define': 'off',
         'no-useless-constructor': 'off',
+        ...(type === 'lib'
+          ? {
+              '@typescript-eslint/explicit-function-return-type': ['error', {
+                allowExpressions: true,
+                allowHigherOrderFunctions: true,
+                allowIIFEs: true,
+              }],
+            }
+          : {}
+        ),
         ...customRules,
         ...overrides,
       },

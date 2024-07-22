@@ -5,6 +5,7 @@ export default rotki({
   typescript: true,
   formatters: true,
   stylistic: true,
+  type: 'lib',
 }, {
   name: 'config/perfectionist/rules',
   files: ['src/**/*.ts'],

@@ -1,5 +1,3 @@
-import process from 'node:process';
-import fs from 'node:fs';
 import { isPackageExists } from 'local-pkg';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import {
@@ -13,9 +11,11 @@ import {
   markdown,
   node,
   perfectionist,
+  regexp,
   rotkiPlugin,
   sortPackageJson,
   sortTsconfig,
+  storybook,
   stylistic,
   test,
   typescript,
@@ -24,9 +24,8 @@ import {
   vueI18n,
   yaml,
 } from './configs';
-import { interopDefault } from './utils';
-import { storybook } from './configs/storybook';
-import { regexp } from './configs/regexp';
+import { interopDefault, isInEditorEnv } from './utils';
+import type { RuleOptions } from './typegen';
 import type { Awaitable, ConfigNames, OptionsConfig, TypedFlatConfigItem } from './types';
 import type { Linter } from 'eslint';
 
@@ -68,7 +67,7 @@ export function rotki(
     componentExts = [],
     cypress: enableCypress,
     gitignore: enableGitignore = true,
-    isInEditor = !!((process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM || process.env.NVIM) && !process.env.CI),
+    isInEditor = isInEditorEnv(),
     regexp: enableRegexp = true,
     rotki: enableRotki,
     storybook: enableStorybook,
@@ -93,8 +92,8 @@ export function rotki(
     if (typeof enableGitignore !== 'boolean') {
       configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r(enableGitignore)]));
     }
-    else if (fs.existsSync('.gitignore')) {
-      configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r()]));
+    else {
+      configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r({ strict: false })]));
     }
   }
 
@@ -128,6 +127,7 @@ export function rotki(
       componentExts,
       isInEditor,
       overrides: getOverrides(options, 'typescript'),
+      type: options.type,
     }));
   }
 
@@ -265,7 +265,7 @@ export function resolveSubOptions<K extends keyof OptionsConfig>(
 export function getOverrides<K extends keyof OptionsConfig>(
   options: OptionsConfig,
   key: K,
-) {
+): Partial<Linter.RulesRecord & RuleOptions> {
   const sub = resolveSubOptions(options, key);
   return {
     ...'overrides' in sub
