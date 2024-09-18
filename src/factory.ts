@@ -67,7 +67,6 @@ export function rotki(
     componentExts = [],
     cypress: enableCypress,
     gitignore: enableGitignore = true,
-    isInEditor = isInEditorEnv(),
     regexp: enableRegexp = true,
     rotki: enableRotki,
     storybook: enableStorybook,
@@ -75,6 +74,15 @@ export function rotki(
     vue: enableVue = VuePackages.some(i => isPackageExists(i)),
     vueI18n: enableVueI18n,
   } = options;
+
+  let isInEditor = options.isInEditor;
+  if (isInEditor === null) {
+    isInEditor = isInEditorEnv();
+    if (isInEditor) {
+      // eslint-disable-next-line no-console
+      console.log('[@rotki/eslint-config] Detected running in editor, some rules are disabled.');
+    }
+  }
 
   const stylisticOptions = options.stylistic === false
     ? false
