@@ -21,6 +21,8 @@ export * from './perfectionist';
 
 export * from './regexp';
 
+export * from './disables';
+
 export * from './rotki-plugin';
 
 export * from './sort';

@@ -1,6 +1,5 @@
 import globals from 'globals';
 import { pluginAntfu, pluginUnusedImports } from '../plugins';
-import { GLOB_SRC, GLOB_SRC_EXT, GLOB_TESTS } from '../globs';
 import type { OptionsIsInEditor, OptionsOverrides, TypedFlatConfigItem } from '../types';
 
 export async function javascript(
@@ -232,22 +231,6 @@ export async function javascript(
 
         ...customRules,
         ...overrides,
-      },
-    },
-    {
-      files: [`**/scripts/${GLOB_SRC}`, `**/cli.${GLOB_SRC_EXT}`],
-      name: 'rotki/javascript/disables/cli',
-      rules: {
-        'max-lines': 'off',
-        'no-console': 'off',
-      },
-    },
-    {
-      files: [...GLOB_TESTS],
-      name: 'rotki/javascript/disables/tests',
-      rules: {
-        'max-lines': 'off',
-        'no-unused-expressions': 'off',
       },
     },
   ];

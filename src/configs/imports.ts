@@ -1,5 +1,4 @@
 import { pluginAntfu, pluginImport } from '../plugins';
-import { GLOB_SRC, GLOB_SRC_EXT, GLOB_TESTS } from '../globs';
 import type { OptionsStylistic, TypedFlatConfigItem } from '../types';
 
 export async function imports(
@@ -59,31 +58,6 @@ export async function imports(
               'import/newline-after-import': ['error', { considerComments: true, count: 1 }],
             }
           : {},
-      },
-    },
-    {
-      files: [
-        ...GLOB_TESTS,
-      ],
-      name: 'rotki/import/disables/tests',
-      rules: {
-        'import/max-dependencies': 'off',
-      },
-    },
-    {
-      files: [`**/*.config.${GLOB_SRC_EXT}`, `**/*.config.*.${GLOB_SRC_EXT}`, `**/.vitepress/config.${GLOB_SRC}`],
-      name: 'rotki/import/disables/config',
-      rules: {
-        'import/no-default-export': 'off',
-        'no-console': 'off',
-      },
-    },
-    {
-      files: ['**/bin/**/*', `**/bin.${GLOB_SRC_EXT}`, `**/eslint.config.${GLOB_SRC_EXT}`],
-      name: 'rotki/import/disables/bin',
-      rules: {
-        'antfu/no-import-dist': 'off',
-        'antfu/no-import-node-modules-by-path': 'off',
       },
     },
   ];

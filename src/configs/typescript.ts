@@ -192,7 +192,6 @@ export async function typescript(
         '@typescript-eslint/no-extraneous-class': 'off',
         '@typescript-eslint/no-import-type-side-effects': 'error',
         '@typescript-eslint/no-invalid-void-type': 'off',
-        '@typescript-eslint/no-loss-of-precision': 'error',
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-redeclare': 'off',
         '@typescript-eslint/no-require-imports': 'error',
@@ -203,7 +202,7 @@ export async function typescript(
         '@typescript-eslint/triple-slash-reference': 'off',
         '@typescript-eslint/unified-signatures': 'off',
         'no-dupe-class-members': 'off',
-        'no-loss-of-precision': 'off',
+        'no-loss-of-precision': 'error',
         'no-redeclare': 'off',
         'no-use-before-define': 'off',
         'no-useless-constructor': 'off',
@@ -232,31 +231,5 @@ export async function typescript(
           },
         }]
       : [],
-    {
-      files: ['**/*.d.?([cm])ts'],
-      name: 'rotki/typescript/disables/dts',
-      rules: {
-        'eslint-comments/no-unlimited-disable': 'off',
-        'import/no-duplicates': 'off',
-        'no-restricted-syntax': 'off',
-        'unused-imports/no-unused-vars': 'off',
-      },
-    },
-    {
-      files: ['**/*.{test,spec,cy}.ts?(x)'],
-      name: 'rotki/typescript/disables/test',
-      rules: {
-        'max-lines': 'off',
-        'no-unused-expressions': 'off',
-      },
-    },
-    {
-      files: ['**/*.js', '**/*.cjs'],
-      name: 'rotki/typescript/disables/cjs',
-      rules: {
-        '@typescript-eslint/no-require-imports': 'off',
-        '@typescript-eslint/no-var-requires': 'off',
-      },
-    },
   ];
 }
