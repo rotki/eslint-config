@@ -85,8 +85,8 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: pnpm install
 
-      - name: Run linter 👀
-        run: pnpm run lint
-
       - name: Build 🏗️
         run: pnpm run build
+
+      - name: Run linter 👀
+        run: pnpm run lint
