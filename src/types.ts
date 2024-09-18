@@ -186,6 +186,11 @@ export interface OptionsTypeScriptWithTypes {
      * @see https://typescript-eslint.io/linting/typed-linting/
      */
   tsconfigPath?: string;
+
+  /**
+   * Override type-aware rules.
+   */
+  overridesTypeAware?: TypedFlatConfigItem['rules'];
 }
 
 export interface OptionsHasTypeScript {

@@ -20,6 +20,7 @@ export async function typescript(
     componentExts = [],
     isInEditor = false,
     overrides = {},
+    overridesTypeAware = {},
     parserOptions = {},
     type = 'app',
   } = options;
@@ -226,8 +227,8 @@ export async function typescript(
           ignores: ignoresTypeAware,
           name: 'rotki/typescript/rules-type-aware',
           rules: {
-            ...tsconfigPath ? typeAwareRules : {},
-            ...overrides,
+            ...typeAwareRules,
+            ...overridesTypeAware,
           },
         }]
       : [],
