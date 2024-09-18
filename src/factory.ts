@@ -29,16 +29,15 @@ import type { RuleOptions } from './typegen';
 import type { Awaitable, ConfigNames, OptionsConfig, TypedFlatConfigItem } from './types';
 import type { Linter } from 'eslint';
 
-const flatConfigProps: (keyof TypedFlatConfigItem)[] = [
-  'files',
-  'ignores',
+const flatConfigProps = [
+  'name',
   'languageOptions',
   'linterOptions',
   'processor',
   'plugins',
   'rules',
   'settings',
-];
+] satisfies (keyof TypedFlatConfigItem)[];
 
 const VuePackages = [
   'vue',
@@ -59,7 +58,7 @@ export const defaultPluginRenaming = {
  */
 
 export function rotki(
-  options: OptionsConfig & TypedFlatConfigItem = {},
+  options: OptionsConfig & Omit<TypedFlatConfigItem, 'files'> = {},
   ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.FlatConfig[]>[]
 ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
   const {
@@ -109,7 +108,7 @@ export function rotki(
 
   // Base configs
   configs.push(
-    ignores(),
+    ignores(options.ignores),
     javascript({
       isInEditor,
       overrides: getOverrides(options, 'javascript'),
@@ -229,6 +228,10 @@ export function rotki(
       options.formatters,
       typeof stylisticOptions === 'boolean' ? {} : stylisticOptions,
     ));
+  }
+
+  if ('files' in options) {
+    throw new Error('[@rotki/eslint-config] The first argument should not contain the "files" property as the options are supposed to be global. Place it in the second or later config instead.');
   }
 
   // User can optionally pass a flat config item to the first argument
