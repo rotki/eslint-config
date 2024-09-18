@@ -1,6 +1,5 @@
-import { isPackageExists } from 'local-pkg';
 import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_XML } from '../globs';
-import { ensurePackages, interopDefault, parserPlain } from '../utils';
+import { ensurePackages, interopDefault, isPackageInScope, parserPlain } from '../utils';
 import { StylisticConfigDefaults } from './stylistic';
 import type { VendoredPrettierOptions } from '../vendor/prettier';
 import type { OptionsFormatters, StylisticConfig, TypedFlatConfigItem } from '../types';
@@ -14,7 +13,7 @@ export async function formatters(
       css: true,
       html: true,
       markdown: true,
-      xml: isPackageExists('@prettier/plugin-xml'),
+      xml: isPackageInScope('@prettier/plugin-xml'),
     };
   }
 
