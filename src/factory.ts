@@ -97,10 +97,16 @@ export function rotki(
 
   if (enableGitignore) {
     if (typeof enableGitignore !== 'boolean') {
-      configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r(enableGitignore)]));
+      configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r({
+        name: 'rotki/gitignore',
+        ...enableGitignore,
+      })]));
     }
     else {
-      configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r({ strict: false })]));
+      configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r({
+        name: 'rotki/gitignore',
+        strict: false,
+      })]));
     }
   }
 
