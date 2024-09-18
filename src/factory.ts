@@ -70,6 +70,7 @@ export function rotki(
     rotki: enableRotki,
     storybook: enableStorybook,
     typescript: enableTypeScript = isPackageExists('typescript'),
+    unicorn: enableUnicorn = true,
     vue: enableVue = VuePackages.some(i => isPackageExists(i)),
     vueI18n: enableVueI18n,
   } = options;
@@ -124,11 +125,14 @@ export function rotki(
     imports({
       stylistic: stylisticOptions,
     }),
-    unicorn(),
 
     // Optional plugins (installed but not enabled by default)
     perfectionist(),
   );
+
+  if (enableUnicorn) {
+    configs.push(unicorn(enableUnicorn === true ? {} : enableUnicorn));
+  }
 
   if (enableVue) {
     componentExts.push('vue');
