@@ -67,7 +67,7 @@ export function rotki(
     componentExts = [],
     cypress: enableCypress,
     gitignore: enableGitignore = true,
-    regexp: enableRegexp = true,
+    regexp: enableRegexp = false,
     rotki: enableRotki,
     storybook: enableStorybook,
     typescript: enableTypeScript = isPackageExists('typescript'),
