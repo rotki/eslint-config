@@ -81,6 +81,13 @@ export async function vue(
     ],
     'vue/prefer-import-from-vue': 'error',
     'vue/require-explicit-emits': 'error',
+    'vue/require-macro-variable-name': ['error', {
+      defineEmits: 'emit',
+      defineProps: 'props',
+      defineSlots: 'slots',
+      useAttrs: 'attrs',
+      useSlots: 'slots',
+    }],
     'vue/v-bind-style': ['error', 'shorthand'],
     'vue/v-on-handler-style': [
       'error',
