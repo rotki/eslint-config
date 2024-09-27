@@ -1,8 +1,8 @@
 import { pluginAntfu, pluginImport } from '../plugins';
-import type { OptionsStylistic, TypedFlatConfigItem } from '../types';
+import type { OptionsOverrides, OptionsStylistic, TypedFlatConfigItem } from '../types';
 
 export async function imports(
-  options: OptionsStylistic = {},
+  options: OptionsStylistic & OptionsOverrides = {},
 ): Promise<TypedFlatConfigItem[]> {
   const {
     stylistic = true,

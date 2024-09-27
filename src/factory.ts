@@ -124,6 +124,7 @@ export function rotki(
     comments(),
     node(),
     imports({
+      overrides: getOverrides(options, 'imports'),
       stylistic: stylisticOptions,
     }),
 

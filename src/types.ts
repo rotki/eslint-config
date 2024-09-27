@@ -264,6 +264,11 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
   jsx?: boolean;
 
   /**
+   * Core rules. Can't be disabled;
+   */
+  imports?: OptionsOverrides;
+
+  /**
    * Options for eslint-plugin-unicorn.
    *
    * @default true
