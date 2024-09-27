@@ -195,7 +195,15 @@ export async function vue(
           ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'],
         }],
         'vue/define-macros-order': ['error', {
-          order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'],
+          defineExposeLast: true,
+          order: [
+            'definePage',
+            'defineOptions',
+            'defineModel',
+            'defineProps',
+            'defineEmits',
+            'defineSlots',
+          ],
         }],
         'vue/dot-location': ['error', 'property'],
         'vue/dot-notation': ['error', { allowKeywords: true }],
