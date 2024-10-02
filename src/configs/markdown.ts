@@ -56,13 +56,13 @@ export async function markdown(
       rules: {
         '@typescript-eslint/consistent-type-imports': 'off',
 
+        '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-namespace': 'off',
         '@typescript-eslint/no-redeclare': 'off',
         '@typescript-eslint/no-require-imports': 'off',
         '@typescript-eslint/no-unused-expressions': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-use-before-define': 'off',
-        '@typescript-eslint/no-var-requires': 'off',
         'import/newline-after-import': 'off',
         'no-alert': 'off',
 
