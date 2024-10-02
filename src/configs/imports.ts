@@ -5,6 +5,7 @@ export async function imports(
   options: OptionsStylistic & OptionsOverrides = {},
 ): Promise<TypedFlatConfigItem[]> {
   const {
+    overrides = {},
     stylistic = true,
   } = options;
 
@@ -58,6 +59,7 @@ export async function imports(
               'import/newline-after-import': ['error', { considerComments: true, count: 1 }],
             }
           : {},
+        ...overrides,
       },
     },
   ];
