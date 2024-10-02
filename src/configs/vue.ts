@@ -184,6 +184,7 @@ export async function vue(
               ...pluginVue.configs['vue3-recommended'].rules,
             },
 
+        '@typescript-eslint/explicit-function-return-type': 'off',
         'node/prefer-global/process': 'off',
 
         'vue/block-order': ['error', {
