@@ -4,6 +4,11 @@
 
 export type VendoredPrettierOptions = Partial<VendoredPrettierOptionsRequired>;
 
+export type VendoredPrettierRuleOptions = VendoredPrettierOptions & {
+  parser?: BuiltInParserName;
+  [k: string]: unknown | undefined;
+};
+
 export interface VendoredPrettierOptionsRequired {
   /**
      * Specify the line length that the printer will wrap on.
