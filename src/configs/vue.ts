@@ -72,6 +72,7 @@ export async function vue(
     'vue/no-deprecated-dollar-listeners-api': 'error',
     'vue/no-deprecated-events-api': 'error',
     'vue/no-deprecated-filter': 'error',
+    'vue/no-duplicate-attr-inheritance': 'error',
     'vue/no-empty-component-block': 'error',
     'vue/no-static-inline-styles': [
       'error',
