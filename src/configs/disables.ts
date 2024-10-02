@@ -11,6 +11,7 @@ export async function disables(): Promise<TypedFlatConfigItem[]> {
       ],
       name: 'rotki/disables/config',
       rules: {
+        '@typescript-eslint/explicit-function-return-type': 'off',
         'import/no-default-export': 'off',
         'no-console': 'off',
       },
