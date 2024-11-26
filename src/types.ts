@@ -3,15 +3,8 @@ import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 import type { ParserOptions } from '@typescript-eslint/parser';
 import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks';
 import type { Linter } from 'eslint';
-import type {
-  RuleConfig,
-} from '@antfu/eslint-define-config';
 import type { ConfigNames, RuleOptions } from './typegen';
 import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
-
-export type WrapRuleConfig<T extends { [key: string]: any }> = {
-  [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>
-};
 
 export type Awaitable<T> = T | Promise<T>;
 
@@ -29,8 +22,7 @@ export type TypedFlatConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>
   plugins?: Record<string, any>;
 };
 
-export type OptionsTypescript =
-  (OptionsTypeScriptWithTypes & OptionsOverrides)
+export type OptionsTypescript = (OptionsTypeScriptWithTypes & OptionsOverrides)
   | (OptionsTypeScriptParserOptions & OptionsOverrides);
 
 export interface OptionsFormatters {
@@ -107,6 +99,12 @@ export interface OptionsCypress extends OptionsOverrides {
   testDirectory?: string;
 }
 
+interface VueI18nNoRawTextIgnores {
+  nodes?: string[];
+  pattern?: string;
+  text?: string[];
+}
+
 export interface OptionsVueI18n extends OptionsOverrides {
 
   /**
@@ -129,6 +127,10 @@ export interface OptionsVueI18n extends OptionsOverrides {
    * @default 9
    */
   version?: 8 | 9;
+  /**
+   * Optional configuration for @intlify/vue-i18n/no-raw-text rule
+   */
+  noRawTextIgnores?: VueI18nNoRawTextIgnores;
 }
 
 export interface OptionsOverrides {

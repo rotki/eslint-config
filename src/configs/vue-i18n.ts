@@ -12,6 +12,11 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
     ignores = [],
     isInEditor = false,
     localesDirectory = 'locales',
+    noRawTextIgnores = {
+      nodes: ['md-icon', 'v-icon', 'vicon'],
+      pattern: '^[-#:()&/+=!.]+$',
+      text: ['EUR', 'HKD', 'USD'],
+    },
     overrides = {},
     src = 'src',
     version = 9,
@@ -80,9 +85,9 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
         '@intlify/vue-i18n/no-raw-text': [
           isInEditor ? 'warn' : 'error',
           {
-            ignoreNodes: ['md-icon', 'v-icon', 'vicon'],
-            ignorePattern: '^[-#:()&/+=!.]+$',
-            ignoreText: ['EUR', 'HKD', 'USD'],
+            ignoreNodes: noRawTextIgnores.nodes,
+            ignorePattern: noRawTextIgnores.pattern,
+            ignoreText: noRawTextIgnores.text,
           },
         ],
         '@intlify/vue-i18n/no-unused-keys': [
