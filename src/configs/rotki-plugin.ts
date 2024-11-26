@@ -45,6 +45,7 @@ export async function rotkiPlugin(options: OptionsOverrides & OptionsHasTypeScri
           sourceType: 'module',
         },
       },
+      name: 'rotki/rotki/rules',
       rules: {
         '@rotki/consistent-ref-type-annotation': ['error', { allowInference: true }],
         '@rotki/no-deprecated-classes': 'error',
