@@ -50,6 +50,7 @@ export async function rotkiPlugin(options: OptionsOverrides & OptionsHasTypeScri
         '@rotki/consistent-ref-type-annotation': ['error', { allowInference: true }],
         '@rotki/no-deprecated-classes': 'error',
         '@rotki/no-deprecated-props': 'error',
+        '@rotki/no-dot-ts-imports': 'error',
 
         ...overrides,
       },
