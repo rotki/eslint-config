@@ -361,7 +361,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    *
    * @default false
    */
-  rotki?: boolean;
+  rotki?: boolean | OptionsOverrides;
 
   /**
    * Enable vue-i18n linting support.
