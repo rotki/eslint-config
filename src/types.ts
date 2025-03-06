@@ -318,15 +318,27 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
   regexp?: boolean | (OptionsRegExp & OptionsOverrides);
 
   /**
-     * Use external formatters to format files.
-     *
-     * Requires installing:
-     * - `eslint-plugin-format`
-     *
-     * When set to `true`, it will enable all formatters.
-     *
-     * @default false
-     */
+   * Enable pnpm catalogs support.
+   *
+   * Currently, it's disabled by default, as it's still experimental.
+   * In the future it will be smartly enabled based on the project catalog usage.
+   *
+   * @see https://github.com/antfu/pnpm-catalogs-utils
+   * @experimental
+   * @default false
+   */
+  pnpmCatalogs?: boolean;
+
+  /**
+   * Use external formatters to format files.
+   *
+   * Requires installing:
+   * - `eslint-plugin-format`
+   *
+   * When set to `true`, it will enable all formatters.
+   *
+   * @default false
+   */
   formatters?: boolean | OptionsFormatters;
 
   /**

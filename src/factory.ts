@@ -28,6 +28,7 @@ import {
   vueI18n,
   yaml,
 } from './configs';
+import { pnpmCatalogs } from './configs/pnpm-catalogs';
 import { interopDefault, isInEditorEnv } from './utils';
 
 const flatConfigProps = [
@@ -67,6 +68,7 @@ export function rotki(
     componentExts = [],
     cypress: enableCypress,
     gitignore: enableGitignore = true,
+    pnpmCatalogs: enablePnpmCatalogs = false,
     regexp: enableRegexp = false,
     rotki: enableRotki,
     storybook: enableStorybook,
@@ -214,6 +216,12 @@ export function rotki(
       }),
       sortPackageJson(),
       sortTsconfig(),
+    );
+  }
+
+  if (enablePnpmCatalogs) {
+    configs.push(
+      pnpmCatalogs(),
     );
   }
 
