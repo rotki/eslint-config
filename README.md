@@ -66,6 +66,19 @@ export default rotki({
 });
 ```
 
+### Editor Specific Disables
+
+Auto-fixing for the following rules are disabled when ESLint is running in a code editor:
+
+- [`prefer-const`](https://eslint.org/docs/rules/prefer-const)
+- [`test/no-only-tests`](https://github.com/levibuzolic/eslint-plugin-no-only-tests)
+- [`unused-imports/no-unused-imports`](https://www.npmjs.com/package/eslint-plugin-unused-imports)
+
+The rules above are non-fixable with the use of [this helper](https://github.com/antfu/eslint-flat-config-utils#composerdisablerulesfix).
+
+This is to improve the developer experience during refactoring by not allowing the editor to remove them.
+These rules will be normally applied when you run ESLint in the terminal or [Lint Staged](#lint-staged).
+
 ## License
 
 [AGPL-3.0](./LICENSE) License &copy; 2023- [Rotki Solutions GmbH](https://github.com/rotki)
