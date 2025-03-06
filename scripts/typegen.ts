@@ -1,13 +1,13 @@
 import fs from 'node:fs/promises';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
-import JS from '@eslint/js';
+import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { combine, comments, cypress, formatters, imports, javascript, jsonc, markdown, node, perfectionist, regexp, rotkiPlugin, sortPackageJson, storybook, stylistic, test, typescript, unicorn, vue, vueI18n, yaml } from '../src';
 
 const configs = await combine(
   {
     plugins: {
       '': {
-        rules: JS.configs.all,
+        rules: Object.fromEntries(builtinRules.entries()),
       },
     },
   },
