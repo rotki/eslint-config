@@ -1,7 +1,7 @@
 {
   "name": "@rotki/eslint-config",
   "version": "3.7.1",
-  "packageManager": "pnpm@9.15.5",
+  "packageManager": "pnpm@10.5.2",
   "type": "module",
   "license": "AGPL-3.0",
   "bugs": {
@@ -117,10 +117,15 @@
   },
   "engines": {
     "node": ">=20 <21",
-    "pnpm": ">=9 <10"
+    "pnpm": ">=10 <11"
   },
   "resolutions": {
     "@typescript-eslint/utils": "^8.15.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   },
   "lint-staged": {
     "*": "eslint --fix"
