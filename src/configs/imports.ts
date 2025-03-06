@@ -1,5 +1,5 @@
-import { pluginAntfu, pluginImport } from '../plugins';
 import type { OptionsOverrides, OptionsStylistic, TypedFlatConfigItem } from '../types';
+import { pluginAntfu, pluginImport } from '../plugins';
 
 export async function imports(
   options: OptionsStylistic & OptionsOverrides = {},
@@ -36,24 +36,6 @@ export async function imports(
         'import/no-named-default': 'error',
         'import/no-self-import': 'error',
         'import/no-webpack-loader-syntax': 'error',
-        'import/order': [
-          'error',
-          {
-            'groups': [
-              'builtin',
-              'external',
-              'internal',
-              'parent',
-              'sibling',
-              'index',
-              'object',
-              'type',
-            ],
-            'newlines-between': 'never',
-            'pathGroups': [{ group: 'internal', pattern: '{{@,~}/,#}**' }],
-            'pathGroupsExcludedImportTypes': ['type'],
-          },
-        ],
         ...stylistic
           ? {
               'import/newline-after-import': ['error', { considerComments: true, count: 1 }],

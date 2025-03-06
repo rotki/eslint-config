@@ -1,7 +1,3 @@
-import process from 'node:process';
-import { GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '../globs';
-import { pluginAntfu } from '../plugins';
-import { interopDefault } from '../utils';
 import type {
   OptionsComponentExts,
   OptionsFiles,
@@ -12,6 +8,10 @@ import type {
   OptionsTypeScriptWithTypes,
   TypedFlatConfigItem,
 } from '../types';
+import process from 'node:process';
+import { GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '../globs';
+import { pluginAntfu } from '../plugins';
+import { interopDefault } from '../utils';
 
 export async function typescript(
   options: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions & OptionsIsInEditor & OptionsProjectType = {},

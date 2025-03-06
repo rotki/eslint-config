@@ -1,6 +1,6 @@
-import { ensurePackages, interopDefault } from '../utils';
-import { GLOB_SRC_EXT } from '../globs';
 import type { OptionsOverrides, TypedFlatConfigItem } from '../types';
+import { GLOB_SRC_EXT } from '../globs';
+import { ensurePackages, interopDefault } from '../utils';
 
 export async function storybook(options: OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
   const {

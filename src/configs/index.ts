@@ -3,6 +3,8 @@ export * from './comments';
 
 export * from './cypress';
 
+export * from './disables';
+
 export * from './formatters';
 
 export * from './ignores';
@@ -21,11 +23,11 @@ export * from './perfectionist';
 
 export * from './regexp';
 
-export * from './disables';
-
 export * from './rotki-plugin';
 
 export * from './sort';
+
+export * from './storybook';
 
 export * from './stylistic';
 
@@ -34,8 +36,6 @@ export * from './test';
 export * from './typescript';
 
 export * from './unicorn';
-
-export * from './storybook';
 
 export * from './vue';
 

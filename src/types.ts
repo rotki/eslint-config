@@ -1,10 +1,10 @@
-import type { VendoredPrettierOptions } from './vendor/prettier';
-import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
-import type { ParserOptions } from '@typescript-eslint/parser';
-import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks';
-import type { Linter } from 'eslint';
-import type { ConfigNames, RuleOptions } from './typegen';
 import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
+import type { ParserOptions } from '@typescript-eslint/parser';
+import type { Linter } from 'eslint';
+import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
+import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks';
+import type { ConfigNames, RuleOptions } from './typegen';
+import type { VendoredPrettierOptions } from './vendor/prettier';
 
 export type Awaitable<T> = T | Promise<T>;
 

@@ -1,10 +1,10 @@
+import type { ParserOptions } from '@antfu/eslint-define-config';
+import type { OptionsFiles, OptionsHasTypeScript, OptionsIsInEditor, OptionsVueI18n, TypedFlatConfigItem } from '../types';
 import path from 'node:path';
 import process from 'node:process';
 import globals from 'globals';
 import { GLOB_JSON, GLOB_JSON5, GLOB_TS, GLOB_VUE, GLOB_YAML } from '../globs';
 import { ensurePackages, interopDefault } from '../utils';
-import type { ParserOptions } from '@antfu/eslint-define-config';
-import type { OptionsFiles, OptionsHasTypeScript, OptionsIsInEditor, OptionsVueI18n, TypedFlatConfigItem } from '../types';
 
 export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor & OptionsFiles & OptionsVueI18n = {}): Promise<TypedFlatConfigItem[]> {
   const {

@@ -1,6 +1,6 @@
 declare module '@intlify/eslint-plugin-vue-i18n' {
-  import { ParserOptions, Prefix } from '@antfu/eslint-define-config';
   import type { VueI18nRules } from './rules';
+  import { ParserOptions, Prefix } from '@antfu/eslint-define-config';
 
   const vueI18n = {
     configs: {

@@ -1,7 +1,7 @@
-import globals from 'globals';
-import { ensurePackages, interopDefault } from '../utils';
-import { GLOB_SRC, GLOB_VUE } from '../globs';
 import type { OptionsFiles, OptionsHasTypeScript, OptionsOverrides, TypedFlatConfigItem } from '../types';
+import globals from 'globals';
+import { GLOB_SRC, GLOB_VUE } from '../globs';
+import { ensurePackages, interopDefault } from '../utils';
 
 export async function rotkiPlugin(options: OptionsOverrides & OptionsHasTypeScript & OptionsFiles = {}): Promise<TypedFlatConfigItem[]> {
   const {

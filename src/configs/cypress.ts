@@ -1,6 +1,3 @@
-import globals from 'globals';
-import { ensurePackages, interopDefault } from '../utils';
-import { GLOB_CYPRESS, GLOB_SRC } from '../globs';
 import type {
   OptionsCypress,
   OptionsFiles,
@@ -8,6 +5,9 @@ import type {
   OptionsOverrides,
   TypedFlatConfigItem,
 } from '../types';
+import globals from 'globals';
+import { GLOB_CYPRESS, GLOB_SRC } from '../globs';
+import { ensurePackages, interopDefault } from '../utils';
 
 export async function cypress(options: OptionsOverrides & OptionsFiles & OptionsHasTypeScript & OptionsCypress = {}): Promise<TypedFlatConfigItem[]> {
   const {
