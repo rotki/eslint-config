@@ -10,7 +10,7 @@ export async function unicorn(options: OptionsUnicorn = {}): Promise<TypedFlatCo
       },
       rules: {
         ...(options.allRecommended
-          ? pluginUnicorn.configs['flat/recommended'].rules
+          ? pluginUnicorn.configs.recommended.rules
           : {
               'unicorn/better-regex': 'error',
               'unicorn/catch-error-name': 'error',
@@ -32,7 +32,7 @@ export async function unicorn(options: OptionsUnicorn = {}): Promise<TypedFlatCo
               'unicorn/no-console-spaces': 'error',
               'unicorn/no-for-loop': 'error',
               'unicorn/no-hex-escape': 'error',
-              'unicorn/no-instanceof-array': 'error',
+              'unicorn/no-instanceof-builtins': 'error',
               'unicorn/no-invalid-remove-event-listener': 'error',
               'unicorn/no-lonely-if': 'error',
               // 'unicorn/no-new-array': 'error',
