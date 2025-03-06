@@ -18,16 +18,13 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
-    }
+    ".": "./dist/index.js"
   },
   "scripts": {
-    "build": "pnpm run typegen && tsup src/index.ts --format esm,cjs --clean --dts",
-    "stub": "tsup src/index.ts --format esm",
-    "dev": "tsup src/index.ts --format esm,cjs --watch & npx @eslint/config-inspector --config eslint.config.ts",
-    "watch": "tsup --format esm,cjs --watch",
+    "build": "pnpm run typegen && tsup --clean --dts",
+    "stub": "tsup",
+    "dev": "tsup --watch & npx @eslint/config-inspector --config eslint.config.ts",
+    "watch": "tsup --watch",
     "lint": "eslint .",
     "prepack": "pnpm run build",
     "release": "bumpp -r --no-push",
