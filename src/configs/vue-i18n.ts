@@ -19,7 +19,6 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
     },
     overrides = {},
     src = 'src',
-    version = 9,
   } = options;
 
   const fileGlobs = files.map(x => `**/${src}/${x}`);
@@ -81,7 +80,9 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
             allowArray: false,
           },
         ],
+        '@intlify/vue-i18n/no-deprecated-i18n-component': 'error',
         '@intlify/vue-i18n/no-duplicate-keys-in-locale': 'error',
+        '@intlify/vue-i18n/no-i18n-t-path-prop': 'error',
         '@intlify/vue-i18n/no-raw-text': [
           isInEditor ? 'warn' : 'error',
           {
@@ -98,12 +99,6 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
             src: path.join('.', src),
           },
         ],
-
-        ...(version === 8
-          ? {
-              '@intlify/vue-i18n/no-deprecated-i18n-component': 'off',
-            }
-          : {}),
 
         ...overrides,
 

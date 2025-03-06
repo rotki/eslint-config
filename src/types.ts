@@ -115,12 +115,6 @@ export interface OptionsVueI18n extends OptionsOverrides {
    */
   ignores?: string[];
   /**
-   * Vue18n version. Apply different rules set from `@intlify/vue-i18n`.
-   *
-   * @default 9
-   */
-  version?: 8 | 9;
-  /**
    * Optional configuration for @intlify/vue-i18n/no-raw-text rule
    */
   noRawTextIgnores?: VueI18nNoRawTextIgnores;
