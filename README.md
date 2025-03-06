@@ -2,19 +2,61 @@
 
 [![npm (scoped)](https://img.shields.io/npm/v/@rotki/eslint-config?style=flat-square)](https://www.npmjs.com/package/@rotki/eslint-config)
 
-Inspired by [@antfu/eslint-config](https://github.com/antfu/eslint-config) and [@sxzz/eslint-config](https://github.com/sxzz/eslint-config).
+A comprehensive ESLint configuration preset for [rotki](https://github.com/rotki) TypeScript and JavaScript repositories. Based on [@antfu/eslint-config](https://github.com/antfu/eslint-config) and inspired by [@sxzz/eslint-config](https://github.com/sxzz/eslint-config).
 
-A common configuration to be used across the different [rotki](https://github.com/rotki) TypeScript and JavaScript repositories.
+## Table of Contents
+
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Basic Configuration](#basic-configuration)
+  - [Vue I18n Support](#vue-i18n-support)
+  - [TypeScript Configuration](#typescript-configuration)
+- [Editor Integration](#editor-integration)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+
+- 📝 TypeScript and JavaScript support
+- 🔧 Auto-fixable rules
+- 🌐 Vue I18n integration
+- ⚡ Editor-aware configurations
+- 🛠️ Preconfigured best practices
+
+## Requirements
+
+- Node.js >=20 < 21
+- ESLint >=9.10.0
+- TypeScript >=5.0.0 (for TypeScript support)
+
+## Installation
+
+Using pnpm (recommended):
+
+```bash
+pnpm add -D eslint @rotki/eslint-config
+```
+
+Using npm:
+
+```bash
+npm install --save-dev eslint @rotki/eslint-config
+```
+
+Using yarn:
+
+```bash
+yarn add -D eslint @rotki/eslint-config
+```
 
 ## Usage
 
-### Install
+### Basic Configuration
 
-```
-pnpm i -D eslint @rotki/eslint-config
-```
-
-### Config `eslint.config.mjs`
+Create an `eslint.config.ts` file in your project root:
 
 ```js
 import rotki from '@rotki/eslint-config';
@@ -23,9 +65,7 @@ import rotki from '@rotki/eslint-config';
 export default rotki();
 ```
 
-### Add script for package.json
-
-For example:
+Add scripts to your `package.json`:
 
 ```json
 {
@@ -36,26 +76,29 @@ For example:
 }
 ```
 
-### @intlify/eslint-plugin-vue-i18n
+### Vue I18n Support
+
+For projects using Vue I18n, configure the plugin in your `eslint.config.ts`:
 
 ```js
-// eslint.config.mjs
+import path from 'node:path';
 import rotki from '@rotki/eslint-config';
 
 // eslint-disable-next-line import/no-default-export
 export default rotki({
   vueI18n: {
-    src: path.join('app', 'src'), // defaults to src for @intlify/vue-i18n/no-unused-keys,
-    localeDir: 'locales', // that would be under app/src/
-    ignores: [], // for @intlify/vue-i18n/no-unused-keys
+    src: path.join('app', 'src'), // Source directory
+    localeDir: 'locales', // Locales directory
+    ignores: [], // Ignored paths
   },
 });
 ```
 
-### TypeScript Aware Rules
+### TypeScript Configuration
+
+For TypeScript projects, specify your `tsconfig.json` location:
 
 ```js
-// eslint.config.mjs
 import rotki from '@rotki/eslint-config';
 
 // eslint-disable-next-line import/no-default-export
@@ -66,18 +109,26 @@ export default rotki({
 });
 ```
 
-### Editor Specific Disables
+## Editor Integration
 
-Auto-fixing for the following rules are disabled when ESLint is running in a code editor:
+This configuration includes special handling for editor environments. The following rules are disabled during editing but enabled during CI/CD:
 
 - [`prefer-const`](https://eslint.org/docs/rules/prefer-const)
 - [`test/no-only-tests`](https://github.com/levibuzolic/eslint-plugin-no-only-tests)
 - [`unused-imports/no-unused-imports`](https://www.npmjs.com/package/eslint-plugin-unused-imports)
 
-The rules above are non-fixable with the use of [this helper](https://github.com/antfu/eslint-flat-config-utils#composerdisablerulesfix).
+This improves the development experience while maintaining code quality in production.
 
-This is to improve the developer experience during refactoring by not allowing the editor to remove them.
-These rules will be normally applied when you run ESLint in the terminal or [Lint Staged](#lint-staged).
+## Troubleshooting
+
+Common issues and their solutions:
+
+- If you encounter parsing errors, ensure your TypeScript version matches the requirements
+- For Vue I18n issues, verify your directory structure matches the configuration
+
+## Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
 
 ## License
 
