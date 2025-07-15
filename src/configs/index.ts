@@ -1,4 +1,3 @@
-/* eslint-disable import/max-dependencies */
 export * from './comments';
 
 export * from './cypress';

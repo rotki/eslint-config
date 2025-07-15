@@ -35,7 +35,7 @@
   "peerDependencies": {
     "@intlify/eslint-plugin-vue-i18n": "^4.0.0",
     "@prettier/plugin-xml": "^3.4.1",
-    "@rotki/eslint-plugin": ">=0.7.0",
+    "@rotki/eslint-plugin": ">=1.1.0",
     "eslint": ">=9.20.0",
     "eslint-plugin-cypress": ">=4.0.0",
     "eslint-plugin-storybook": ">=0.11.0"
@@ -73,7 +73,7 @@
     "eslint-plugin-antfu": "3.1.1",
     "eslint-plugin-format": "1.0.1",
     "eslint-plugin-html": "8.1.3",
-    "eslint-plugin-import-x": "4.16.1",
+    "eslint-plugin-import-lite": "0.3.0",
     "eslint-plugin-jsonc": "2.20.1",
     "eslint-plugin-n": "17.21.0",
     "eslint-plugin-no-only-tests": "3.3.0",

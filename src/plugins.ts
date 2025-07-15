@@ -5,7 +5,7 @@ export { default as pluginComments } from '@eslint-community/eslint-plugin-eslin
 
 export { default as pluginAntfu } from 'eslint-plugin-antfu';
 
-export * as pluginImport from 'eslint-plugin-import-x';
+export { default as pluginImport } from 'eslint-plugin-import-lite';
 
 export { default as pluginNode } from 'eslint-plugin-n';
 
