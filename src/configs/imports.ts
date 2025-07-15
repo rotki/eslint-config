@@ -29,8 +29,6 @@ export async function imports(
         'antfu/no-import-dist': 'error',
         'antfu/no-import-node-modules-by-path': 'error',
 
-        // Available in import-lite
-        'import/consistent-type-specifier-style': ['error', 'top-level'],
         'import/first': 'error',
         'import/no-default-export': 'warn',
         'import/no-duplicates': ['error', { 'prefer-inline': true }],
