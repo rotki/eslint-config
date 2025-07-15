@@ -20,6 +20,8 @@ export * from './node';
 
 export * from './perfectionist';
 
+export * from './pnpm';
+
 export * from './regexp';
 
 export * from './rotki-plugin';

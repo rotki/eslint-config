@@ -28,7 +28,7 @@ import {
   vueI18n,
   yaml,
 } from './configs';
-import { pnpmCatalogs } from './configs/pnpm-catalogs';
+import { pnpm } from './configs/pnpm';
 import { interopDefault, isInEditorEnv } from './utils';
 
 const flatConfigProps = [
@@ -221,7 +221,7 @@ export function rotki(
 
   if (enablePnpmCatalogs) {
     configs.push(
-      pnpmCatalogs(),
+      pnpm(),
     );
   }
 
