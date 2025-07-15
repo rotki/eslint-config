@@ -1,4 +1,4 @@
-import type { ParserOptions } from '@antfu/eslint-define-config';
+import type { ParserOptions } from '@typescript-eslint/parser';
 import type { OptionsFiles, OptionsHasTypeScript, OptionsIsInEditor, OptionsVueI18n, TypedFlatConfigItem } from '../types';
 import path from 'node:path';
 import process from 'node:process';

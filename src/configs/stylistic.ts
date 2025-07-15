@@ -53,6 +53,7 @@ export async function stylistic(
       },
     ],
     '@stylistic/no-mixed-spaces-and-tabs': 'error',
+    '@stylistic/operator-linebreak': 'off',
     '@stylistic/padding-line-between-statements': [
       'error',
       {
@@ -72,7 +73,7 @@ export async function stylistic(
         'antfu': pluginAntfu,
       },
       rules: {
-        ...config.rules,
+        ...config.rules as Required<TypedFlatConfigItem['rules']>,
 
         'antfu/consistent-chaining': 'error',
         'antfu/consistent-list-newline': 'error',

@@ -10,7 +10,7 @@ export async function unicorn(options: OptionsUnicorn = {}): Promise<TypedFlatCo
       },
       rules: {
         ...(options.allRecommended
-          ? pluginUnicorn.configs.recommended.rules
+          ? pluginUnicorn.configs.recommended.rules as Required<TypedFlatConfigItem['rules']>
           : {
               'unicorn/better-regex': 'error',
               'unicorn/catch-error-name': 'error',
