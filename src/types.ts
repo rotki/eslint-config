@@ -99,7 +99,6 @@ interface VueI18nNoRawTextIgnores {
 }
 
 export interface OptionsVueI18n extends OptionsOverrides {
-
   /**
    * The source directory where of the project where vue-i18n is setup.
    */
@@ -118,6 +117,10 @@ export interface OptionsVueI18n extends OptionsOverrides {
    * Optional configuration for @intlify/vue-i18n/no-raw-text rule
    */
   noRawTextIgnores?: VueI18nNoRawTextIgnores;
+  /**
+   * Specifies the configuration mode for @intlify/vue-i18n/no-unused-keys.
+   */
+  enableNoUnusedKeys?: 'always' | 'ci' | 'never';
 }
 
 export interface OptionsOverrides {

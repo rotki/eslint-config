@@ -8,6 +8,7 @@ import { ensurePackages, interopDefault } from '../utils';
 
 export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor & OptionsFiles & OptionsVueI18n = {}): Promise<TypedFlatConfigItem[]> {
   const {
+    enableNoUnusedKeys = 'never',
     files = [GLOB_TS, GLOB_VUE],
     ignores = [],
     isInEditor = false,
@@ -91,14 +92,18 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
             ignoreText: noRawTextIgnores.text,
           },
         ],
-        '@intlify/vue-i18n/no-unused-keys': [
-          'error',
-          {
-            extensions: ['.ts', '.vue'],
-            ignores,
-            src: path.join('.', src),
-          },
-        ],
+        ...(enableNoUnusedKeys === 'always' || (enableNoUnusedKeys === 'ci' && process.env.CI)
+          ? {
+              '@intlify/vue-i18n/no-unused-keys': [
+                'error',
+                {
+                  extensions: ['.ts', '.vue'],
+                  ignores,
+                  src: path.join('.', src),
+                },
+              ],
+            }
+          : {}),
 
         ...overrides,
 
