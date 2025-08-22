@@ -53,17 +53,6 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: publish to npm
-        run: |
-          {
-            echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}"
-            echo "registry=https://registry.npmjs.org/"
-            echo "always-auth=true"
-          } >> ~/.npmrc
-
-          npm whoami
-
-          pnpm publish --access=public --no-git-checks
-          rm ~/.npmrc
+        run: pnpm publish --access=public --no-git-checks
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
