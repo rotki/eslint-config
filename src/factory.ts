@@ -1,5 +1,4 @@
 import type { Linter } from 'eslint';
-import type { RuleOptions } from './typegen';
 import type { Awaitable, ConfigNames, OptionsConfig, TypedFlatConfigItem } from './types';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
@@ -309,11 +308,11 @@ export function resolveSubOptions<K extends keyof OptionsConfig>(
 export function getOverrides<K extends keyof OptionsConfig>(
   options: OptionsConfig,
   key: K,
-): Partial<Linter.RulesRecord & RuleOptions> {
+): TypedFlatConfigItem['rules'] {
   const sub = resolveSubOptions(options, key);
   return {
     ...'overrides' in sub
       ? sub.overrides
       : {},
-  } as any; // We need to cast to any otherwise we get a bunch of TS errors on dts generation;
+  };
 }
