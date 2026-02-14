@@ -91,10 +91,6 @@ export interface OptionsVue extends OptionsOverrides {
   sfcBlocks?: boolean | VueBlocksOptions;
 }
 
-export interface OptionsCypress extends OptionsOverrides {
-  testDirectory?: string;
-}
-
 interface VueI18nNoRawTextIgnores {
   nodes?: string[];
   pattern?: string;
@@ -346,17 +342,6 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    * @default false
    */
   formatters?: boolean | OptionsFormatters;
-
-  /**
-   * Enable cypress test linting
-   * Requires installing:
-   * - `eslint-plugin-cypress`
-   *
-   * When set to `true` it will run on the whole project
-   *
-   * @default false
-   */
-  cypress?: boolean | OptionsCypress;
 
   /**
    * Enable rotki linting

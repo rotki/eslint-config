@@ -37,7 +37,6 @@
     "@prettier/plugin-xml": "^3.4.1",
     "@rotki/eslint-plugin": ">=1.1.0",
     "eslint": ">=9.20.0",
-    "eslint-plugin-cypress": ">=4.0.0",
     "eslint-plugin-storybook": ">=0.11.0"
   },
   "peerDependenciesMeta": {
@@ -48,9 +47,6 @@
       "optional": true
     },
     "@rotki/eslint-plugin": {
-      "optional": true
-    },
-    "eslint-plugin-cypress": {
       "optional": true
     },
     "eslint-plugin-storybook": {

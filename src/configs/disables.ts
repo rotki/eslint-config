@@ -47,7 +47,7 @@ export async function disables(): Promise<TypedFlatConfigItem[]> {
       },
     },
     {
-      files: ['**/*.{test,spec,cy}.ts?(x)'],
+      files: ['**/*.{test,spec}.ts?(x)'],
       name: 'rotki/disables/test',
       rules: {
         '@rotki/max-dependencies': 'off',

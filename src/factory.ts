@@ -4,7 +4,6 @@ import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
 import {
   comments,
-  cypress,
   disables,
   formatters,
   ignores,
@@ -65,7 +64,6 @@ export function rotki(
   const {
     autoRenamePlugins = true,
     componentExts = [],
-    cypress: enableCypress,
     gitignore: enableGitignore = true,
     pnpmCatalogs: enablePnpmCatalogs = false,
     regexp: enableRegexp = false,
@@ -174,14 +172,6 @@ export function rotki(
       ...resolveSubOptions(options, 'vue'),
       overrides: getOverrides(options, 'vue'),
       stylistic: stylisticOptions,
-      typescript: !!enableTypeScript,
-    }));
-  }
-
-  if (enableCypress) {
-    configs.push(cypress({
-      ...resolveSubOptions(options, 'cypress'),
-      overrides: getOverrides(options, 'cypress'),
       typescript: !!enableTypeScript,
     }));
   }

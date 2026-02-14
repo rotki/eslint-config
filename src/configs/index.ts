@@ -1,7 +1,5 @@
 export * from './comments';
 
-export * from './cypress';
-
 export * from './disables';
 
 export * from './formatters';
