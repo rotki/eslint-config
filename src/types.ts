@@ -210,6 +210,17 @@ export interface OptionsIsInEditor {
   isInEditor?: boolean;
 }
 
+export interface OptionsPnpm extends OptionsIsInEditor {
+  /** Requires catalogs usage. Detects automatically based on pnpm-workspace.yaml */
+  catalogs?: boolean;
+  /** Enable linting for package.json @default true */
+  json?: boolean;
+  /** Enable linting for pnpm-workspace.yaml @default true */
+  yaml?: boolean;
+  /** Sort entries in pnpm-workspace.yaml @default false */
+  sort?: boolean;
+}
+
 export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType {
   /**
      * Enable gitignore support.
@@ -326,16 +337,13 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
   ignores?: string[] | ((originals: string[]) => string[]);
 
   /**
-   * Enable pnpm catalogs support.
+   * Enable pnpm (workspace/catalogs) support.
+   * Auto-detected based on pnpm-workspace.yaml presence.
    *
-   * Currently, it's disabled by default, as it's still experimental.
-   * In the future it will be smartly enabled based on the project catalog usage.
-   *
-   * @see https://github.com/antfu/pnpm-catalogs-utils
-   * @experimental
-   * @default false
+   * @see https://github.com/antfu/pnpm-workspace-utils
+   * @default auto-detect
    */
-  pnpmCatalogs?: boolean;
+  pnpm?: boolean | OptionsPnpm;
 
   /**
    * Use external formatters to format files.

@@ -1,7 +1,9 @@
 import type { Linter } from 'eslint';
 import type { Awaitable, ConfigNames, OptionsConfig, TypedFlatConfigItem } from './types';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
+import { findUpSync } from 'find-up-simple';
 import { isPackageExists } from 'local-pkg';
+
 import {
   comments,
   disables,
@@ -65,7 +67,7 @@ export function rotki(
     autoRenamePlugins = true,
     componentExts = [],
     gitignore: enableGitignore = true,
-    pnpmCatalogs: enablePnpmCatalogs = false,
+    pnpm: enablePnpm = !!findUpSync('pnpm-workspace.yaml'),
     regexp: enableRegexp = false,
     rotki: enableRotki,
     storybook: enableStorybook,
@@ -208,9 +210,15 @@ export function rotki(
     );
   }
 
-  if (enablePnpmCatalogs) {
+  if (enablePnpm) {
+    const optionsPnpm = resolveSubOptions(options, 'pnpm');
     configs.push(
-      pnpm(),
+      pnpm({
+        isInEditor,
+        json: options.jsonc !== false,
+        yaml: options.yaml !== false,
+        ...optionsPnpm,
+      }),
     );
   }
 
