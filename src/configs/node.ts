@@ -1,9 +1,11 @@
 import type { TypedFlatConfigItem } from '../types';
+import { GLOB_SRC } from '../globs';
 import { pluginNode } from '../plugins';
 
 export async function node(): Promise<TypedFlatConfigItem[]> {
   return [
     {
+      files: [GLOB_SRC],
       name: 'rotki/node/rules',
       plugins: {
         node: pluginNode,

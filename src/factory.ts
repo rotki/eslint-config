@@ -47,7 +47,7 @@ const VuePackages = [
 ];
 
 export const defaultPluginRenaming = {
-  'import-x': 'import',
+  'import-lite': 'import',
   'n': 'node',
   'vitest': 'test',
   'yml': 'yaml',
