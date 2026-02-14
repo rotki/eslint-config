@@ -1,4 +1,4 @@
-import rotki from './dist/index.js';
+import rotki from './dist/index.mjs';
 
 export default rotki({
   vue: true,
