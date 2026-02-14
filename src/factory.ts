@@ -58,7 +58,7 @@ export const defaultPluginRenaming = {
  */
 
 export function rotki(
-  options: OptionsConfig & Omit<TypedFlatConfigItem, 'files'> = {},
+  options: OptionsConfig & Omit<TypedFlatConfigItem, 'files' | 'ignores'> = {},
   ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.FlatConfig[]>[]
 ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
   const {

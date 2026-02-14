@@ -320,6 +320,11 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
   regexp?: boolean | (OptionsRegExp & OptionsOverrides);
 
   /**
+   * Additional ignore patterns, or a function that receives the default ignores and returns custom ignores.
+   */
+  ignores?: string[] | ((originals: string[]) => string[]);
+
+  /**
    * Enable pnpm catalogs support.
    *
    * Currently, it's disabled by default, as it's still experimental.
