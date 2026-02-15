@@ -19,6 +19,12 @@
         "as-needed"
       ],
       "block-scoped-var": "error",
+      "complexity": [
+        "warn",
+        {
+          "max": 10
+        }
+      ],
       "constructor-super": "error",
       "default-case-last": "error",
       "dot-notation": [
