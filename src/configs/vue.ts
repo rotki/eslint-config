@@ -84,6 +84,7 @@ export async function vue(
         allowBinding: false,
       },
     ],
+    'vue/no-unused-emit-declarations': 'error',
     'vue/prefer-define-options': 'error',
     'vue/prefer-import-from-vue': 'error',
     'vue/prefer-use-template-ref': 'warn',
