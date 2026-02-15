@@ -1299,6 +1299,10 @@
           ]
         }
       ],
+      "vue/define-emits-declaration": [
+        "error",
+        "type-literal"
+      ],
       "vue/define-macros-order": [
         "error",
         {

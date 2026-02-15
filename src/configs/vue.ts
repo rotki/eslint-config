@@ -41,6 +41,7 @@ export async function vue(
     'max-lines': ['warn', { max: 800 }],
     // migration
     'vue/component-api-style': ['error', ['script-setup']],
+    'vue/define-emits-declaration': ['error', 'type-literal'],
     'vue/define-props-declaration': ['error', 'type-based'],
     'vue/define-props-destructuring': 'warn',
     'vue/first-attribute-linebreak': ['error', {
