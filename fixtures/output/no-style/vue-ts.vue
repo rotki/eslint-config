@@ -6,6 +6,12 @@ import { ref } from 'vue';
 defineOptions({ inheritAttrs: false })
 
 
+const props = withDefaults(defineProps<{
+  title?: string
+}>(), {
+  title: 'Hello',
+});
+
 const greeting = ref('Hello, Vue 3!');
 const counter = ref<number  | 1>(0);
 

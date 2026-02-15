@@ -1245,7 +1245,12 @@
       "vue/no-mutating-props": "error",
       "vue/no-parsing-error": "error",
       "vue/no-ref-as-operand": "error",
-      "vue/no-required-prop-with-default": "warn",
+      "vue/no-required-prop-with-default": [
+        "error",
+        {
+          "autofix": true
+        }
+      ],
       "vue/no-reserved-component-names": "error",
       "vue/no-reserved-keys": "error",
       "vue/no-reserved-props": "error",

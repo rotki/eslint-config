@@ -15,6 +15,12 @@ export default { inheritAttrs: false }
 // Define reactive data and props
 import { ref } from 'vue';
 
+const props = withDefaults(defineProps<{
+  title: string
+}>(), {
+  title: 'Hello',
+});
+
 const greeting = ref('Hello, Vue 3!');
 let counter = ref<number  | 1>(0);
 
