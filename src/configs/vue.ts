@@ -42,6 +42,7 @@ export async function vue(
     // migration
     'vue/component-api-style': ['error', ['script-setup']],
     'vue/define-props-declaration': ['error', 'type-based'],
+    'vue/define-props-destructuring': 'warn',
     'vue/first-attribute-linebreak': ['error', {
       multiline: 'below',
       singleline: 'ignore',
@@ -79,6 +80,7 @@ export async function vue(
       },
     ],
     'vue/prefer-import-from-vue': 'error',
+    'vue/prefer-use-template-ref': 'warn',
     'vue/require-explicit-emits': 'error',
     'vue/require-macro-variable-name': ['error', {
       defineEmits: 'emit',
