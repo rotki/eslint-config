@@ -1,5 +1,7 @@
 import { rotki } from './factory';
 
+export * from './config-presets';
+
 export * from './configs';
 
 export * from './factory';

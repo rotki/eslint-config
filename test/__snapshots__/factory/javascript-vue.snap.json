@@ -1,0 +1,1914 @@
+[
+  {
+    "name": "rotki/javascript/rules",
+    "plugins": [
+      "antfu",
+      "unused-imports"
+    ],
+    "rules": {
+      "accessor-pairs": [
+        "error",
+        {
+          "enforceForClassMembers": true,
+          "setWithoutGet": true
+        }
+      ],
+      "array-callback-return": "error",
+      "arrow-body-style": [
+        "error",
+        "as-needed"
+      ],
+      "block-scoped-var": "error",
+      "constructor-super": "error",
+      "default-case-last": "error",
+      "dot-notation": [
+        "error",
+        {
+          "allowKeywords": true
+        }
+      ],
+      "eqeqeq": [
+        "error",
+        "smart"
+      ],
+      "for-direction": "error",
+      "getter-return": "error",
+      "max-lines": [
+        "error",
+        {
+          "max": 400
+        }
+      ],
+      "new-cap": [
+        "error",
+        {
+          "capIsNew": false,
+          "newIsCap": true,
+          "properties": true
+        }
+      ],
+      "no-alert": "error",
+      "no-async-promise-executor": "error",
+      "no-caller": "error",
+      "no-case-declarations": "error",
+      "no-class-assign": "error",
+      "no-compare-neg-zero": "error",
+      "no-cond-assign": [
+        "error",
+        "always"
+      ],
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "warn",
+            "error"
+          ]
+        }
+      ],
+      "no-const-assign": "error",
+      "no-constant-condition": "error",
+      "no-control-regex": "error",
+      "no-debugger": "error",
+      "no-delete-var": "error",
+      "no-dupe-args": "error",
+      "no-dupe-class-members": "error",
+      "no-dupe-else-if": "error",
+      "no-dupe-keys": "error",
+      "no-duplicate-case": "error",
+      "no-duplicate-imports": "error",
+      "no-empty": [
+        "error",
+        {
+          "allowEmptyCatch": true
+        }
+      ],
+      "no-empty-character-class": "error",
+      "no-empty-pattern": "error",
+      "no-eval": "error",
+      "no-ex-assign": "error",
+      "no-extend-native": "error",
+      "no-extra-bind": "error",
+      "no-extra-boolean-cast": "error",
+      "no-fallthrough": "error",
+      "no-func-assign": "error",
+      "no-global-assign": "error",
+      "no-implied-eval": "error",
+      "no-import-assign": "error",
+      "no-inner-declarations": "error",
+      "no-invalid-regexp": "error",
+      "no-irregular-whitespace": "error",
+      "no-iterator": "error",
+      "no-labels": [
+        "error",
+        {
+          "allowLoop": false,
+          "allowSwitch": false
+        }
+      ],
+      "no-lone-blocks": "error",
+      "no-loss-of-precision": "error",
+      "no-misleading-character-class": "error",
+      "no-multi-str": "error",
+      "no-new": "error",
+      "no-new-func": "error",
+      "no-new-native-nonconstructor": "error",
+      "no-new-wrappers": "error",
+      "no-nonoctal-decimal-escape": "error",
+      "no-obj-calls": "error",
+      "no-object-constructor": "error",
+      "no-octal": "error",
+      "no-octal-escape": "error",
+      "no-proto": "error",
+      "no-prototype-builtins": "error",
+      "no-redeclare": [
+        "error",
+        {
+          "builtinGlobals": false
+        }
+      ],
+      "no-regex-spaces": "error",
+      "no-restricted-globals": [
+        "error",
+        {
+          "message": "Use `globalThis` instead.",
+          "name": "global"
+        },
+        {
+          "message": "Use `globalThis` instead.",
+          "name": "self"
+        }
+      ],
+      "no-restricted-properties": [
+        "error",
+        {
+          "message": "Use `Object.getPrototypeOf` or `Object.setPrototypeOf` instead.",
+          "property": "__proto__"
+        },
+        {
+          "message": "Use `Object.defineProperty` instead.",
+          "property": "__defineGetter__"
+        },
+        {
+          "message": "Use `Object.defineProperty` instead.",
+          "property": "__defineSetter__"
+        },
+        {
+          "message": "Use `Object.getOwnPropertyDescriptor` instead.",
+          "property": "__lookupGetter__"
+        },
+        {
+          "message": "Use `Object.getOwnPropertyDescriptor` instead.",
+          "property": "__lookupSetter__"
+        }
+      ],
+      "no-restricted-syntax": [
+        "error",
+        "TSEnumDeclaration[const=true]",
+        "TSExportAssignment"
+      ],
+      "no-self-assign": [
+        "error",
+        {
+          "props": true
+        }
+      ],
+      "no-self-compare": "error",
+      "no-sequences": "error",
+      "no-setter-return": "error",
+      "no-shadow-restricted-names": "error",
+      "no-sparse-arrays": "error",
+      "no-template-curly-in-string": "error",
+      "no-this-before-super": "error",
+      "no-throw-literal": "error",
+      "no-undef": "error",
+      "no-undef-init": "error",
+      "no-unexpected-multiline": "error",
+      "no-unmodified-loop-condition": "error",
+      "no-unneeded-ternary": [
+        "error",
+        {
+          "defaultAssignment": false
+        }
+      ],
+      "no-unreachable": "error",
+      "no-unreachable-loop": "error",
+      "no-unsafe-finally": "error",
+      "no-unsafe-negation": "error",
+      "no-unsafe-optional-chaining": "error",
+      "no-unused-expressions": [
+        "error",
+        {
+          "allowShortCircuit": true,
+          "allowTaggedTemplates": true,
+          "allowTernary": true
+        }
+      ],
+      "no-unused-labels": "error",
+      "no-unused-vars": [
+        "error",
+        {
+          "args": "none",
+          "caughtErrors": "none",
+          "ignoreRestSiblings": true,
+          "vars": "all"
+        }
+      ],
+      "no-use-before-define": [
+        "error",
+        {
+          "classes": false,
+          "functions": false,
+          "variables": true
+        }
+      ],
+      "no-useless-backreference": "error",
+      "no-useless-call": "error",
+      "no-useless-catch": "error",
+      "no-useless-computed-key": "error",
+      "no-useless-constructor": "error",
+      "no-useless-escape": "error",
+      "no-useless-rename": "error",
+      "no-useless-return": "error",
+      "no-var": "error",
+      "no-void": "error",
+      "no-with": "error",
+      "object-shorthand": [
+        "error",
+        "always",
+        {
+          "avoidQuotes": true,
+          "ignoreConstructors": false
+        }
+      ],
+      "one-var": [
+        "error",
+        {
+          "initialized": "never"
+        }
+      ],
+      "prefer-arrow-callback": [
+        "error",
+        {
+          "allowNamedFunctions": false,
+          "allowUnboundThis": true
+        }
+      ],
+      "prefer-const": [
+        "error",
+        {
+          "destructuring": "all",
+          "ignoreReadBeforeAssign": true
+        }
+      ],
+      "prefer-exponentiation-operator": "error",
+      "prefer-promise-reject-errors": "error",
+      "prefer-regex-literals": [
+        "error",
+        {
+          "disallowRedundantWrapping": true
+        }
+      ],
+      "prefer-rest-params": "error",
+      "prefer-spread": "error",
+      "prefer-template": "error",
+      "require-yield": "error",
+      "symbol-description": "error",
+      "unicode-bom": [
+        "error",
+        "never"
+      ],
+      "unused-imports/no-unused-imports": "error",
+      "unused-imports/no-unused-vars": [
+        "error",
+        {
+          "args": "after-used",
+          "argsIgnorePattern": "^_",
+          "ignoreRestSiblings": true,
+          "vars": "all",
+          "varsIgnorePattern": "^_"
+        }
+      ],
+      "use-isnan": [
+        "error",
+        {
+          "enforceForIndexOf": true,
+          "enforceForSwitchCase": true
+        }
+      ],
+      "valid-typeof": [
+        "error",
+        {
+          "requireStringLiterals": true
+        }
+      ],
+      "vars-on-top": "error",
+      "yoda": [
+        "error",
+        "never"
+      ]
+    }
+  },
+  {
+    "name": "rotki/eslint-comments/rules",
+    "plugins": [
+      "eslint-comments"
+    ],
+    "rules": {
+      "eslint-comments/disable-enable-pair": [
+        "error",
+        {
+          "allowWholeFile": true
+        }
+      ],
+      "eslint-comments/no-aggregating-enable": "error",
+      "eslint-comments/no-duplicate-disable": "error",
+      "eslint-comments/no-unlimited-disable": "error",
+      "eslint-comments/no-unused-enable": "error"
+    }
+  },
+  {
+    "files": [
+      "**/*.?([cm])[jt]s?(x)"
+    ],
+    "name": "rotki/node/rules",
+    "plugins": [
+      "node"
+    ],
+    "rules": {
+      "node/handle-callback-err": [
+        "error",
+        "^(err|error)$"
+      ],
+      "node/no-deprecated-api": "error",
+      "node/no-exports-assign": "error",
+      "node/no-new-require": "error",
+      "node/no-path-concat": "error",
+      "node/prefer-global/buffer": [
+        "error",
+        "never"
+      ],
+      "node/prefer-global/process": [
+        "error",
+        "never"
+      ],
+      "node/process-exit-as-throw": "error"
+    }
+  },
+  {
+    "name": "rotki/import/rules",
+    "plugins": [
+      "@rotki",
+      "antfu",
+      "import"
+    ],
+    "rules": {
+      "@rotki/max-dependencies": [
+        "error",
+        {
+          "ignoreTypeImports": false,
+          "max": 20
+        }
+      ],
+      "antfu/import-dedupe": "error",
+      "antfu/no-import-dist": "error",
+      "antfu/no-import-node-modules-by-path": "error",
+      "import/first": "error",
+      "import/newline-after-import": [
+        "error",
+        {
+          "considerComments": true,
+          "count": 1
+        }
+      ],
+      "import/no-default-export": "warn",
+      "import/no-duplicates": [
+        "error",
+        {
+          "prefer-inline": true
+        }
+      ],
+      "import/no-mutable-exports": "error",
+      "import/no-named-default": "error"
+    }
+  },
+  {
+    "name": "rotki/perfectionist/setup",
+    "plugins": [
+      "perfectionist"
+    ],
+    "rules": {
+      "perfectionist/sort-exports": [
+        "error",
+        {
+          "order": "asc",
+          "type": "natural"
+        }
+      ],
+      "perfectionist/sort-imports": [
+        "error",
+        {
+          "groups": [
+            [
+              "type-builtin",
+              "type-external"
+            ],
+            [
+              "type-parent",
+              "type-sibling",
+              "type-index",
+              "type-internal"
+            ],
+            "builtin",
+            "external",
+            "internal",
+            [
+              "parent",
+              "sibling",
+              "index"
+            ],
+            "side-effect",
+            "unknown"
+          ],
+          "newlinesBetween": "ignore",
+          "order": "asc",
+          "type": "natural"
+        }
+      ],
+      "perfectionist/sort-named-exports": [
+        "error",
+        {
+          "order": "asc",
+          "type": "natural"
+        }
+      ],
+      "perfectionist/sort-named-imports": [
+        "error",
+        {
+          "order": "asc",
+          "type": "natural"
+        }
+      ]
+    }
+  },
+  {
+    "name": "rotki/unicorn/rules",
+    "plugins": [
+      "unicorn"
+    ],
+    "rules": {
+      "unicorn/better-regex": "error",
+      "unicorn/catch-error-name": "error",
+      "unicorn/custom-error-definition": "error",
+      "unicorn/error-message": "error",
+      "unicorn/escape-case": "error",
+      "unicorn/explicit-length-check": "error",
+      "unicorn/filename-case": [
+        "error",
+        {
+          "cases": {
+            "kebabCase": true,
+            "pascalCase": true
+          },
+          "ignore": [
+            {}
+          ]
+        }
+      ],
+      "unicorn/new-for-builtins": "error",
+      "unicorn/no-array-method-this-argument": "error",
+      "unicorn/no-array-push-push": "error",
+      "unicorn/no-console-spaces": "error",
+      "unicorn/no-for-loop": "error",
+      "unicorn/no-hex-escape": "error",
+      "unicorn/no-instanceof-builtins": "error",
+      "unicorn/no-invalid-remove-event-listener": "error",
+      "unicorn/no-lonely-if": "error",
+      "unicorn/no-new-buffer": "error",
+      "unicorn/no-static-only-class": "error",
+      "unicorn/no-unnecessary-await": "error",
+      "unicorn/no-zero-fractions": "error",
+      "unicorn/prefer-array-find": "error",
+      "unicorn/prefer-array-flat-map": "error",
+      "unicorn/prefer-array-index-of": "error",
+      "unicorn/prefer-array-some": "error",
+      "unicorn/prefer-at": "error",
+      "unicorn/prefer-blob-reading-methods": "error",
+      "unicorn/prefer-date-now": "error",
+      "unicorn/prefer-dom-node-text-content": "error",
+      "unicorn/prefer-includes": "error",
+      "unicorn/prefer-keyboard-event-key": "error",
+      "unicorn/prefer-math-trunc": "error",
+      "unicorn/prefer-modern-dom-apis": "error",
+      "unicorn/prefer-modern-math-apis": "error",
+      "unicorn/prefer-negative-index": "error",
+      "unicorn/prefer-node-protocol": "error",
+      "unicorn/prefer-optional-catch-binding": "error",
+      "unicorn/prefer-prototype-methods": "error",
+      "unicorn/prefer-reflect-apply": "error",
+      "unicorn/prefer-regexp-test": "error",
+      "unicorn/prefer-string-starts-ends-with": "error",
+      "unicorn/prefer-string-trim-start-end": "error",
+      "unicorn/prefer-top-level-await": "error",
+      "unicorn/prefer-type-error": "error",
+      "unicorn/throw-new-error": "error"
+    }
+  },
+  {
+    "files": [
+      ".github/**/*.md"
+    ],
+    "name": "rotki/unicorn/github-markdown",
+    "rules": {
+      "unicorn/filename-case": "off"
+    }
+  },
+  {
+    "name": "rotki/stylistic/rules",
+    "plugins": [
+      "@stylistic",
+      "antfu"
+    ],
+    "rules": {
+      "@stylistic/array-bracket-spacing": [
+        "error",
+        "never"
+      ],
+      "@stylistic/arrow-parens": [
+        "error",
+        "as-needed",
+        {
+          "requireForBlockBody": true
+        }
+      ],
+      "@stylistic/arrow-spacing": [
+        "error",
+        {
+          "after": true,
+          "before": true
+        }
+      ],
+      "@stylistic/block-spacing": [
+        "error",
+        "always"
+      ],
+      "@stylistic/brace-style": [
+        "error",
+        "stroustrup",
+        {
+          "allowSingleLine": true
+        }
+      ],
+      "@stylistic/comma-dangle": [
+        "error",
+        "always-multiline"
+      ],
+      "@stylistic/comma-spacing": [
+        "error",
+        {
+          "after": true,
+          "before": false
+        }
+      ],
+      "@stylistic/comma-style": [
+        "error",
+        "last"
+      ],
+      "@stylistic/computed-property-spacing": [
+        "error",
+        "never",
+        {
+          "enforceForClassMembers": true
+        }
+      ],
+      "@stylistic/dot-location": [
+        "error",
+        "property"
+      ],
+      "@stylistic/eol-last": "error",
+      "@stylistic/generator-star-spacing": [
+        "error",
+        {
+          "after": true,
+          "before": false
+        }
+      ],
+      "@stylistic/indent": [
+        "error",
+        2,
+        {
+          "ArrayExpression": 1,
+          "CallExpression": {
+            "arguments": 1
+          },
+          "flatTernaryExpressions": false,
+          "FunctionDeclaration": {
+            "body": 1,
+            "parameters": 1,
+            "returnType": 1
+          },
+          "FunctionExpression": {
+            "body": 1,
+            "parameters": 1,
+            "returnType": 1
+          },
+          "ignoreComments": false,
+          "ignoredNodes": [
+            "TSUnionType",
+            "TSIntersectionType"
+          ],
+          "ImportDeclaration": 1,
+          "MemberExpression": 1,
+          "ObjectExpression": 1,
+          "offsetTernaryExpressions": true,
+          "outerIIFEBody": 1,
+          "SwitchCase": 1,
+          "tabLength": 2,
+          "VariableDeclarator": 1
+        }
+      ],
+      "@stylistic/indent-binary-ops": [
+        "error",
+        2
+      ],
+      "@stylistic/jsx-closing-bracket-location": "error",
+      "@stylistic/jsx-closing-tag-location": "error",
+      "@stylistic/jsx-curly-brace-presence": [
+        "error",
+        {
+          "propElementValues": "always"
+        }
+      ],
+      "@stylistic/jsx-curly-newline": "error",
+      "@stylistic/jsx-curly-spacing": [
+        "error",
+        "never"
+      ],
+      "@stylistic/jsx-equals-spacing": "error",
+      "@stylistic/jsx-first-prop-new-line": "error",
+      "@stylistic/jsx-function-call-newline": [
+        "error",
+        "multiline"
+      ],
+      "@stylistic/jsx-indent-props": [
+        "error",
+        2
+      ],
+      "@stylistic/jsx-max-props-per-line": [
+        "error",
+        {
+          "maximum": 1,
+          "when": "multiline"
+        }
+      ],
+      "@stylistic/jsx-one-expression-per-line": [
+        "error",
+        {
+          "allow": "single-child"
+        }
+      ],
+      "@stylistic/jsx-quotes": "error",
+      "@stylistic/jsx-tag-spacing": [
+        "error",
+        {
+          "afterOpening": "never",
+          "beforeClosing": "never",
+          "beforeSelfClosing": "always",
+          "closingSlash": "never"
+        }
+      ],
+      "@stylistic/jsx-wrap-multilines": [
+        "error",
+        {
+          "arrow": "parens-new-line",
+          "assignment": "parens-new-line",
+          "condition": "parens-new-line",
+          "declaration": "parens-new-line",
+          "logical": "parens-new-line",
+          "prop": "parens-new-line",
+          "propertyValue": "parens-new-line",
+          "return": "parens-new-line"
+        }
+      ],
+      "@stylistic/key-spacing": [
+        "error",
+        {
+          "afterColon": true,
+          "beforeColon": false
+        }
+      ],
+      "@stylistic/keyword-spacing": [
+        "error",
+        {
+          "after": true,
+          "before": true
+        }
+      ],
+      "@stylistic/lines-between-class-members": [
+        "error",
+        "always",
+        {
+          "exceptAfterSingleLine": true
+        }
+      ],
+      "@stylistic/max-statements-per-line": [
+        "error",
+        {
+          "max": 1
+        }
+      ],
+      "@stylistic/member-delimiter-style": [
+        "error",
+        {
+          "multiline": {
+            "delimiter": "semi",
+            "requireLast": true
+          },
+          "multilineDetection": "brackets",
+          "singleline": {
+            "delimiter": "semi",
+            "requireLast": false
+          }
+        }
+      ],
+      "@stylistic/multiline-ternary": [
+        "error",
+        "always-multiline"
+      ],
+      "@stylistic/new-parens": "error",
+      "@stylistic/no-extra-parens": [
+        "error",
+        "functions"
+      ],
+      "@stylistic/no-floating-decimal": "error",
+      "@stylistic/no-mixed-operators": [
+        "error",
+        {
+          "allowSamePrecedence": true,
+          "groups": [
+            [
+              "==",
+              "!=",
+              "===",
+              "!==",
+              ">",
+              ">=",
+              "<",
+              "<="
+            ],
+            [
+              "&&",
+              "||"
+            ],
+            [
+              "in",
+              "instanceof"
+            ]
+          ]
+        }
+      ],
+      "@stylistic/no-mixed-spaces-and-tabs": "error",
+      "@stylistic/no-multi-spaces": "error",
+      "@stylistic/no-multiple-empty-lines": [
+        "error",
+        {
+          "max": 1,
+          "maxBOF": 0,
+          "maxEOF": 0
+        }
+      ],
+      "@stylistic/no-tabs": "error",
+      "@stylistic/no-trailing-spaces": "error",
+      "@stylistic/no-whitespace-before-property": "error",
+      "@stylistic/object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "@stylistic/operator-linebreak": "off",
+      "@stylistic/padded-blocks": [
+        "error",
+        {
+          "blocks": "never",
+          "classes": "never",
+          "switches": "never"
+        }
+      ],
+      "@stylistic/padding-line-between-statements": [
+        "error",
+        {
+          "blankLine": "always",
+          "next": [
+            "interface",
+            "type",
+            "class",
+            "function",
+            "export"
+          ],
+          "prev": "*"
+        }
+      ],
+      "@stylistic/quote-props": [
+        "error",
+        "consistent-as-needed"
+      ],
+      "@stylistic/quotes": [
+        "error",
+        "single",
+        {
+          "allowTemplateLiterals": "always",
+          "avoidEscape": false
+        }
+      ],
+      "@stylistic/rest-spread-spacing": [
+        "error",
+        "never"
+      ],
+      "@stylistic/semi": [
+        "error",
+        "always"
+      ],
+      "@stylistic/semi-spacing": [
+        "error",
+        {
+          "after": true,
+          "before": false
+        }
+      ],
+      "@stylistic/space-before-blocks": [
+        "error",
+        "always"
+      ],
+      "@stylistic/space-before-function-paren": [
+        "error",
+        {
+          "anonymous": "always",
+          "asyncArrow": "always",
+          "named": "never"
+        }
+      ],
+      "@stylistic/space-in-parens": [
+        "error",
+        "never"
+      ],
+      "@stylistic/space-infix-ops": "error",
+      "@stylistic/space-unary-ops": [
+        "error",
+        {
+          "nonwords": false,
+          "words": true
+        }
+      ],
+      "@stylistic/spaced-comment": [
+        "error",
+        "always",
+        {
+          "block": {
+            "balanced": true,
+            "exceptions": [
+              "*"
+            ],
+            "markers": [
+              "!"
+            ]
+          },
+          "line": {
+            "exceptions": [
+              "/",
+              "#"
+            ],
+            "markers": [
+              "/"
+            ]
+          }
+        }
+      ],
+      "@stylistic/template-curly-spacing": "error",
+      "@stylistic/template-tag-spacing": [
+        "error",
+        "never"
+      ],
+      "@stylistic/type-annotation-spacing": [
+        "error",
+        {}
+      ],
+      "@stylistic/type-generic-spacing": "error",
+      "@stylistic/type-named-tuple-spacing": "error",
+      "@stylistic/wrap-iife": [
+        "error",
+        "any",
+        {
+          "functionPrototypeMethods": true
+        }
+      ],
+      "@stylistic/yield-star-spacing": [
+        "error",
+        {
+          "after": true,
+          "before": false
+        }
+      ],
+      "antfu/consistent-chaining": "error",
+      "antfu/consistent-list-newline": "error",
+      "antfu/curly": "error",
+      "antfu/if-newline": "error",
+      "antfu/top-level-function": "error"
+    }
+  },
+  {
+    "name": "rotki/test/setup",
+    "plugins": [
+      "test"
+    ]
+  },
+  {
+    "files": [
+      "**/__tests__/**/*.?([cm])[jt]s?(x)",
+      "**/*.spec.?([cm])[jt]s?(x)",
+      "**/*.test.?([cm])[jt]s?(x)",
+      "**/*.bench.?([cm])[jt]s?(x)",
+      "**/*.benchmark.?([cm])[jt]s?(x)"
+    ],
+    "name": "rotki/test/rules",
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "node/prefer-global/process": "off",
+      "test/consistent-test-it": [
+        "error",
+        {
+          "fn": "it",
+          "withinDescribe": "it"
+        }
+      ],
+      "test/no-identical-title": "error",
+      "test/no-import-node-test": "error",
+      "test/no-only-tests": "error",
+      "test/prefer-hooks-in-order": "error",
+      "test/prefer-lowercase-title": "error"
+    }
+  },
+  {
+    "languageOptions": {
+      "globals": "/* globals */"
+    },
+    "name": "rotki/vue/setup",
+    "plugins": [
+      "vue"
+    ]
+  },
+  {
+    "files": [
+      "**/*.vue"
+    ],
+    "languageOptions": {
+      "parser": "vue-eslint-parser",
+      "parserOptions": {
+        "ecmaFeatures": {
+          "jsx": true
+        },
+        "extraFileExtensions": [
+          ".vue"
+        ],
+        "parser": null,
+        "sourceType": "module"
+      }
+    },
+    "name": "rotki/vue/rules",
+    "processor": "object-processor",
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "max-lines": [
+        "warn",
+        {
+          "max": 800
+        }
+      ],
+      "node/prefer-global/process": "off",
+      "vue/array-bracket-spacing": [
+        "error",
+        "never"
+      ],
+      "vue/arrow-spacing": [
+        "error",
+        {
+          "after": true,
+          "before": true
+        }
+      ],
+      "vue/attribute-hyphenation": "warn",
+      "vue/attributes-order": "warn",
+      "vue/block-order": [
+        "error",
+        {
+          "order": [
+            "script",
+            "template",
+            "style"
+          ]
+        }
+      ],
+      "vue/block-spacing": [
+        "error",
+        "always"
+      ],
+      "vue/block-tag-newline": [
+        "error",
+        {
+          "multiline": "always",
+          "singleline": "always"
+        }
+      ],
+      "vue/brace-style": [
+        "error",
+        "stroustrup",
+        {
+          "allowSingleLine": true
+        }
+      ],
+      "vue/comma-dangle": [
+        "error",
+        "always-multiline"
+      ],
+      "vue/comma-spacing": [
+        "error",
+        {
+          "after": true,
+          "before": false
+        }
+      ],
+      "vue/comma-style": [
+        "error",
+        "last"
+      ],
+      "vue/comment-directive": "error",
+      "vue/component-api-style": [
+        "error",
+        [
+          "script-setup"
+        ]
+      ],
+      "vue/component-definition-name-casing": "warn",
+      "vue/component-name-in-template-casing": [
+        "error",
+        "PascalCase",
+        {
+          "ignores": [
+            "i18n",
+            "i18n-t",
+            "i18n-d",
+            "i18n-n"
+          ],
+          "registeredComponentsOnly": false
+        }
+      ],
+      "vue/component-options-name-casing": [
+        "error",
+        "PascalCase"
+      ],
+      "vue/custom-event-name-casing": [
+        "error",
+        "kebab-case",
+        {
+          "ignores": [
+            "/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u"
+          ]
+        }
+      ],
+      "vue/define-macros-order": [
+        "error",
+        {
+          "defineExposeLast": true,
+          "order": [
+            "definePage",
+            "defineOptions",
+            "defineModel",
+            "defineProps",
+            "defineEmits",
+            "defineSlots"
+          ]
+        }
+      ],
+      "vue/define-props-declaration": [
+        "error",
+        "type-based"
+      ],
+      "vue/dot-location": [
+        "error",
+        "property"
+      ],
+      "vue/dot-notation": [
+        "error",
+        {
+          "allowKeywords": true
+        }
+      ],
+      "vue/eqeqeq": [
+        "error",
+        "smart"
+      ],
+      "vue/first-attribute-linebreak": [
+        "error",
+        {
+          "multiline": "below",
+          "singleline": "ignore"
+        }
+      ],
+      "vue/html-closing-bracket-newline": "warn",
+      "vue/html-closing-bracket-spacing": "warn",
+      "vue/html-comment-content-spacing": [
+        "error",
+        "always",
+        {
+          "exceptions": [
+            "-"
+          ]
+        }
+      ],
+      "vue/html-end-tags": "warn",
+      "vue/html-indent": [
+        "error",
+        2
+      ],
+      "vue/html-quotes": [
+        "error",
+        "double"
+      ],
+      "vue/html-self-closing": [
+        "error",
+        {
+          "html": {
+            "component": "always",
+            "normal": "always",
+            "void": "always"
+          },
+          "math": "always",
+          "svg": "always"
+        }
+      ],
+      "vue/jsx-uses-vars": "error",
+      "vue/key-spacing": [
+        "error",
+        {
+          "afterColon": true,
+          "beforeColon": false
+        }
+      ],
+      "vue/keyword-spacing": [
+        "error",
+        {
+          "after": true,
+          "before": true
+        }
+      ],
+      "vue/max-attributes-per-line": [
+        "error",
+        {
+          "multiline": {
+            "max": 1
+          },
+          "singleline": {
+            "max": 1
+          }
+        }
+      ],
+      "vue/multi-word-component-names": "off",
+      "vue/multiline-html-element-content-newline": [
+        "error",
+        {
+          "allowEmptyLines": false,
+          "ignores": [
+            "pre",
+            "textarea"
+          ],
+          "ignoreWhenEmpty": true
+        }
+      ],
+      "vue/mustache-interpolation-spacing": "warn",
+      "vue/no-arrow-functions-in-watch": "error",
+      "vue/no-async-in-computed-properties": "error",
+      "vue/no-child-content": "error",
+      "vue/no-computed-properties-in-data": "error",
+      "vue/no-constant-condition": "warn",
+      "vue/no-deprecated-data-object-declaration": "error",
+      "vue/no-deprecated-delete-set": "error",
+      "vue/no-deprecated-destroyed-lifecycle": "error",
+      "vue/no-deprecated-dollar-listeners-api": "error",
+      "vue/no-deprecated-dollar-scopedslots-api": "error",
+      "vue/no-deprecated-events-api": "error",
+      "vue/no-deprecated-filter": "error",
+      "vue/no-deprecated-functional-template": "error",
+      "vue/no-deprecated-html-element-is": "error",
+      "vue/no-deprecated-inline-template": "error",
+      "vue/no-deprecated-model-definition": "error",
+      "vue/no-deprecated-props-default-this": "error",
+      "vue/no-deprecated-router-link-tag-prop": "error",
+      "vue/no-deprecated-scope-attribute": "error",
+      "vue/no-deprecated-slot-attribute": "error",
+      "vue/no-deprecated-slot-scope-attribute": "error",
+      "vue/no-deprecated-v-bind-sync": "error",
+      "vue/no-deprecated-v-is": "error",
+      "vue/no-deprecated-v-on-native-modifier": "error",
+      "vue/no-deprecated-v-on-number-modifiers": "error",
+      "vue/no-deprecated-vue-config-keycodes": "error",
+      "vue/no-dupe-keys": "off",
+      "vue/no-dupe-v-else-if": "error",
+      "vue/no-duplicate-attr-inheritance": "error",
+      "vue/no-duplicate-attributes": "error",
+      "vue/no-empty-component-block": "error",
+      "vue/no-empty-pattern": "error",
+      "vue/no-export-in-script-setup": "error",
+      "vue/no-expose-after-await": "error",
+      "vue/no-irregular-whitespace": "error",
+      "vue/no-lifecycle-after-await": "error",
+      "vue/no-lone-template": "warn",
+      "vue/no-loss-of-precision": "error",
+      "vue/no-multi-spaces": "warn",
+      "vue/no-multiple-slot-args": "warn",
+      "vue/no-mutating-props": "error",
+      "vue/no-parsing-error": "error",
+      "vue/no-ref-as-operand": "error",
+      "vue/no-required-prop-with-default": "warn",
+      "vue/no-reserved-component-names": "error",
+      "vue/no-reserved-keys": "error",
+      "vue/no-reserved-props": "error",
+      "vue/no-restricted-syntax": [
+        "error",
+        "DebuggerStatement",
+        "LabeledStatement",
+        "WithStatement"
+      ],
+      "vue/no-restricted-v-bind": [
+        "error",
+        "/^v-/"
+      ],
+      "vue/no-setup-props-reactivity-loss": "off",
+      "vue/no-shared-component-data": "error",
+      "vue/no-side-effects-in-computed-properties": "error",
+      "vue/no-spaces-around-equal-signs-in-attribute": "warn",
+      "vue/no-sparse-arrays": "error",
+      "vue/no-static-inline-styles": [
+        "error",
+        {
+          "allowBinding": false
+        }
+      ],
+      "vue/no-template-key": "error",
+      "vue/no-template-shadow": "warn",
+      "vue/no-textarea-mustache": "error",
+      "vue/no-unused-components": "error",
+      "vue/no-unused-refs": "error",
+      "vue/no-unused-vars": "error",
+      "vue/no-use-computed-property-like-method": "error",
+      "vue/no-use-v-if-with-v-for": "error",
+      "vue/no-useless-template-attributes": "error",
+      "vue/no-useless-v-bind": "error",
+      "vue/no-v-for-template-key-on-child": "error",
+      "vue/no-v-html": "off",
+      "vue/no-v-text-v-html-on-component": "error",
+      "vue/no-watch-after-await": "error",
+      "vue/object-curly-newline": "off",
+      "vue/object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "vue/object-property-newline": [
+        "error",
+        {
+          "allowMultiplePropertiesPerLine": true
+        }
+      ],
+      "vue/object-shorthand": [
+        "error",
+        "always",
+        {
+          "avoidQuotes": true,
+          "ignoreConstructors": false
+        }
+      ],
+      "vue/one-component-per-file": "warn",
+      "vue/operator-linebreak": [
+        "error",
+        "before"
+      ],
+      "vue/order-in-components": "warn",
+      "vue/padding-line-between-blocks": [
+        "error",
+        "always"
+      ],
+      "vue/prefer-import-from-vue": "error",
+      "vue/prefer-separate-static-class": "error",
+      "vue/prefer-template": "error",
+      "vue/prop-name-casing": [
+        "error",
+        "camelCase"
+      ],
+      "vue/quote-props": [
+        "error",
+        "consistent-as-needed"
+      ],
+      "vue/require-component-is": "error",
+      "vue/require-default-prop": "off",
+      "vue/require-explicit-emits": "error",
+      "vue/require-macro-variable-name": [
+        "error",
+        {
+          "defineEmits": "emit",
+          "defineProps": "props",
+          "defineSlots": "slots",
+          "useAttrs": "attrs",
+          "useSlots": "slots"
+        }
+      ],
+      "vue/require-prop-type-constructor": "error",
+      "vue/require-prop-types": "off",
+      "vue/require-render-return": "error",
+      "vue/require-slots-as-functions": "error",
+      "vue/require-toggle-inside-transition": "error",
+      "vue/require-v-for-key": "error",
+      "vue/require-valid-default-prop": "error",
+      "vue/return-in-computed-property": "error",
+      "vue/return-in-emits-validator": "error",
+      "vue/singleline-html-element-content-newline": "warn",
+      "vue/space-in-parens": [
+        "error",
+        "never"
+      ],
+      "vue/space-infix-ops": "error",
+      "vue/space-unary-ops": [
+        "error",
+        {
+          "nonwords": false,
+          "words": true
+        }
+      ],
+      "vue/template-curly-spacing": "error",
+      "vue/this-in-template": "warn",
+      "vue/use-v-on-exact": "error",
+      "vue/v-bind-style": [
+        "error",
+        "shorthand"
+      ],
+      "vue/v-on-event-hyphenation": [
+        "warn",
+        "always",
+        {
+          "autofix": true
+        }
+      ],
+      "vue/v-on-handler-style": [
+        "error",
+        "inline",
+        {
+          "ignoreIncludesComment": false
+        }
+      ],
+      "vue/v-on-style": [
+        "error",
+        "shorthand"
+      ],
+      "vue/v-slot-style": [
+        "error",
+        {
+          "atComponent": "shorthand",
+          "default": "shorthand",
+          "named": "shorthand"
+        }
+      ],
+      "vue/valid-attribute-name": "error",
+      "vue/valid-define-emits": "error",
+      "vue/valid-define-options": "error",
+      "vue/valid-define-props": "error",
+      "vue/valid-next-tick": "error",
+      "vue/valid-template-root": "error",
+      "vue/valid-v-bind": "error",
+      "vue/valid-v-cloak": "error",
+      "vue/valid-v-else": "error",
+      "vue/valid-v-else-if": "error",
+      "vue/valid-v-for": "error",
+      "vue/valid-v-html": "error",
+      "vue/valid-v-if": "error",
+      "vue/valid-v-is": "error",
+      "vue/valid-v-memo": "error",
+      "vue/valid-v-model": "error",
+      "vue/valid-v-on": "error",
+      "vue/valid-v-once": "error",
+      "vue/valid-v-pre": "error",
+      "vue/valid-v-show": "error",
+      "vue/valid-v-slot": [
+        "error",
+        {
+          "allowModifiers": true
+        }
+      ],
+      "vue/valid-v-text": "error"
+    }
+  },
+  {
+    "name": "rotki/jsonc/setup",
+    "plugins": [
+      "jsonc"
+    ]
+  },
+  {
+    "files": [
+      "**/*.json",
+      "**/*.json5",
+      "**/*.jsonc"
+    ],
+    "languageOptions": {
+      "parser": "jsonc-eslint-parser"
+    },
+    "name": "rotki/jsonc/rules",
+    "rules": {
+      "jsonc/array-bracket-spacing": [
+        "error",
+        "never"
+      ],
+      "jsonc/comma-dangle": [
+        "error",
+        "never"
+      ],
+      "jsonc/comma-style": [
+        "error",
+        "last"
+      ],
+      "jsonc/indent": [
+        "error",
+        2
+      ],
+      "jsonc/key-spacing": [
+        "error",
+        {
+          "afterColon": true,
+          "beforeColon": false
+        }
+      ],
+      "jsonc/no-bigint-literals": "error",
+      "jsonc/no-binary-expression": "error",
+      "jsonc/no-binary-numeric-literals": "error",
+      "jsonc/no-dupe-keys": "error",
+      "jsonc/no-escape-sequence-in-identifier": "error",
+      "jsonc/no-floating-decimal": "error",
+      "jsonc/no-hexadecimal-numeric-literals": "error",
+      "jsonc/no-infinity": "error",
+      "jsonc/no-multi-str": "error",
+      "jsonc/no-nan": "error",
+      "jsonc/no-number-props": "error",
+      "jsonc/no-numeric-separators": "error",
+      "jsonc/no-octal": "error",
+      "jsonc/no-octal-escape": "error",
+      "jsonc/no-octal-numeric-literals": "error",
+      "jsonc/no-parenthesized": "error",
+      "jsonc/no-plus-sign": "error",
+      "jsonc/no-regexp-literals": "error",
+      "jsonc/no-sparse-arrays": "error",
+      "jsonc/no-template-literals": "error",
+      "jsonc/no-undefined-value": "error",
+      "jsonc/no-unicode-codepoint-escapes": "error",
+      "jsonc/no-useless-escape": "error",
+      "jsonc/object-curly-newline": [
+        "error",
+        {
+          "consistent": true,
+          "multiline": true
+        }
+      ],
+      "jsonc/object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "jsonc/object-property-newline": [
+        "error",
+        {
+          "allowMultiplePropertiesPerLine": true
+        }
+      ],
+      "jsonc/quote-props": "error",
+      "jsonc/quotes": "error",
+      "jsonc/space-unary-ops": "error",
+      "jsonc/valid-json-number": "error",
+      "jsonc/vue-custom-block/no-parsing-error": "error",
+      "max-lines": "off"
+    }
+  },
+  {
+    "files": [
+      "**/package.json"
+    ],
+    "name": "rotki/sort/package-json",
+    "rules": {
+      "jsonc/sort-array-values": [
+        "error",
+        {
+          "order": {
+            "type": "asc"
+          },
+          "pathPattern": "^files$"
+        }
+      ],
+      "jsonc/sort-keys": [
+        "error",
+        {
+          "order": [
+            "name",
+            "version",
+            "private",
+            "packageManager",
+            "description",
+            "type",
+            "keywords",
+            "license",
+            "homepage",
+            "bugs",
+            "repository",
+            "author",
+            "contributors",
+            "funding",
+            "files",
+            "main",
+            "module",
+            "types",
+            "exports",
+            "typesVersions",
+            "sideEffects",
+            "unpkg",
+            "jsdelivr",
+            "browser",
+            "bin",
+            "man",
+            "directories",
+            "publishConfig",
+            "scripts",
+            "peerDependencies",
+            "peerDependenciesMeta",
+            "optionalDependencies",
+            "dependencies",
+            "devDependencies",
+            "engines",
+            "config",
+            "overrides",
+            "pnpm",
+            "husky",
+            "lint-staged",
+            "eslintConfig",
+            "prettier"
+          ],
+          "pathPattern": "^$"
+        },
+        {
+          "order": {
+            "type": "asc"
+          },
+          "pathPattern": "^(?:dev|peer|optional|bundled)?[Dd]ependencies(Meta)?$"
+        },
+        {
+          "order": {
+            "type": "asc"
+          },
+          "pathPattern": "^(?:resolutions|overrides|pnpm.overrides)$"
+        },
+        {
+          "order": {
+            "type": "asc"
+          },
+          "pathPattern": "^workspaces\\.catalog$"
+        },
+        {
+          "order": {
+            "type": "asc"
+          },
+          "pathPattern": "^workspaces\\.catalogs\\.[^.]+$"
+        },
+        {
+          "order": [
+            "types",
+            "require",
+            "import",
+            "default"
+          ],
+          "pathPattern": "^exports.*$"
+        },
+        {
+          "order": [
+            "pre-commit",
+            "prepare-commit-msg",
+            "commit-msg",
+            "post-commit",
+            "pre-rebase",
+            "post-rewrite",
+            "post-checkout",
+            "post-merge",
+            "pre-push",
+            "pre-auto-gc"
+          ],
+          "pathPattern": "^(?:gitHooks|husky|simple-git-hooks)$"
+        }
+      ]
+    }
+  },
+  {
+    "files": [
+      "**/[jt]sconfig.json",
+      "**/[jt]sconfig.*.json"
+    ],
+    "name": "rotki/sort/tsconfig-json",
+    "rules": {
+      "jsonc/sort-keys": [
+        "error",
+        {
+          "order": [
+            "extends",
+            "compilerOptions",
+            "references",
+            "files",
+            "include",
+            "exclude"
+          ],
+          "pathPattern": "^$"
+        },
+        {
+          "order": [
+            "incremental",
+            "composite",
+            "tsBuildInfoFile",
+            "disableSourceOfProjectReferenceRedirect",
+            "disableSolutionSearching",
+            "disableReferencedProjectLoad",
+            "target",
+            "jsx",
+            "jsxFactory",
+            "jsxFragmentFactory",
+            "jsxImportSource",
+            "lib",
+            "moduleDetection",
+            "noLib",
+            "reactNamespace",
+            "useDefineForClassFields",
+            "emitDecoratorMetadata",
+            "experimentalDecorators",
+            "baseUrl",
+            "rootDir",
+            "rootDirs",
+            "customConditions",
+            "module",
+            "moduleResolution",
+            "moduleSuffixes",
+            "noResolve",
+            "paths",
+            "resolveJsonModule",
+            "resolvePackageJsonExports",
+            "resolvePackageJsonImports",
+            "typeRoots",
+            "types",
+            "allowArbitraryExtensions",
+            "allowImportingTsExtensions",
+            "allowUmdGlobalAccess",
+            "allowJs",
+            "checkJs",
+            "maxNodeModuleJsDepth",
+            "strict",
+            "strictBindCallApply",
+            "strictFunctionTypes",
+            "strictNullChecks",
+            "strictPropertyInitialization",
+            "allowUnreachableCode",
+            "allowUnusedLabels",
+            "alwaysStrict",
+            "exactOptionalPropertyTypes",
+            "noFallthroughCasesInSwitch",
+            "noImplicitAny",
+            "noImplicitOverride",
+            "noImplicitReturns",
+            "noImplicitThis",
+            "noPropertyAccessFromIndexSignature",
+            "noUncheckedIndexedAccess",
+            "noUnusedLocals",
+            "noUnusedParameters",
+            "useUnknownInCatchVariables",
+            "declaration",
+            "declarationDir",
+            "declarationMap",
+            "downlevelIteration",
+            "emitBOM",
+            "emitDeclarationOnly",
+            "importHelpers",
+            "importsNotUsedAsValues",
+            "inlineSourceMap",
+            "inlineSources",
+            "mapRoot",
+            "newLine",
+            "noEmit",
+            "noEmitHelpers",
+            "noEmitOnError",
+            "outDir",
+            "outFile",
+            "preserveConstEnums",
+            "preserveValueImports",
+            "removeComments",
+            "sourceMap",
+            "sourceRoot",
+            "stripInternal",
+            "allowSyntheticDefaultImports",
+            "esModuleInterop",
+            "forceConsistentCasingInFileNames",
+            "isolatedDeclarations",
+            "isolatedModules",
+            "preserveSymlinks",
+            "verbatimModuleSyntax",
+            "skipDefaultLibCheck",
+            "skipLibCheck"
+          ],
+          "pathPattern": "^compilerOptions$"
+        }
+      ]
+    }
+  },
+  {
+    "name": "rotki/yaml/setup",
+    "plugins": [
+      "yaml"
+    ]
+  },
+  {
+    "files": [
+      "**/*.y?(a)ml"
+    ],
+    "languageOptions": {
+      "parser": "yaml-eslint-parser"
+    },
+    "name": "rotki/yaml/rules",
+    "rules": {
+      "max-lines": "off",
+      "style/spaced-comment": "off",
+      "yaml/block-mapping": "error",
+      "yaml/block-mapping-question-indicator-newline": "error",
+      "yaml/block-sequence": "error",
+      "yaml/block-sequence-hyphen-indicator-newline": "error",
+      "yaml/flow-mapping-curly-newline": "error",
+      "yaml/flow-mapping-curly-spacing": "error",
+      "yaml/flow-sequence-bracket-newline": "error",
+      "yaml/flow-sequence-bracket-spacing": "error",
+      "yaml/indent": [
+        "error",
+        2
+      ],
+      "yaml/key-spacing": "error",
+      "yaml/no-empty-key": "error",
+      "yaml/no-empty-sequence-entry": "error",
+      "yaml/no-irregular-whitespace": "error",
+      "yaml/no-tab-indent": "error",
+      "yaml/plain-scalar": "error",
+      "yaml/quotes": [
+        "error",
+        {
+          "avoidEscape": true,
+          "prefer": "single"
+        }
+      ],
+      "yaml/spaced-comment": "error",
+      "yaml/vue-custom-block/no-parsing-error": "error"
+    }
+  },
+  {
+    "name": "rotki/markdown/setup",
+    "plugins": [
+      "markdown"
+    ]
+  },
+  {
+    "files": [
+      "**/*.md"
+    ],
+    "ignores": [
+      "**/*.md/*.md"
+    ],
+    "name": "rotki/markdown/processor",
+    "processor": "object-processor"
+  },
+  {
+    "files": [
+      "**/*.md"
+    ],
+    "languageOptions": {
+      "parser": "parser-plain"
+    },
+    "name": "rotki/markdown/parser"
+  },
+  {
+    "files": [
+      "**/*.md/**/*.?([cm])[jt]s?(x)",
+      "**/*.md/**/*.vue"
+    ],
+    "languageOptions": {
+      "parserOptions": {
+        "ecmaFeatures": {
+          "impliedStrict": true
+        }
+      }
+    },
+    "name": "rotki/markdown/disables",
+    "rules": {
+      "@typescript-eslint/consistent-type-imports": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/no-namespace": "off",
+      "@typescript-eslint/no-redeclare": "off",
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-unused-expressions": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-use-before-define": "off",
+      "import/newline-after-import": "off",
+      "no-alert": "off",
+      "no-console": "off",
+      "no-labels": "off",
+      "no-lone-blocks": "off",
+      "no-restricted-syntax": "off",
+      "no-undef": "off",
+      "no-unused-expressions": "off",
+      "no-unused-labels": "off",
+      "no-unused-vars": "off",
+      "node/prefer-global/process": "off",
+      "style/comma-dangle": "off",
+      "style/eol-last": "off",
+      "unicode-bom": "off",
+      "unused-imports/no-unused-imports": "off",
+      "unused-imports/no-unused-vars": "off"
+    }
+  },
+  {
+    "files": [
+      "**/*.md"
+    ],
+    "name": "rotki/markdown/no-max",
+    "rules": {
+      "max-lines": "off"
+    }
+  },
+  {
+    "files": [
+      "**/*.config.?([cm])[jt]s?(x)",
+      "**/*.config.*.?([cm])[jt]s?(x)",
+      "**/.vitepress/config.**/*.?([cm])[jt]s?(x)"
+    ],
+    "name": "rotki/disables/config",
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "import/no-default-export": "off",
+      "no-console": "off"
+    }
+  },
+  {
+    "files": [
+      "**/bin/**/*",
+      "**/bin.?([cm])[jt]s?(x)",
+      "**/eslint.config.?([cm])[jt]s?(x)"
+    ],
+    "name": "rotki/disables/bin",
+    "rules": {
+      "antfu/no-import-dist": "off",
+      "antfu/no-import-node-modules-by-path": "off"
+    }
+  },
+  {
+    "files": [
+      "**/scripts/**/*.?([cm])[jt]s?(x)",
+      "**/cli.?([cm])[jt]s?(x)"
+    ],
+    "name": "rotki/disables/cli",
+    "rules": {
+      "max-lines": "off",
+      "no-console": "off"
+    }
+  },
+  {
+    "files": [
+      "**/*.d.?([cm])ts"
+    ],
+    "name": "rotki/disables/dts",
+    "rules": {
+      "eslint-comments/no-unlimited-disable": "off",
+      "import/no-duplicates": "off",
+      "no-restricted-syntax": "off",
+      "unused-imports/no-unused-vars": "off"
+    }
+  },
+  {
+    "files": [
+      "**/*.{test,spec}.ts?(x)"
+    ],
+    "name": "rotki/disables/test",
+    "rules": {
+      "@rotki/max-dependencies": "off",
+      "max-lines": "off",
+      "no-unused-expressions": "off"
+    }
+  },
+  {
+    "files": [
+      "**/*.js",
+      "**/*.cjs"
+    ],
+    "name": "rotki/disables/cjs",
+    "rules": {
+      "@typescript-eslint/no-require-imports": "off"
+    }
+  }
+]
