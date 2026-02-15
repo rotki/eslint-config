@@ -48,6 +48,7 @@ export async function vue(
       multiline: 'below',
       singleline: 'ignore',
     }],
+    'vue/html-button-has-type': 'error',
     'vue/html-self-closing': [
       'error',
       {

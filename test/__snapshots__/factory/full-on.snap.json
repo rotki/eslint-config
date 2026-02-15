@@ -1343,6 +1343,7 @@
           "singleline": "ignore"
         }
       ],
+      "vue/html-button-has-type": "error",
       "vue/html-closing-bracket-newline": "warn",
       "vue/html-closing-bracket-spacing": "warn",
       "vue/html-comment-content-spacing": [
