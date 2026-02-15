@@ -1,0 +1,26 @@
+name: test
+version: 1.0.0
+description: A test YAML file
+
+nested:
+  key1: value1
+  key2: value2
+  array:
+    - 1
+    - 2
+    - 3
+
+mapping:
+  a: 1
+  b: 2
+  c: 3
+
+multiline: |
+  This is a
+  multiline string
+
+boolean_values:
+  yes_value: yes
+  no_value: no
+  true_value: true
+  false_value: false

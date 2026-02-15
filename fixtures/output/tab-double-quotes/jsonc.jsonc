@@ -1,0 +1,12 @@
+{
+	// This is a JSONC file with comments
+	"name": "test",
+	"version": "1.0.0",
+	"description": "A test JSONC file",
+	"nested": {
+		"key1": "value1",
+		"key2": "value2",
+		"array": [1, 2, 3, 4, 5]
+	},
+	"trailing": "comma"
+}
