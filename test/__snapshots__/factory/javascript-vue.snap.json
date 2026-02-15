@@ -1310,6 +1310,8 @@
       "vue/require-component-is": "error",
       "vue/require-default-prop": "off",
       "vue/require-explicit-emits": "error",
+      "vue/require-explicit-slots": "warn",
+      "vue/require-expose": "error",
       "vue/require-macro-variable-name": [
         "error",
         {

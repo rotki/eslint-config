@@ -82,6 +82,8 @@ export async function vue(
     'vue/prefer-import-from-vue': 'error',
     'vue/prefer-use-template-ref': 'warn',
     'vue/require-explicit-emits': 'error',
+    'vue/require-explicit-slots': 'warn',
+    'vue/require-expose': 'error',
     'vue/require-macro-variable-name': ['error', {
       defineEmits: 'emit',
       defineProps: 'props',
