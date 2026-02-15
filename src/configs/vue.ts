@@ -76,6 +76,7 @@ export async function vue(
     'vue/no-deprecated-filter': 'error',
     'vue/no-duplicate-attr-inheritance': 'error',
     'vue/no-empty-component-block': 'error',
+    'vue/no-ref-object-reactivity-loss': 'error',
     'vue/no-required-prop-with-default': ['error', { autofix: true }],
     'vue/no-static-inline-styles': [
       'error',

@@ -1249,6 +1249,7 @@
       "vue/no-mutating-props": "error",
       "vue/no-parsing-error": "error",
       "vue/no-ref-as-operand": "error",
+      "vue/no-ref-object-reactivity-loss": "error",
       "vue/no-required-prop-with-default": [
         "error",
         {
