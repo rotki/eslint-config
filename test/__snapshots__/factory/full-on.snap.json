@@ -1577,6 +1577,7 @@
       "vue/require-render-return": "error",
       "vue/require-slots-as-functions": "error",
       "vue/require-toggle-inside-transition": "error",
+      "vue/require-typed-object-prop": "error",
       "vue/require-typed-ref": "error",
       "vue/require-v-for-key": "error",
       "vue/require-valid-default-prop": "error",

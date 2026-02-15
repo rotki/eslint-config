@@ -98,6 +98,7 @@ export async function vue(
       useAttrs: 'attrs',
       useSlots: 'slots',
     }],
+    'vue/require-typed-object-prop': 'error',
     'vue/require-typed-ref': 'error',
     'vue/v-bind-style': ['error', 'shorthand'],
     'vue/v-on-handler-style': [
