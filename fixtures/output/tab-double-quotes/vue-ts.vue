@@ -2,6 +2,8 @@
 // Define reactive data and props
 import { ref } from "vue";
 
+defineOptions({ inheritAttrs: false });
+
 const greeting = ref("Hello, Vue 3!");
 const counter = ref<number | 1>(0);
 

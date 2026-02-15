@@ -7,6 +7,10 @@
   </div>
 </template>
 
+<script lang="ts">
+export default { inheritAttrs: false }
+</script>
+
 <script setup lang="ts">
 // Define reactive data and props
 import { ref } from 'vue';

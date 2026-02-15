@@ -1313,6 +1313,7 @@
         "error",
         "always"
       ],
+      "vue/prefer-define-options": "error",
       "vue/prefer-import-from-vue": "error",
       "vue/prefer-separate-static-class": "error",
       "vue/prefer-template": "error",
