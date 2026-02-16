@@ -20,6 +20,7 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
     },
     overrides = {},
     src = 'src',
+    typescript,
   } = options;
 
   const fileGlobs = files.map(x => `**/${src}/${x}`);
@@ -47,7 +48,7 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
     },
     ecmaVersion: 2022,
     extraFileExtensions: ['.vue'],
-    parser: options.typescript
+    parser: typescript
       ? await interopDefault(import('@typescript-eslint/parser')) as any
       : null,
     sourceType: 'module',

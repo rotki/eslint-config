@@ -67,6 +67,7 @@ export function rotki(
     autoRenamePlugins = true,
     componentExts = [],
     gitignore: enableGitignore = true,
+    jsx = true,
     pnpm: enablePnpm = !!findUpSync('pnpm-workspace.yaml'),
     regexp: enableRegexp = false,
     rotki: enableRotki,
@@ -98,7 +99,7 @@ export function rotki(
   }
 
   if (stylisticOptions && !('jsx' in stylisticOptions)) {
-    stylisticOptions.jsx = options.jsx ?? true;
+    stylisticOptions.jsx = jsx;
   }
 
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];

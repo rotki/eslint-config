@@ -17,6 +17,7 @@ export async function vue(
     files = [GLOB_VUE],
     overrides = {},
     stylistic = true,
+    typescript,
   } = options;
 
   const sfcBlocks = options.sfcBlocks === true
@@ -163,7 +164,7 @@ export async function vue(
             jsx: true,
           },
           extraFileExtensions: ['.vue'],
-          parser: options.typescript
+          parser: typescript
             ? await interopDefault(import('@typescript-eslint/parser')) as any
             : null,
           sourceType: 'module',

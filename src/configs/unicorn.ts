@@ -14,6 +14,7 @@ export async function unicorn(options: OptionsUnicorn = {}): Promise<TypedFlatCo
           : {
               'unicorn/better-regex': 'error',
               'unicorn/catch-error-name': 'error',
+              'unicorn/consistent-destructuring': 'warn',
               'unicorn/custom-error-definition': 'error',
               'unicorn/error-message': 'error',
               'unicorn/escape-case': 'error',
@@ -39,6 +40,7 @@ export async function unicorn(options: OptionsUnicorn = {}): Promise<TypedFlatCo
               'unicorn/no-new-buffer': 'error',
               'unicorn/no-static-only-class': 'error',
               'unicorn/no-unnecessary-await': 'error',
+              'unicorn/no-unused-properties': 'warn',
               'unicorn/no-zero-fractions': `error`,
               // 'unicorn/prefer-add-event-listener': 'error',
               'unicorn/prefer-array-find': 'error',

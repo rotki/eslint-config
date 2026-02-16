@@ -7,6 +7,7 @@ export async function rotkiPlugin(options: OptionsOverrides & OptionsHasTypeScri
   const {
     files = [GLOB_SRC, GLOB_VUE],
     overrides = {},
+    typescript,
   } = options;
 
   await ensurePackages([
@@ -39,7 +40,7 @@ export async function rotkiPlugin(options: OptionsOverrides & OptionsHasTypeScri
           },
           ecmaVersion: 2022,
           extraFileExtensions: ['.vue'],
-          parser: options.typescript
+          parser: typescript
             ? await interopDefault(import('@typescript-eslint/parser')) as any
             : null,
           sourceType: 'module',
