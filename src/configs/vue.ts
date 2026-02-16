@@ -87,6 +87,9 @@ export async function vue(
       },
     ],
     'vue/no-unused-emit-declarations': 'error',
+    'vue/no-unused-properties': ['warn', {
+      groups: ['props', 'data', 'computed', 'methods'],
+    }],
     'vue/prefer-define-options': 'error',
     'vue/prefer-import-from-vue': 'error',
     'vue/prefer-use-template-ref': 'warn',

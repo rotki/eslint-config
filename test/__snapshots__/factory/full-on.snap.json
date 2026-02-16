@@ -1523,6 +1523,17 @@
       "vue/no-textarea-mustache": "error",
       "vue/no-unused-components": "error",
       "vue/no-unused-emit-declarations": "error",
+      "vue/no-unused-properties": [
+        "warn",
+        {
+          "groups": [
+            "props",
+            "data",
+            "computed",
+            "methods"
+          ]
+        }
+      ],
       "vue/no-unused-refs": "error",
       "vue/no-unused-vars": "error",
       "vue/no-use-computed-property-like-method": "error",
