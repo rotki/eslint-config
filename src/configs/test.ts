@@ -47,12 +47,20 @@ export async function test(
 
         'node/prefer-global/process': 'off',
         'test/consistent-test-it': ['error', { fn: 'it', withinDescribe: 'it' }],
+        'test/max-nested-describe': ['error', { max: 2 }],
+        'test/no-conditional-in-test': 'warn',
+        'test/no-duplicate-hooks': 'error',
         'test/no-identical-title': 'error',
         'test/no-import-node-test': 'error',
         'test/no-only-tests': isInEditor ? 'warn' : 'error',
         'test/prefer-hooks-in-order': 'error',
-
+        'test/prefer-hooks-on-top': 'error',
         'test/prefer-lowercase-title': 'error',
+        'test/prefer-mock-promise-shorthand': 'error',
+        'test/prefer-to-be': 'error',
+        'test/prefer-to-contain': 'error',
+        'test/prefer-to-have-length': 'error',
+        'test/require-top-level-describe': 'error',
 
         ...overrides,
       },

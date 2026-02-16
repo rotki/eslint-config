@@ -1,4 +1,4 @@
-import { expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { CONFIG_PRESET_FULL_OFF, CONFIG_PRESET_FULL_ON, rotki } from '../src';
 
 const ignoredConfigNames = new Set([
@@ -60,47 +60,49 @@ async function run(name: string, configs: Record<string, any>[]): Promise<void> 
   await expect(JSON.stringify(serialized, null, 2)).toMatchFileSnapshot(`__snapshots__/factory/${name}.snap.json`);
 }
 
-it('default', async () => {
-  const configs = await rotki({
-    vue: false,
-    pnpm: false,
+describe('factory-snap', () => {
+  it('default', async () => {
+    const configs = await rotki({
+      vue: false,
+      pnpm: false,
+    });
+    await run('default', configs);
   });
-  await run('default', configs);
-});
 
-it('full-off', async () => {
-  const configs = await rotki(CONFIG_PRESET_FULL_OFF);
-  await run('full-off', configs);
-});
-
-it('full-on', async () => {
-  const configs = await rotki(CONFIG_PRESET_FULL_ON);
-  await run('full-on', configs);
-});
-
-it('less-opinionated', async () => {
-  const configs = await rotki({
-    lessOpinionated: true,
-    vue: false,
-    pnpm: false,
+  it('full-off', async () => {
+    const configs = await rotki(CONFIG_PRESET_FULL_OFF);
+    await run('full-off', configs);
   });
-  await run('less-opinionated', configs);
-});
 
-it('javascript-vue', async () => {
-  const configs = await rotki({
-    typescript: false,
-    vue: true,
-    pnpm: false,
+  it('full-on', async () => {
+    const configs = await rotki(CONFIG_PRESET_FULL_ON);
+    await run('full-on', configs);
   });
-  await run('javascript-vue', configs);
-});
 
-it('in-editor', async () => {
-  const configs = await rotki({
-    isInEditor: true,
-    vue: false,
-    pnpm: false,
+  it('less-opinionated', async () => {
+    const configs = await rotki({
+      lessOpinionated: true,
+      vue: false,
+      pnpm: false,
+    });
+    await run('less-opinionated', configs);
   });
-  await run('in-editor', configs);
+
+  it('javascript-vue', async () => {
+    const configs = await rotki({
+      typescript: false,
+      vue: true,
+      pnpm: false,
+    });
+    await run('javascript-vue', configs);
+  });
+
+  it('in-editor', async () => {
+    const configs = await rotki({
+      isInEditor: true,
+      vue: false,
+      pnpm: false,
+    });
+    await run('in-editor', configs);
+  });
 });
