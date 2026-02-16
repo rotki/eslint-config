@@ -1,5 +1,5 @@
 import type { Linter } from 'eslint';
-import type { Awaitable, ConfigNames, OptionsConfig, TypedFlatConfigItem } from './types';
+import type { Awaitable, ConfigNames, OptionsConfig, StylisticConfig, TypedFlatConfigItem } from './types';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { findUpSync } from 'find-up-simple';
 import { isPackageExists } from 'local-pkg';
@@ -86,11 +86,16 @@ export function rotki(
     }
   }
 
-  const stylisticOptions = options.stylistic === false
-    ? false
-    : typeof options.stylistic === 'object'
-      ? options.stylistic
-      : {};
+  let stylisticOptions: StylisticConfig | false;
+  if (options.stylistic === false) {
+    stylisticOptions = false;
+  }
+  else if (typeof options.stylistic === 'object') {
+    stylisticOptions = options.stylistic;
+  }
+  else {
+    stylisticOptions = {};
+  }
 
   if (stylisticOptions && !('jsx' in stylisticOptions)) {
     stylisticOptions.jsx = options.jsx ?? true;
