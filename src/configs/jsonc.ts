@@ -12,8 +12,10 @@ export async function jsonc(
   } = options;
 
   const {
-    indent = 2,
+    indent: rawIndent = 2,
   } = typeof stylistic === 'boolean' ? {} : stylistic;
+
+  const indent = Array.isArray(rawIndent) ? rawIndent[0] : rawIndent;
 
   const [
     pluginJsonc,

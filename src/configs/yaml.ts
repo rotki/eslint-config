@@ -12,9 +12,11 @@ export async function yaml(
   } = options;
 
   const {
-    indent = 2,
+    indent: rawIndent = 2,
     quotes = 'single',
   } = typeof stylistic === 'boolean' ? {} : stylistic;
+
+  const indent = Array.isArray(rawIndent) ? rawIndent[0] : rawIndent;
 
   const [
     pluginYaml,

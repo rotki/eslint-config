@@ -4,10 +4,10 @@ import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_XML }
 import { ensurePackages, interopDefault, isPackageInScope, parserPlain } from '../utils';
 import { StylisticConfigDefaults } from './stylistic';
 
-function mergePrettierOptions(
+function mergePrettierOptions<T extends VendoredPrettierRuleOptions>(
   options: VendoredPrettierOptions,
-  overrides: VendoredPrettierRuleOptions = {},
-): VendoredPrettierRuleOptions {
+  overrides: T,
+): VendoredPrettierOptions & T {
   return {
     ...options,
     ...overrides,
@@ -37,13 +37,15 @@ export async function formatters(
   ]);
 
   const {
-    indent,
+    indent: rawIndent,
     quotes,
     semi,
   } = {
     ...StylisticConfigDefaults,
     ...stylistic,
   };
+
+  const indent = Array.isArray(rawIndent) ? rawIndent[0] : rawIndent;
 
   const prettierOptions: VendoredPrettierOptions = Object.assign(
         {
