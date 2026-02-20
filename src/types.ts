@@ -110,17 +110,16 @@ export interface OptionsVueI18n extends OptionsOverrides {
    */
   localesDirectory?: string;
   /**
-   * Patterns that will be ignored by @intlify/vue-i18n/no-unused-keys.
-   */
-  ignores?: string[];
-  /**
    * Optional configuration for @intlify/vue-i18n/no-raw-text rule
    */
   noRawTextIgnores?: VueI18nNoRawTextIgnores;
-  /**
-   * Specifies the configuration mode for @intlify/vue-i18n/no-unused-keys.
-   */
-  enableNoUnusedKeys?: 'always' | 'ci' | 'never';
+}
+
+export interface OptionsRotkiPlugin extends OptionsOverrides {
+  /** Key patterns ignored by @rotki/no-unused-i18n-keys */
+  ignoreKeys?: string[];
+  /** @default 'src' */
+  src?: string;
 }
 
 export interface OptionsOverrides {
@@ -364,7 +363,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    *
    * @default false
    */
-  rotki?: boolean | OptionsOverrides;
+  rotki?: boolean | OptionsRotkiPlugin;
 
   /**
    * Enable vue-i18n linting support.

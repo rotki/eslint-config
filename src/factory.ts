@@ -182,7 +182,9 @@ export function rotki(
 
   if (enableRotki) {
     configs.push(rotkiPlugin({
+      ...resolveSubOptions(options, 'rotki'),
       overrides: getOverrides(options, 'rotki'),
+      stylistic: stylisticOptions,
       typescript: !!enableTypeScript,
     }));
   }
