@@ -87,16 +87,17 @@ export function rotki(
     }
   }
 
-  let stylisticOptions: StylisticConfig | false;
-  if (options.stylistic === false) {
-    stylisticOptions = false;
+  function resolveStylisticOptions(): StylisticConfig | false {
+    if (options.stylistic === false)
+      return false;
+
+    if (typeof options.stylistic === 'object')
+      return options.stylistic;
+
+    return {};
   }
-  else if (typeof options.stylistic === 'object') {
-    stylisticOptions = options.stylistic;
-  }
-  else {
-    stylisticOptions = {};
-  }
+
+  const stylisticOptions = resolveStylisticOptions();
 
   if (stylisticOptions && !('jsx' in stylisticOptions)) {
     stylisticOptions.jsx = jsx;
@@ -105,18 +106,13 @@ export function rotki(
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
 
   if (enableGitignore) {
-    if (typeof enableGitignore !== 'boolean') {
-      configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r({
-        name: 'rotki/gitignore',
-        ...enableGitignore,
-      })]));
-    }
-    else {
-      configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r({
-        name: 'rotki/gitignore',
-        strict: false,
-      })]));
-    }
+    const gitignoreOptions = typeof enableGitignore !== 'boolean'
+      ? enableGitignore
+      : { strict: false };
+    configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r({
+      name: 'rotki/gitignore',
+      ...gitignoreOptions,
+    })]));
   }
 
   const typescriptOptions = resolveSubOptions(options, 'typescript');
