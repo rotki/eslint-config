@@ -133,14 +133,6 @@ export async function javascript(
           'error',
           'TSEnumDeclaration[const=true]',
           'TSExportAssignment',
-          {
-            message: 'Avoid `else if`. Prefer early returns or ternary operators.',
-            selector: 'IfStatement > IfStatement.alternate',
-          },
-          {
-            message: 'Avoid `else`. Prefer early returns or ternary operators.',
-            selector: 'IfStatement > :not(IfStatement).alternate',
-          },
         ],
         'no-self-assign': ['error', { props: true }],
         'no-self-compare': 'error',
