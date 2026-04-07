@@ -17,13 +17,7 @@ export async function jsonc(
 
   const indent = Array.isArray(rawIndent) ? rawIndent[0] : rawIndent;
 
-  const [
-    pluginJsonc,
-    parserJsonc,
-  ] = await Promise.all([
-    interopDefault(import('eslint-plugin-jsonc')),
-    interopDefault(import('jsonc-eslint-parser')),
-  ] as const);
+  const pluginJsonc = await interopDefault(import('eslint-plugin-jsonc'));
 
   const customRules: TypedFlatConfigItem['rules'] = {
     'max-lines': 'off',
@@ -38,9 +32,7 @@ export async function jsonc(
     },
     {
       files,
-      languageOptions: {
-        parser: parserJsonc,
-      },
+      language: 'jsonc/json',
       name: 'rotki/jsonc/rules',
       rules: {
         'jsonc/no-bigint-literals': 'error',

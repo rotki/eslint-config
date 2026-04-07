@@ -533,6 +533,30 @@
     }
   },
   {
+    "name": "rotki/e18e/rules",
+    "plugins": [
+      "e18e"
+    ],
+    "rules": {
+      "e18e/prefer-array-at": "error",
+      "e18e/prefer-array-fill": "error",
+      "e18e/prefer-array-from-map": "error",
+      "e18e/prefer-array-some": "error",
+      "e18e/prefer-array-to-reversed": "off",
+      "e18e/prefer-array-to-sorted": "off",
+      "e18e/prefer-array-to-spliced": "off",
+      "e18e/prefer-date-now": "error",
+      "e18e/prefer-includes": "error",
+      "e18e/prefer-nullish-coalescing": "error",
+      "e18e/prefer-object-has-own": "error",
+      "e18e/prefer-regex-test": "error",
+      "e18e/prefer-spread-syntax": "off",
+      "e18e/prefer-static-regex": "error",
+      "e18e/prefer-timer-args": "error",
+      "e18e/prefer-url-canparse": "error"
+    }
+  },
+  {
     "name": "rotki/stylistic/rules",
     "plugins": [
       "@stylistic",
@@ -940,6 +964,7 @@
     "name": "rotki/test/rules",
     "rules": {
       "@typescript-eslint/explicit-function-return-type": "off",
+      "e18e/prefer-static-regex": "off",
       "node/prefer-global/process": "off",
       "test/consistent-test-it": [
         "error",
@@ -1479,9 +1504,7 @@
       "**/*.json5",
       "**/*.jsonc"
     ],
-    "languageOptions": {
-      "parser": "jsonc-eslint-parser"
-    },
+    "language": "jsonc/json",
     "name": "rotki/jsonc/rules",
     "rules": {
       "jsonc/array-bracket-spacing": [
@@ -1853,10 +1876,49 @@
     "files": [
       "**/*.md"
     ],
-    "languageOptions": {
-      "parser": "parser-plain"
-    },
+    "language": "markdown/gfm",
     "name": "rotki/markdown/parser"
+  },
+  {
+    "files": [
+      "**/*.md"
+    ],
+    "name": "rotki/markdown/rules",
+    "rules": {
+      "markdown/fenced-code-language": "off",
+      "markdown/heading-increment": "error",
+      "markdown/no-duplicate-definitions": "error",
+      "markdown/no-empty-definitions": "error",
+      "markdown/no-empty-images": "error",
+      "markdown/no-empty-links": "error",
+      "markdown/no-invalid-label-refs": "error",
+      "markdown/no-missing-atx-heading-space": "error",
+      "markdown/no-missing-label-refs": "off",
+      "markdown/no-missing-link-fragments": "error",
+      "markdown/no-multiple-h1": "error",
+      "markdown/no-reference-like-urls": "error",
+      "markdown/no-reversed-media-syntax": "error",
+      "markdown/no-space-in-emphasis": "error",
+      "markdown/no-unused-definitions": "error",
+      "markdown/require-alt-text": "error",
+      "markdown/table-column-count": "error"
+    }
+  },
+  {
+    "files": [
+      "**/*.md"
+    ],
+    "name": "rotki/markdown/disables/markdown",
+    "rules": {
+      "@stylistic/indent": "off",
+      "no-irregular-whitespace": "off",
+      "perfectionist/sort-exports": "off",
+      "perfectionist/sort-imports": "off",
+      "regexp/no-legacy-features": "off",
+      "regexp/no-missing-g-flag": "off",
+      "regexp/no-useless-dollar-replacements": "off",
+      "regexp/no-useless-flag": "off"
+    }
   },
   {
     "files": [
@@ -1870,10 +1932,11 @@
         }
       }
     },
-    "name": "rotki/markdown/disables",
+    "name": "rotki/markdown/disables/code",
     "rules": {
       "@stylistic/comma-dangle": "off",
       "@stylistic/eol-last": "off",
+      "@stylistic/padding-line-between-statements": "off",
       "@typescript-eslint/consistent-type-imports": "off",
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-namespace": "off",
@@ -1882,6 +1945,7 @@
       "@typescript-eslint/no-unused-expressions": "off",
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-use-before-define": "off",
+      "e18e/prefer-static-regex": "off",
       "import/newline-after-import": "off",
       "no-alert": "off",
       "no-console": "off",

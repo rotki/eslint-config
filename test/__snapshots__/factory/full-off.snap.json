@@ -452,6 +452,30 @@
     }
   },
   {
+    "name": "rotki/e18e/rules",
+    "plugins": [
+      "e18e"
+    ],
+    "rules": {
+      "e18e/prefer-array-at": "error",
+      "e18e/prefer-array-fill": "error",
+      "e18e/prefer-array-from-map": "error",
+      "e18e/prefer-array-some": "error",
+      "e18e/prefer-array-to-reversed": "off",
+      "e18e/prefer-array-to-sorted": "off",
+      "e18e/prefer-array-to-spliced": "off",
+      "e18e/prefer-date-now": "error",
+      "e18e/prefer-includes": "error",
+      "e18e/prefer-nullish-coalescing": "error",
+      "e18e/prefer-object-has-own": "error",
+      "e18e/prefer-regex-test": "error",
+      "e18e/prefer-spread-syntax": "off",
+      "e18e/prefer-static-regex": "error",
+      "e18e/prefer-timer-args": "error",
+      "e18e/prefer-url-canparse": "error"
+    }
+  },
+  {
     "files": [
       "**/*.config.?([cm])[jt]s?(x)",
       "**/*.config.*.?([cm])[jt]s?(x)",

@@ -45,6 +45,7 @@ export async function test(
       rules: {
         '@typescript-eslint/explicit-function-return-type': 'off',
 
+        'e18e/prefer-static-regex': 'off',
         'node/prefer-global/process': 'off',
         'test/consistent-test-it': ['error', { fn: 'it', withinDescribe: 'it' }],
         'test/max-nested-describe': ['error', { max: 2 }],

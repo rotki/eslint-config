@@ -1,6 +1,8 @@
 import type { OptionsUnicorn, TypedFlatConfigItem } from '../types';
 import { pluginUnicorn } from '../plugins';
 
+const FILENAME_CASE_IGNORE = /^[A-Z]+\..*$/;
+
 export async function unicorn(options: OptionsUnicorn = {}): Promise<TypedFlatConfigItem[]> {
   return [
     {
@@ -23,7 +25,7 @@ export async function unicorn(options: OptionsUnicorn = {}): Promise<TypedFlatCo
                 'error',
                 {
                   cases: { kebabCase: true, pascalCase: true },
-                  ignore: [/^[A-Z]+\..*$/],
+                  ignore: [FILENAME_CASE_IGNORE],
                 },
               ],
               'unicorn/new-for-builtins': 'error',

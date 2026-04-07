@@ -7,6 +7,7 @@ import { isPackageExists } from 'local-pkg';
 import {
   comments,
   disables,
+  e18e,
   formatters,
   ignores,
   imports,
@@ -66,13 +67,14 @@ export function rotki(
   const {
     autoRenamePlugins = true,
     componentExts = [],
+    e18e: enableE18e = true,
     gitignore: enableGitignore = true,
     jsx = true,
     pnpm: enablePnpm = !!findUpSync('pnpm-workspace.yaml'),
     regexp: enableRegexp = false,
     rotki: enableRotki,
     storybook: enableStorybook,
-    typescript: enableTypeScript = isPackageExists('typescript'),
+    typescript: enableTypeScript = isPackageExists('typescript') || isPackageExists('@typescript/native-preview'),
     unicorn: enableUnicorn = true,
     vue: enableVue = VuePackages.some(i => isPackageExists(i)),
     vueI18n: enableVueI18n,
@@ -137,6 +139,14 @@ export function rotki(
 
   if (enableUnicorn) {
     configs.push(unicorn(enableUnicorn === true ? {} : enableUnicorn));
+  }
+
+  if (enableE18e) {
+    configs.push(e18e({
+      ...(typeof enableE18e === 'boolean' ? {} : enableE18e),
+      isInEditor,
+      type: options.type,
+    }));
   }
 
   if (enableVue) {
