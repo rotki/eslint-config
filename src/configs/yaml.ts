@@ -40,7 +40,7 @@ export async function yaml(
       },
       name: 'rotki/yaml/rules',
       rules: {
-        'style/spaced-comment': 'off',
+        '@stylistic/spaced-comment': 'off',
 
         'yaml/block-mapping': 'error',
         'yaml/block-sequence': 'error',

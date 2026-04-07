@@ -97,6 +97,20 @@ describe('factory-snap', () => {
     await run('javascript-vue', configs);
   });
 
+  it('yaml config disables @stylistic/spaced-comment', async () => {
+    const configs = await rotki({
+      vue: false,
+      pnpm: false,
+    });
+
+    const yamlRulesConfig = configs.find(
+      (config: Record<string, any>) => config.name === 'rotki/yaml/rules',
+    ) as Record<string, any> | undefined;
+
+    expect(yamlRulesConfig).toBeDefined();
+    expect(yamlRulesConfig!.rules['@stylistic/spaced-comment']).toBe('off');
+  });
+
   it('in-editor', async () => {
     const configs = await rotki({
       isInEditor: true,

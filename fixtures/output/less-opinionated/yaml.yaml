@@ -1,3 +1,4 @@
+# Configuration for the test fixture (used by eslint-config)
 name: test
 version: 1.0.0
 description: A test YAML file
