@@ -25,7 +25,14 @@ export async function e18e(options: OptionsE18e & OptionsProjectType & OptionsIs
         ...moduleReplacements ? { ...configs.moduleReplacements!.rules } : {},
         ...performanceImprovements ? { ...configs.performanceImprovements!.rules } : {},
 
-        // these are a bit opinionated and dangerous, so we disable them
+        // e18e/prefer-static-regex is too strict for non-lib projects, and most of the time the performance improvement is negligible
+        ...(type === 'lib'
+          ? {}
+          : {
+              'e18e/prefer-static-regex': 'off',
+            }),
+
+        // these are a bit opinionated and dangerous (introducing behavioral changes), so we disable them
         'e18e/prefer-array-to-reversed': 'off',
         'e18e/prefer-array-to-sorted': 'off',
         'e18e/prefer-array-to-spliced': 'off',
