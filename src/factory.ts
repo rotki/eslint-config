@@ -30,6 +30,7 @@ import {
   yaml,
 } from './configs';
 import { pnpm } from './configs/pnpm';
+import { GLOB_MARKDOWN } from './globs';
 import { interopDefault, isInEditorEnv } from './utils';
 
 const flatConfigProps = [
@@ -285,6 +286,13 @@ export function rotki(
     ...configs,
     ...userConfigs as any,
   );
+
+  // Scope rules without explicit `files` away from markdown files, so that
+  // JS-only rules (including user overrides) don't run against the markdown
+  // `SourceCode`, which lacks methods like `getAllComments()`.
+  if (options.markdown ?? true) {
+    composer = composer.setDefaultIgnores(prev => [...prev, GLOB_MARKDOWN]);
+  }
 
   if (autoRenamePlugins) {
     composer = composer.renamePlugins(defaultPluginRenaming);

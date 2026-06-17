@@ -52,20 +52,6 @@ export async function markdown(
       },
     },
     {
-      files,
-      name: 'rotki/markdown/disables/markdown',
-      rules: {
-        '@stylistic/indent': 'off',
-        'no-irregular-whitespace': 'off',
-        'perfectionist/sort-exports': 'off',
-        'perfectionist/sort-imports': 'off',
-        'regexp/no-legacy-features': 'off',
-        'regexp/no-missing-g-flag': 'off',
-        'regexp/no-useless-dollar-replacements': 'off',
-        'regexp/no-useless-flag': 'off',
-      },
-    },
-    {
       files: [
         GLOB_MARKDOWN_CODE,
         ...componentExts.map(ext => `${GLOB_MARKDOWN}/**/*.${ext}`),
