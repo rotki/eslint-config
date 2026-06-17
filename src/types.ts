@@ -2,11 +2,13 @@ import type { Linter } from 'eslint';
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 import type { ConfigWithExtends } from 'eslint-flat-config-utils';
 import type {
+  OptionsComponentExts,
   OptionsE18e,
   OptionsFormatters,
   OptionsMarkdown,
   OptionsOverrides,
   OptionsPnpm,
+  OptionsProjectType,
   OptionsRegExp,
   OptionsRotkiPlugin,
   OptionsTypescript,
@@ -60,7 +62,7 @@ export type TypedFlatConfigItem = Omit<ConfigWithExtends, 'plugins' | 'rules'> &
   rules?: Linter.RulesRecord & Rules;
 };
 
-export interface OptionsConfig {
+export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType {
   /**
      * Enable gitignore support.
      *
