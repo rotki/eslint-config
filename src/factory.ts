@@ -71,6 +71,7 @@ export function rotki(
     e18e: enableE18e = true,
     gitignore: enableGitignore = true,
     jsx = true,
+    perfectionist: enablePerfectionist = true,
     pnpm: enablePnpm = !!findUpSync('pnpm-workspace.yaml'),
     regexp: enableRegexp = false,
     rotki: enableRotki,
@@ -133,10 +134,13 @@ export function rotki(
       overrides: getOverrides(options, 'imports'),
       stylistic: stylisticOptions,
     }),
-
-    // Optional plugins (installed but not enabled by default)
-    perfectionist(),
   );
+
+  if (enablePerfectionist) {
+    configs.push(perfectionist({
+      overrides: getOverrides(options, 'perfectionist'),
+    }));
+  }
 
   if (enableUnicorn) {
     configs.push(unicorn(enableUnicorn === true ? {} : enableUnicorn));

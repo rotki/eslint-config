@@ -165,6 +165,14 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
   stylistic?: boolean | StylisticConfig;
 
   /**
+   * Enable perfectionist (imports/exports sorting) rules.
+   *
+   * @see https://github.com/azat-io/eslint-plugin-perfectionist
+   * @default true
+   */
+  perfectionist?: boolean | OptionsOverrides;
+
+  /**
    * Enable regexp rules.
    *
    * @see https://ota-meshi.github.io/eslint-plugin-regexp/
