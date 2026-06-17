@@ -13,6 +13,11 @@
       "allowedVersions": "/^(24)\\./",
       "groupName": "Node.js",
       "matchPackageNames": ["@types/node", "node"]
+    },
+    {
+      "description": "First-party plugin, no cooldown needed",
+      "matchPackageNames": ["@rotki/eslint-plugin"],
+      "minimumReleaseAge": "0 days"
     }
   ]
 }
