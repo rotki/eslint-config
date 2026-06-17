@@ -1255,10 +1255,10 @@
           ".vue"
         ],
         "parser": {
-          "version": "8.58.0",
+          "version": "8.61.0",
           "meta": {
             "name": "typescript-eslint/parser",
-            "version": "8.58.0"
+            "version": "8.61.0"
           }
         },
         "sourceType": "module"
