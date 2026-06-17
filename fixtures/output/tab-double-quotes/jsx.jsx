@@ -9,7 +9,7 @@ export function HelloWorld({
 	const [num] = React.useState(() => Math
 		.floor (Math.random() * 1E+7)
 		.toString()
-		.replace(/\.\d+/gi, ""));
+		.replace(/\.\d+/ig, ""));
 
 	if (!greeting) {
 		return null;

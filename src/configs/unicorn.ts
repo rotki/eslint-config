@@ -14,7 +14,6 @@ export async function unicorn(options: OptionsUnicorn = {}): Promise<TypedFlatCo
         ...(options.allRecommended
           ? pluginUnicorn.configs.recommended.rules as Required<TypedFlatConfigItem['rules']>
           : {
-              'unicorn/better-regex': 'error',
               'unicorn/catch-error-name': 'error',
               'unicorn/consistent-destructuring': 'warn',
               'unicorn/custom-error-definition': 'error',
@@ -53,7 +52,7 @@ export async function unicorn(options: OptionsUnicorn = {}): Promise<TypedFlatCo
               'unicorn/prefer-blob-reading-methods': 'error',
               'unicorn/prefer-date-now': 'error',
               // 'unicorn/prefer-dom-node-append': 'error',
-              // 'unicorn/prefer-dom-node-dataset': 'error',
+              // 'unicorn/dom-node-dataset': 'error',
               // 'unicorn/prefer-dom-node-remove': 'error',
               'unicorn/prefer-dom-node-text-content': 'error',
               'unicorn/prefer-includes': 'error',
