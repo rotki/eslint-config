@@ -1471,7 +1471,7 @@
       "vue/max-props": [
         "warn",
         {
-          "maxProps": 6
+          "maxProps": 8
         }
       ],
       "vue/max-template-depth": [
