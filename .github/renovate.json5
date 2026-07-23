@@ -15,6 +15,10 @@
       "matchPackageNames": ["@types/node", "node"]
     },
     {
+      "allowedVersions": "/^(11)\\./",
+      "matchPackageNames": ["pnpm"]
+    },
+    {
       "description": "First-party plugin, no cooldown needed",
       "matchPackageNames": ["@rotki/eslint-plugin"],
       "minimumReleaseAge": "0 days"
