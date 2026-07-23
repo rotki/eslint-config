@@ -1,4 +1,5 @@
 import type { OptionsUnicorn, TypedFlatConfigItem } from '../types';
+import { GLOB_SRC, GLOB_VUE } from '../globs';
 import { pluginUnicorn } from '../plugins';
 
 const FILENAME_CASE_IGNORE = /^[A-Z]+\..*$/;
@@ -6,6 +7,7 @@ const FILENAME_CASE_IGNORE = /^[A-Z]+\..*$/;
 export async function unicorn(options: OptionsUnicorn = {}): Promise<TypedFlatConfigItem[]> {
   return [
     {
+      files: [GLOB_SRC, GLOB_VUE],
       name: 'rotki/unicorn/rules',
       plugins: {
         unicorn: pluginUnicorn,
@@ -76,13 +78,6 @@ export async function unicorn(options: OptionsUnicorn = {}): Promise<TypedFlatCo
               'unicorn/prefer-type-error': 'error',
               'unicorn/throw-new-error': 'error',
             }),
-      },
-    },
-    {
-      files: ['.github/**/*.md'],
-      name: 'rotki/unicorn/github-markdown',
-      rules: {
-        'unicorn/filename-case': 'off',
       },
     },
   ];

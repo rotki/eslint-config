@@ -471,6 +471,10 @@
     ]
   },
   {
+    "files": [
+      "**/*.?([cm])[jt]s?(x)",
+      "**/*.vue"
+    ],
     "name": "rotki/unicorn/rules",
     "plugins": [
       "unicorn"
@@ -532,18 +536,6 @@
       "unicorn/prefer-top-level-await": "error",
       "unicorn/prefer-type-error": "error",
       "unicorn/throw-new-error": "error"
-    },
-    "ignores": [
-      "**/*.md"
-    ]
-  },
-  {
-    "files": [
-      ".github/**/*.md"
-    ],
-    "name": "rotki/unicorn/github-markdown",
-    "rules": {
-      "unicorn/filename-case": "off"
     }
   },
   {
