@@ -63,7 +63,7 @@ export async function vue(
         svg: 'always',
       },
     ],
-    'vue/max-props': ['warn', { maxProps: 6 }],
+    'vue/max-props': ['warn', { maxProps: 8 }],
     'vue/max-template-depth': ['warn', { maxDepth: 8 }],
     'vue/multiline-html-element-content-newline': [
       'error',
