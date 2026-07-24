@@ -1648,6 +1648,7 @@
             "directories",
             "publishConfig",
             "scripts",
+            "scripts-info",
             "peerDependencies",
             "peerDependenciesMeta",
             "optionalDependencies",
