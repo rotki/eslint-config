@@ -60,6 +60,8 @@ export async function rotkiPlugin(options: OptionsRotkiPlugin & OptionsHasTypeSc
         '@rotki/no-deprecated-classes': 'error',
         '@rotki/no-deprecated-props': 'error',
         '@rotki/no-dot-ts-imports': 'error',
+        '@rotki/no-redundant-flex-row': 'error',
+        '@rotki/no-shared-pinia': 'error',
 
         '@rotki/no-unused-i18n-keys': [
           'error',
