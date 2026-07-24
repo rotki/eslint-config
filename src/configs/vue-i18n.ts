@@ -6,7 +6,9 @@ import globals from 'globals';
 import { GLOB_JSON, GLOB_JSON5, GLOB_TS, GLOB_VUE, GLOB_YAML } from '../globs';
 import { ensurePackages, interopDefault } from '../utils';
 
-export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor & OptionsFiles & OptionsVueI18n = {}): Promise<TypedFlatConfigItem[]> {
+type ResolvedVueI18nOptions = Required<Pick<OptionsHasTypeScript & OptionsIsInEditor & OptionsFiles & OptionsVueI18n, 'files' | 'isInEditor' | 'localesDirectory' | 'noRawTextIgnores' | 'overrides' | 'src'>> & Pick<OptionsHasTypeScript, 'typescript'>;
+
+function resolveVueI18nOptions(options: OptionsHasTypeScript & OptionsIsInEditor & OptionsFiles & OptionsVueI18n): ResolvedVueI18nOptions {
   const {
     files = [GLOB_TS, GLOB_VUE],
     isInEditor = false,
@@ -20,6 +22,28 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
     src = 'src',
     typescript,
   } = options;
+
+  return {
+    files,
+    isInEditor,
+    localesDirectory,
+    noRawTextIgnores,
+    overrides,
+    src,
+    typescript,
+  };
+}
+
+export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor & OptionsFiles & OptionsVueI18n = {}): Promise<TypedFlatConfigItem[]> {
+  const {
+    files,
+    isInEditor,
+    localesDirectory,
+    noRawTextIgnores,
+    overrides,
+    src,
+    typescript,
+  } = resolveVueI18nOptions(options);
 
   const fileGlobs = files.map(x => `**/${src}/${x}`);
 

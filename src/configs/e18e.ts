@@ -2,7 +2,7 @@ import type { Linter } from 'eslint';
 import type { OptionsE18e, OptionsIsInEditor, OptionsProjectType, TypedFlatConfigItem } from '../types';
 import { pluginE18e } from '../plugins';
 
-export async function e18e(options: OptionsE18e & OptionsProjectType & OptionsIsInEditor = {}): Promise<TypedFlatConfigItem[]> {
+function resolveE18eOptions(options: OptionsE18e & OptionsProjectType & OptionsIsInEditor): Required<Pick<OptionsE18e & OptionsProjectType & OptionsIsInEditor, 'isInEditor' | 'modernization' | 'moduleReplacements' | 'overrides' | 'performanceImprovements' | 'type'>> {
   const {
     isInEditor = false,
     modernization = true,
@@ -11,6 +11,12 @@ export async function e18e(options: OptionsE18e & OptionsProjectType & OptionsIs
     overrides = {},
     performanceImprovements = true,
   } = options;
+
+  return { isInEditor, modernization, moduleReplacements, overrides, performanceImprovements, type };
+}
+
+export async function e18e(options: OptionsE18e & OptionsProjectType & OptionsIsInEditor = {}): Promise<TypedFlatConfigItem[]> {
+  const { modernization, moduleReplacements, overrides, performanceImprovements, type } = resolveE18eOptions(options);
 
   const configs = pluginE18e.configs as Record<string, Linter.Config>;
 

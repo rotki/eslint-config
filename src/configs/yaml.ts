@@ -1,10 +1,16 @@
-import type { OptionsFiles, OptionsOverrides, OptionsStylistic, TypedFlatConfigItem } from '../types';
+import type { OptionsFiles, OptionsOverrides, OptionsStylistic, StylisticConfig, TypedFlatConfigItem } from '../types';
 import { GLOB_YAML } from '../globs';
 import { interopDefault } from '../utils';
 
-export async function yaml(
-  options: OptionsOverrides & OptionsStylistic & OptionsFiles = {},
-): Promise<TypedFlatConfigItem[]> {
+interface ResolvedYamlOptions {
+  files: string[];
+  indent: StylisticConfig['indent'];
+  overrides: TypedFlatConfigItem['rules'];
+  quotes: NonNullable<StylisticConfig['quotes']>;
+  stylistic: boolean | StylisticConfig;
+}
+
+function resolveYamlOptions(options: OptionsOverrides & OptionsStylistic & OptionsFiles): ResolvedYamlOptions {
   const {
     files = [GLOB_YAML],
     overrides = {},
@@ -17,6 +23,26 @@ export async function yaml(
   } = typeof stylistic === 'boolean' ? {} : stylistic;
 
   const indent = Array.isArray(rawIndent) ? rawIndent[0] : rawIndent;
+
+  return {
+    files,
+    indent,
+    overrides,
+    quotes,
+    stylistic,
+  };
+}
+
+export async function yaml(
+  options: OptionsOverrides & OptionsStylistic & OptionsFiles = {},
+): Promise<TypedFlatConfigItem[]> {
+  const {
+    files,
+    indent,
+    overrides,
+    quotes,
+    stylistic,
+  } = resolveYamlOptions(options);
 
   const [
     pluginYaml,

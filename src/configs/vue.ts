@@ -4,15 +4,26 @@ import type {
   OptionsOverrides,
   OptionsStylistic,
   OptionsVue,
+  StylisticConfig,
   TypedFlatConfigItem,
 } from '../types';
 import { mergeProcessors } from 'eslint-merge-processors';
 import { GLOB_VUE } from '../globs';
 import { interopDefault } from '../utils';
 
-export async function vue(
-  options: OptionsVue & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles = {},
-): Promise<TypedFlatConfigItem[]> {
+type ResolvedVueOptions = OptionsVue & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles;
+
+interface ResolvedVueConfig {
+  braceStyle: NonNullable<StylisticConfig['braceStyle']>;
+  files: string[];
+  indent: StylisticConfig['indent'];
+  overrides: TypedFlatConfigItem['rules'];
+  sfcBlocks: Exclude<NonNullable<OptionsVue['sfcBlocks']>, true>;
+  stylistic: boolean | StylisticConfig;
+  typescript: OptionsHasTypeScript['typescript'];
+}
+
+function resolveVueOptions(options: ResolvedVueOptions): ResolvedVueConfig {
   const {
     files = [GLOB_VUE],
     overrides = {},
@@ -29,6 +40,30 @@ export async function vue(
     indent = 2,
   } = typeof stylistic === 'boolean' ? {} : stylistic;
 
+  return {
+    braceStyle,
+    files,
+    indent,
+    overrides,
+    sfcBlocks,
+    stylistic,
+    typescript,
+  };
+}
+
+export async function vue(
+  options: ResolvedVueOptions = {},
+): Promise<TypedFlatConfigItem[]> {
+  const {
+    braceStyle,
+    files,
+    indent,
+    overrides,
+    sfcBlocks,
+    stylistic,
+    typescript,
+  } = resolveVueOptions(options);
+
   const [
     pluginVue,
     parserVue,
@@ -41,11 +76,12 @@ export async function vue(
 
   const customRules: typeof pluginVue['rules'] = {
     'max-lines': ['warn', { max: 800 }],
+    'vue/block-lang': ['error', { script: { lang: 'ts' } }],
     // migration
     'vue/component-api-style': ['error', ['script-setup']],
     'vue/define-emits-declaration': ['error', 'type-literal'],
     'vue/define-props-declaration': ['error', 'type-based'],
-    'vue/define-props-destructuring': 'warn',
+    'vue/define-props-destructuring': 'error',
     'vue/first-attribute-linebreak': ['error', {
       multiline: 'below',
       singleline: 'ignore',
@@ -63,8 +99,8 @@ export async function vue(
         svg: 'always',
       },
     ],
-    'vue/max-props': ['warn', { maxProps: 8 }],
-    'vue/max-template-depth': ['warn', { maxDepth: 8 }],
+    'vue/max-props': ['error', { maxProps: 8 }],
+    'vue/max-template-depth': ['error', { maxDepth: 8 }],
     'vue/multiline-html-element-content-newline': [
       'error',
       {
@@ -73,7 +109,7 @@ export async function vue(
         ignoreWhenEmpty: true,
       },
     ],
-    'vue/no-constant-condition': 'warn',
+    'vue/no-constant-condition': 'error',
     'vue/no-deprecated-dollar-listeners-api': 'error',
     'vue/no-deprecated-events-api': 'error',
     'vue/no-deprecated-filter': 'error',
@@ -88,14 +124,15 @@ export async function vue(
       },
     ],
     'vue/no-unused-emit-declarations': 'error',
-    'vue/no-unused-properties': ['warn', {
+    'vue/no-unused-properties': ['error', {
       groups: ['props', 'data', 'computed', 'methods'],
     }],
     'vue/prefer-define-options': 'error',
     'vue/prefer-import-from-vue': 'error',
-    'vue/prefer-use-template-ref': 'warn',
+    'vue/prefer-true-attribute-shorthand': 'error',
+    'vue/prefer-use-template-ref': 'error',
     'vue/require-explicit-emits': 'error',
-    'vue/require-explicit-slots': 'warn',
+    'vue/require-explicit-slots': 'error',
     'vue/require-expose': 'error',
     'vue/require-macro-variable-name': ['error', {
       defineEmits: 'emit',

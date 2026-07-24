@@ -12,7 +12,7 @@ export async function javascript(
 
   const customRules: TypedFlatConfigItem['rules'] = {
     'arrow-body-style': ['error', 'as-needed'],
-    'complexity': ['warn', { max: 10 }],
+    'complexity': ['error', { max: 10 }],
     'max-lines': ['error', { max: 400 }],
   };
 

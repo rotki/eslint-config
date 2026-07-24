@@ -7,50 +7,64 @@ const ignoredConfigNames = new Set([
   'rotki/javascript/setup',
 ]);
 
+// Normalize plugins — only keep names
+function normalizePlugins(clone: Record<string, any>): void {
+  if (clone.plugins) {
+    clone.plugins = Object.keys(clone.plugins).sort();
+  }
+}
+
+// Normalize parser references
+function normalizeParser(clone: Record<string, any>): void {
+  if (clone.languageOptions?.parser) {
+    clone.languageOptions = {
+      ...clone.languageOptions,
+      parser: clone.languageOptions.parser?.meta?.name ?? 'unknown-parser',
+    };
+  }
+}
+
+// Normalize processor references
+function normalizeProcessor(clone: Record<string, any>): void {
+  if (clone.processor) {
+    clone.processor = typeof clone.processor === 'string'
+      ? clone.processor
+      : 'object-processor';
+  }
+}
+
+// Sort rules by key for stability
+function normalizeRules(clone: Record<string, any>): void {
+  if (clone.rules) {
+    clone.rules = Object.fromEntries(
+      Object.entries(clone.rules).sort(([a], [b]) => a.localeCompare(b)),
+    );
+  }
+}
+
+// Strip non-deterministic fields
+function stripNonDeterministic(clone: Record<string, any>): void {
+  if (clone.languageOptions?.globals) {
+    clone.languageOptions.globals = '/* globals */';
+  }
+  if (clone.languageOptions?.parserOptions?.tsconfigRootDir) {
+    clone.languageOptions.parserOptions = {
+      ...clone.languageOptions.parserOptions,
+      tsconfigRootDir: '/* tsconfigRootDir */',
+    };
+  }
+}
+
 function serialize(configs: Record<string, any>[]): Record<string, any>[] {
   return configs
     .filter(config => !ignoredConfigNames.has(config.name ?? ''))
     .map((config) => {
       const clone: Record<string, any> = { ...config };
-
-      // Normalize plugins — only keep names
-      if (clone.plugins) {
-        clone.plugins = Object.keys(clone.plugins).sort();
-      }
-
-      // Normalize parser references
-      if (clone.languageOptions?.parser) {
-        clone.languageOptions = {
-          ...clone.languageOptions,
-          parser: clone.languageOptions.parser?.meta?.name ?? 'unknown-parser',
-        };
-      }
-
-      // Normalize processor references
-      if (clone.processor) {
-        clone.processor = typeof clone.processor === 'string'
-          ? clone.processor
-          : 'object-processor';
-      }
-
-      // Sort rules by key for stability
-      if (clone.rules) {
-        clone.rules = Object.fromEntries(
-          Object.entries(clone.rules).sort(([a], [b]) => a.localeCompare(b)),
-        );
-      }
-
-      // Strip non-deterministic fields
-      if (clone.languageOptions?.globals) {
-        clone.languageOptions.globals = '/* globals */';
-      }
-      if (clone.languageOptions?.parserOptions?.tsconfigRootDir) {
-        clone.languageOptions.parserOptions = {
-          ...clone.languageOptions.parserOptions,
-          tsconfigRootDir: '/* tsconfigRootDir */',
-        };
-      }
-
+      normalizePlugins(clone);
+      normalizeParser(clone);
+      normalizeProcessor(clone);
+      normalizeRules(clone);
+      stripNonDeterministic(clone);
       return clone;
     });
 }

@@ -20,7 +20,7 @@
       ],
       "block-scoped-var": "error",
       "complexity": [
-        "warn",
+        "error",
         {
           "max": 10
         }

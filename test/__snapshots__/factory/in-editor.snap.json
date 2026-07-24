@@ -20,7 +20,7 @@
       ],
       "block-scoped-var": "error",
       "complexity": [
-        "warn",
+        "error",
         {
           "max": 10
         }
@@ -481,7 +481,7 @@
     ],
     "rules": {
       "unicorn/catch-error-name": "error",
-      "unicorn/consistent-destructuring": "warn",
+      "unicorn/consistent-destructuring": "error",
       "unicorn/custom-error-definition": "error",
       "unicorn/error-message": "error",
       "unicorn/escape-case": "error",
@@ -654,7 +654,7 @@
       ],
       "@typescript-eslint/no-useless-constructor": "off",
       "@typescript-eslint/no-wrapper-object-types": "error",
-      "@typescript-eslint/prefer-as-const": "warn",
+      "@typescript-eslint/prefer-as-const": "error",
       "@typescript-eslint/prefer-literal-enum-member": [
         "warn",
         {

@@ -20,7 +20,7 @@
       ],
       "block-scoped-var": "error",
       "complexity": [
-        "warn",
+        "error",
         {
           "max": 10
         }
@@ -481,7 +481,7 @@
     ],
     "rules": {
       "unicorn/catch-error-name": "error",
-      "unicorn/consistent-destructuring": "warn",
+      "unicorn/consistent-destructuring": "error",
       "unicorn/custom-error-definition": "error",
       "unicorn/error-message": "error",
       "unicorn/escape-case": "error",
@@ -658,7 +658,7 @@
       ],
       "@typescript-eslint/no-useless-constructor": "off",
       "@typescript-eslint/no-wrapper-object-types": "error",
-      "@typescript-eslint/prefer-as-const": "warn",
+      "@typescript-eslint/prefer-as-const": "error",
       "@typescript-eslint/prefer-literal-enum-member": [
         "warn",
         {
@@ -1280,6 +1280,14 @@
       ],
       "vue/attribute-hyphenation": "warn",
       "vue/attributes-order": "warn",
+      "vue/block-lang": [
+        "error",
+        {
+          "script": {
+            "lang": "ts"
+          }
+        }
+      ],
       "vue/block-order": [
         "error",
         {
@@ -1379,7 +1387,7 @@
         "error",
         "type-based"
       ],
-      "vue/define-props-destructuring": "warn",
+      "vue/define-props-destructuring": "error",
       "vue/dot-location": [
         "error",
         "property"
@@ -1461,13 +1469,13 @@
         }
       ],
       "vue/max-props": [
-        "warn",
+        "error",
         {
           "maxProps": 8
         }
       ],
       "vue/max-template-depth": [
-        "warn",
+        "error",
         {
           "maxDepth": 8
         }
@@ -1489,7 +1497,7 @@
       "vue/no-async-in-computed-properties": "error",
       "vue/no-child-content": "error",
       "vue/no-computed-properties-in-data": "error",
-      "vue/no-constant-condition": "warn",
+      "vue/no-constant-condition": "error",
       "vue/no-deprecated-data-object-declaration": "error",
       "vue/no-deprecated-delete-set": "error",
       "vue/no-deprecated-destroyed-lifecycle": "error",
@@ -1565,7 +1573,7 @@
       "vue/no-unused-components": "error",
       "vue/no-unused-emit-declarations": "error",
       "vue/no-unused-properties": [
-        "warn",
+        "error",
         {
           "groups": [
             "props",
@@ -1618,7 +1626,8 @@
       "vue/prefer-import-from-vue": "error",
       "vue/prefer-separate-static-class": "error",
       "vue/prefer-template": "error",
-      "vue/prefer-use-template-ref": "warn",
+      "vue/prefer-true-attribute-shorthand": "error",
+      "vue/prefer-use-template-ref": "error",
       "vue/prop-name-casing": [
         "error",
         "camelCase"
@@ -1630,7 +1639,7 @@
       "vue/require-component-is": "error",
       "vue/require-default-prop": "off",
       "vue/require-explicit-emits": "error",
-      "vue/require-explicit-slots": "warn",
+      "vue/require-explicit-slots": "error",
       "vue/require-expose": "error",
       "vue/require-macro-variable-name": [
         "error",

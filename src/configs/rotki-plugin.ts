@@ -51,11 +51,11 @@ export async function rotkiPlugin(options: OptionsRotkiPlugin & OptionsHasTypeSc
       },
       name: 'rotki/rotki/rules',
       rules: {
-        '@rotki/composable-no-default-export': 'warn',
-        '@rotki/composable-prefer-shallowref': 'warn',
-        '@rotki/composable-require-cleanup': 'warn',
-        '@rotki/composable-return-readonly': 'warn',
-        '@rotki/composable-ssr-safety': 'warn',
+        '@rotki/composable-no-default-export': 'error',
+        '@rotki/composable-prefer-shallowref': 'error',
+        '@rotki/composable-require-cleanup': 'error',
+        '@rotki/composable-return-readonly': 'error',
+        '@rotki/composable-ssr-safety': 'error',
         '@rotki/consistent-ref-type-annotation': ['error', { allowInference: true }],
         '@rotki/no-deprecated-classes': 'error',
         '@rotki/no-deprecated-props': 'error',
@@ -72,9 +72,9 @@ export async function rotkiPlugin(options: OptionsRotkiPlugin & OptionsHasTypeSc
 
         ...stylistic
           ? {
-              '@rotki/composable-input-flexibility': 'warn' as const,
-              '@rotki/composable-naming-convention': 'warn' as const,
-              '@rotki/require-jsdoc-on-composable-options': 'warn' as const,
+              '@rotki/composable-input-flexibility': 'error' as const,
+              '@rotki/composable-naming-convention': 'error' as const,
+              '@rotki/require-jsdoc-on-composable-options': 'error' as const,
             }
           : {},
 

@@ -57,31 +57,53 @@ export const defaultPluginRenaming = {
   'yml': 'yaml',
 };
 
-/**
- * Construct an array of ESLint flat config items.
- */
+interface ResolvedConfig {
+  autoRenamePlugins: boolean;
+  componentExts: string[];
+  enableE18e: OptionsConfig['e18e'];
+  enableGitignore: OptionsConfig['gitignore'];
+  enablePerfectionist: boolean;
+  enablePnpm: boolean;
+  enableRegexp: OptionsConfig['regexp'];
+  enableRotki: OptionsConfig['rotki'];
+  enableStorybook: OptionsConfig['storybook'];
+  enableTypeScript: OptionsConfig['typescript'];
+  enableUnicorn: OptionsConfig['unicorn'];
+  enableVue: boolean;
+  enableVueI18n: OptionsConfig['vueI18n'];
+  isInEditor: boolean;
+  stylisticOptions: StylisticConfig | false;
+  typescriptOptions: ResolvedOptions<OptionsConfig['typescript']>;
+}
 
-export function rotki(
-  options: OptionsConfig & Omit<TypedFlatConfigItem, 'files' | 'ignores'> = {},
-  ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.FlatConfig[]>[]
-): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
-  const {
-    autoRenamePlugins = true,
-    componentExts = [],
-    e18e: enableE18e = true,
-    gitignore: enableGitignore = true,
-    jsx = true,
-    perfectionist: enablePerfectionist = true,
-    pnpm: enablePnpm = !!findUpSync('pnpm-workspace.yaml'),
-    regexp: enableRegexp = false,
-    rotki: enableRotki,
-    storybook: enableStorybook,
-    typescript: enableTypeScript = isPackageExists('typescript') || isPackageExists('@typescript/native-preview'),
-    unicorn: enableUnicorn = true,
-    vue: enableVue = VuePackages.some(i => isPackageExists(i)),
-    vueI18n: enableVueI18n,
-  } = options;
+function resolveStylisticOptions(options: OptionsConfig, jsx: boolean): StylisticConfig | false {
+  if (options.stylistic === false)
+    return false;
 
+  const stylisticOptions = typeof options.stylistic === 'object' ? options.stylistic : {};
+
+  if (!('jsx' in stylisticOptions))
+    stylisticOptions.jsx = jsx;
+
+  return stylisticOptions;
+}
+
+function resolveEnableFlags(options: OptionsConfig): Pick<ResolvedConfig, 'autoRenamePlugins' | 'enableE18e' | 'enableGitignore' | 'enablePerfectionist' | 'enablePnpm' | 'enableRegexp' | 'enableRotki' | 'enableStorybook' | 'enableUnicorn' | 'enableVueI18n'> {
+  return {
+    autoRenamePlugins: options.autoRenamePlugins ?? true,
+    enableE18e: options.e18e ?? true,
+    enableGitignore: options.gitignore ?? true,
+    enablePerfectionist: !!(options.perfectionist ?? true),
+    enablePnpm: !!(options.pnpm ?? findUpSync('pnpm-workspace.yaml')),
+    enableRegexp: options.regexp ?? false,
+    enableRotki: options.rotki,
+    enableStorybook: options.storybook,
+    enableUnicorn: options.unicorn ?? true,
+    enableVueI18n: options.vueI18n,
+  };
+}
+
+function resolveIsInEditor(options: OptionsConfig): boolean {
   let isInEditor = options.isInEditor;
   if (isInEditor === null) {
     isInEditor = isInEditorEnv();
@@ -90,36 +112,34 @@ export function rotki(
       console.log('[@rotki/eslint-config] Detected running in editor, some rules are disabled.');
     }
   }
+  return !!isInEditor;
+}
 
-  function resolveStylisticOptions(): StylisticConfig | false {
-    if (options.stylistic === false)
-      return false;
+function resolveOptions(options: OptionsConfig): ResolvedConfig {
+  const jsx = options.jsx ?? true;
+  const enableVue = !!(options.vue ?? VuePackages.some(i => isPackageExists(i)));
 
-    if (typeof options.stylistic === 'object')
-      return options.stylistic;
+  return {
+    ...resolveEnableFlags(options),
+    componentExts: [...(options.componentExts ?? []), ...(enableVue ? ['vue'] : [])],
+    enableTypeScript: options.typescript ?? (isPackageExists('typescript') || isPackageExists('@typescript/native-preview')),
+    enableVue,
+    isInEditor: resolveIsInEditor(options),
+    stylisticOptions: resolveStylisticOptions(options, jsx),
+    typescriptOptions: resolveSubOptions(options, 'typescript'),
+  };
+}
 
-    return {};
-  }
-
-  const stylisticOptions = resolveStylisticOptions();
-
-  if (stylisticOptions && !('jsx' in stylisticOptions)) {
-    stylisticOptions.jsx = jsx;
-  }
-
-  const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
+function buildLanguageConfigs(configs: Awaitable<TypedFlatConfigItem[]>[], options: OptionsConfig, resolved: ResolvedConfig): void {
+  const { enableE18e, enableGitignore, enablePerfectionist, enableUnicorn, isInEditor, stylisticOptions } = resolved;
 
   if (enableGitignore) {
-    const gitignoreOptions = typeof enableGitignore !== 'boolean'
-      ? enableGitignore
-      : { strict: false };
+    const gitignoreOptions = typeof enableGitignore !== 'boolean' ? enableGitignore : { strict: false };
     configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r({
       name: 'rotki/gitignore',
       ...gitignoreOptions,
     })]));
   }
-
-  const typescriptOptions = resolveSubOptions(options, 'typescript');
 
   // Base configs
   configs.push(
@@ -153,10 +173,10 @@ export function rotki(
       type: options.type,
     }));
   }
+}
 
-  if (enableVue) {
-    componentExts.push('vue');
-  }
+function buildTypeScriptAndStyleConfigs(configs: Awaitable<TypedFlatConfigItem[]>[], options: OptionsConfig, resolved: ResolvedConfig): void {
+  const { componentExts, enableRegexp, enableTypeScript, isInEditor, stylisticOptions, typescriptOptions } = resolved;
 
   if (enableTypeScript) {
     configs.push(typescript({
@@ -185,6 +205,10 @@ export function rotki(
       overrides: getOverrides(options, 'test'),
     }));
   }
+}
+
+function buildFrameworkConfigs(configs: Awaitable<TypedFlatConfigItem[]>[], options: OptionsConfig, resolved: ResolvedConfig): void {
+  const { enableRotki, enableStorybook, enableTypeScript, enableVue, enableVueI18n, stylisticOptions } = resolved;
 
   if (enableVue) {
     configs.push(vue({
@@ -217,6 +241,10 @@ export function rotki(
       overrides: getOverrides(options, 'storybook'),
     }));
   }
+}
+
+function buildFileFormatConfigs(configs: Awaitable<TypedFlatConfigItem[]>[], options: OptionsConfig, resolved: ResolvedConfig): void {
+  const { componentExts, enablePnpm, isInEditor, stylisticOptions } = resolved;
 
   if (options.jsonc ?? true) {
     configs.push(
@@ -230,13 +258,12 @@ export function rotki(
   }
 
   if (enablePnpm) {
-    const optionsPnpm = resolveSubOptions(options, 'pnpm');
     configs.push(
       pnpm({
         isInEditor,
         json: options.jsonc !== false,
         yaml: options.yaml !== false,
-        ...optionsPnpm,
+        ...resolveSubOptions(options, 'pnpm'),
       }),
     );
   }
@@ -249,14 +276,10 @@ export function rotki(
   }
 
   if (options.markdown ?? true) {
-    configs.push(
-      markdown(
-        {
-          componentExts,
-          overrides: getOverrides(options, 'markdown'),
-        },
-      ),
-    );
+    configs.push(markdown({
+      componentExts,
+      overrides: getOverrides(options, 'markdown'),
+    }));
   }
 
   if (options.formatters) {
@@ -265,13 +288,14 @@ export function rotki(
       typeof stylisticOptions === 'boolean' ? {} : stylisticOptions,
     ));
   }
+}
 
-  configs.push(disables());
-
-  if ('files' in options) {
-    throw new Error('[@rotki/eslint-config] The first argument should not contain the "files" property as the options are supposed to be global. Place it in the second or later config instead.');
-  }
-
+function finalizeComposer(
+  configs: Awaitable<TypedFlatConfigItem[]>[],
+  options: OptionsConfig & Omit<TypedFlatConfigItem, 'files' | 'ignores'>,
+  resolved: ResolvedConfig,
+  userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.FlatConfig[]>[],
+): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
   // User can optionally pass a flat config item to the first argument
   // We pick the known keys as ESLint would do schema validation
   const fusedConfig = flatConfigProps.reduce((acc, key) => {
@@ -298,11 +322,11 @@ export function rotki(
     composer = composer.setDefaultIgnores(prev => [...prev, GLOB_MARKDOWN]);
   }
 
-  if (autoRenamePlugins) {
+  if (resolved.autoRenamePlugins) {
     composer = composer.renamePlugins(defaultPluginRenaming);
   }
 
-  if (isInEditor) {
+  if (resolved.isInEditor) {
     composer = composer
       .disableRulesFix([
         'unused-imports/no-unused-imports',
@@ -314,6 +338,31 @@ export function rotki(
   }
 
   return composer;
+}
+
+/**
+ * Construct an array of ESLint flat config items.
+ */
+
+export function rotki(
+  options: OptionsConfig & Omit<TypedFlatConfigItem, 'files' | 'ignores'> = {},
+  ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.FlatConfig[]>[]
+): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
+  if ('files' in options) {
+    throw new Error('[@rotki/eslint-config] The first argument should not contain the "files" property as the options are supposed to be global. Place it in the second or later config instead.');
+  }
+
+  const resolved = resolveOptions(options);
+  const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
+
+  buildLanguageConfigs(configs, options, resolved);
+  buildTypeScriptAndStyleConfigs(configs, options, resolved);
+  buildFrameworkConfigs(configs, options, resolved);
+  buildFileFormatConfigs(configs, options, resolved);
+
+  configs.push(disables());
+
+  return finalizeComposer(configs, options, resolved, userConfigs);
 }
 
 export type ResolvedOptions<T> = T extends boolean

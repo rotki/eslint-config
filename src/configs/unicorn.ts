@@ -17,7 +17,7 @@ export async function unicorn(options: OptionsUnicorn = {}): Promise<TypedFlatCo
           ? pluginUnicorn.configs.recommended.rules as Required<TypedFlatConfigItem['rules']>
           : {
               'unicorn/catch-error-name': 'error',
-              'unicorn/consistent-destructuring': 'warn',
+              'unicorn/consistent-destructuring': 'error',
               'unicorn/custom-error-definition': 'error',
               'unicorn/error-message': 'error',
               'unicorn/escape-case': 'error',

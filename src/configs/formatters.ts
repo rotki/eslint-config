@@ -18,12 +18,9 @@ function mergePrettierOptions<T extends VendoredPrettierRuleOptions>(
   };
 }
 
-export async function formatters(
-  options: OptionsFormatters | true = {},
-  stylistic: StylisticConfig = {},
-): Promise<TypedFlatConfigItem[]> {
+function resolveFormattersOptions(options: OptionsFormatters | true): OptionsFormatters {
   if (options === true) {
-    options = {
+    return {
       css: true,
       html: true,
       markdown: true,
@@ -31,9 +28,205 @@ export async function formatters(
     };
   }
 
+  return options;
+}
+
+function buildPrettierOptions(
+  indent: number | 'tab' | undefined,
+  quotes: StylisticConfig['quotes'],
+  semi: StylisticConfig['semi'],
+  options: OptionsFormatters,
+): VendoredPrettierOptions {
+  return Object.assign(
+        {
+          endOfLine: 'auto',
+          printWidth: 120,
+          semi,
+          singleQuote: quotes === 'single',
+          tabWidth: typeof indent === 'number' ? indent : 2,
+          trailingComma: 'all',
+          useTabs: indent === 'tab',
+        } satisfies VendoredPrettierOptions,
+        options.prettierOptions || {},
+  );
+}
+
+function buildDprintOptions(
+  indent: number | 'tab' | undefined,
+  quotes: StylisticConfig['quotes'],
+  options: OptionsFormatters,
+): Record<string, unknown> {
+  return Object.assign(
+    {
+      indentWidth: typeof indent === 'number' ? indent : 2,
+      quoteStyle: quotes === 'single' ? 'preferSingle' : 'preferDouble',
+      useTabs: indent === 'tab',
+    },
+    options.dprintOptions || {},
+  );
+}
+
+function cssFormatters(
+  options: OptionsFormatters,
+  prettierOptions: VendoredPrettierOptions,
+): TypedFlatConfigItem[] {
+  if (!options.css)
+    return [];
+
+  return [
+    {
+      files: [GLOB_CSS, GLOB_POSTCSS],
+      languageOptions: {
+        parser: parserPlain,
+      },
+      name: 'rotki/formatter/css',
+      rules: {
+        'format/prettier': [
+          'error',
+          mergePrettierOptions(prettierOptions, {
+            parser: 'css',
+          }),
+        ],
+      },
+    },
+    {
+      files: [GLOB_SCSS],
+      languageOptions: {
+        parser: parserPlain,
+      },
+      name: 'rotki/formatter/scss',
+      rules: {
+        'format/prettier': [
+          'error',
+          mergePrettierOptions(prettierOptions, {
+            parser: 'scss',
+          }),
+        ],
+      },
+    },
+    {
+      files: [GLOB_LESS],
+      languageOptions: {
+        parser: parserPlain,
+      },
+      name: 'rotki/formatter/less',
+      rules: {
+        'format/prettier': [
+          'error',
+          mergePrettierOptions(prettierOptions, {
+            parser: 'less',
+          }),
+        ],
+      },
+    },
+  ];
+}
+
+function htmlFormatter(
+  options: OptionsFormatters,
+  prettierOptions: VendoredPrettierOptions,
+): TypedFlatConfigItem[] {
+  if (!options.html)
+    return [];
+
+  return [{
+    files: ['**/*.html'],
+    languageOptions: {
+      parser: parserPlain,
+    },
+    name: 'rotki/formatter/html',
+    rules: {
+      'format/prettier': [
+        'error',
+        mergePrettierOptions(prettierOptions, {
+          parser: 'html',
+        }),
+      ],
+    },
+  }];
+}
+
+function xmlFormatter(
+  options: OptionsFormatters,
+  prettierOptions: VendoredPrettierOptions,
+): TypedFlatConfigItem[] {
+  if (!options.xml)
+    return [];
+
+  const prettierXmlOptions: VendoredPrettierOptions = {
+    xmlQuoteAttributes: 'double',
+    xmlSelfClosingSpace: true,
+    xmlSortAttributesByKey: false,
+    xmlWhitespaceSensitivity: 'ignore',
+  };
+
+  return [{
+    files: [GLOB_XML],
+    languageOptions: {
+      parser: parserPlain,
+    },
+    name: 'rotki/formatter/xml',
+    rules: {
+      'format/prettier': [
+        'error',
+        mergePrettierOptions({
+          ...prettierXmlOptions,
+          ...prettierOptions,
+        }, {
+          parser: 'xml',
+          plugins: [
+            '@prettier/plugin-xml',
+          ],
+        }),
+      ],
+    },
+  }];
+}
+
+function markdownFormatter(
+  options: OptionsFormatters,
+  prettierOptions: VendoredPrettierOptions,
+  dprintOptions: Record<string, unknown>,
+): TypedFlatConfigItem[] {
+  if (!options.markdown)
+    return [];
+
+  const formater = options.markdown === true
+    ? 'prettier'
+    : options.markdown;
+
+  return [{
+    files: [GLOB_MARKDOWN],
+    languageOptions: {
+      parser: parserPlain,
+    },
+    name: 'rotki/formatter/markdown',
+    rules: {
+      [`format/${formater}`]: [
+        'error',
+        formater === 'prettier'
+          ? mergePrettierOptions(prettierOptions, {
+              embeddedLanguageFormatting: 'off',
+              parser: 'markdown',
+            })
+          : {
+              ...dprintOptions,
+              language: 'markdown',
+            },
+      ],
+    },
+  }];
+}
+
+export async function formatters(
+  options: OptionsFormatters | true = {},
+  stylistic: StylisticConfig = {},
+): Promise<TypedFlatConfigItem[]> {
+  const resolvedOptions = resolveFormattersOptions(options);
+
   await ensurePackages([
     'eslint-plugin-format',
-    options.xml ? '@prettier/plugin-xml' : undefined,
+    resolvedOptions.xml ? '@prettier/plugin-xml' : undefined,
   ]);
 
   const {
@@ -47,34 +240,8 @@ export async function formatters(
 
   const indent = Array.isArray(rawIndent) ? rawIndent[0] : rawIndent;
 
-  const prettierOptions: VendoredPrettierOptions = Object.assign(
-        {
-          endOfLine: 'auto',
-          printWidth: 120,
-          semi,
-          singleQuote: quotes === 'single',
-          tabWidth: typeof indent === 'number' ? indent : 2,
-          trailingComma: 'all',
-          useTabs: indent === 'tab',
-        } satisfies VendoredPrettierOptions,
-        options.prettierOptions || {},
-  );
-
-  const dprintOptions = Object.assign(
-    {
-      indentWidth: typeof indent === 'number' ? indent : 2,
-      quoteStyle: quotes === 'single' ? 'preferSingle' : 'preferDouble',
-      useTabs: indent === 'tab',
-    },
-    options.dprintOptions || {},
-  );
-
-  const prettierXmlOptions: VendoredPrettierOptions = {
-    xmlQuoteAttributes: 'double',
-    xmlSelfClosingSpace: true,
-    xmlSortAttributesByKey: false,
-    xmlWhitespaceSensitivity: 'ignore',
-  };
+  const prettierOptions = buildPrettierOptions(indent, quotes, semi, resolvedOptions);
+  const dprintOptions = buildDprintOptions(indent, quotes, resolvedOptions);
 
   const pluginFormat = await interopDefault(import('eslint-plugin-format'));
 
@@ -87,125 +254,12 @@ export async function formatters(
     },
   ];
 
-  if (options.css) {
-    configs.push(
-      {
-        files: [GLOB_CSS, GLOB_POSTCSS],
-        languageOptions: {
-          parser: parserPlain,
-        },
-        name: 'rotki/formatter/css',
-        rules: {
-          'format/prettier': [
-            'error',
-            mergePrettierOptions(prettierOptions, {
-              parser: 'css',
-            }),
-          ],
-        },
-      },
-      {
-        files: [GLOB_SCSS],
-        languageOptions: {
-          parser: parserPlain,
-        },
-        name: 'rotki/formatter/scss',
-        rules: {
-          'format/prettier': [
-            'error',
-            mergePrettierOptions(prettierOptions, {
-              parser: 'scss',
-            }),
-          ],
-        },
-      },
-      {
-        files: [GLOB_LESS],
-        languageOptions: {
-          parser: parserPlain,
-        },
-        name: 'rotki/formatter/less',
-        rules: {
-          'format/prettier': [
-            'error',
-            mergePrettierOptions(prettierOptions, {
-              parser: 'less',
-            }),
-          ],
-        },
-      },
-    );
-  }
-
-  if (options.html) {
-    configs.push({
-      files: ['**/*.html'],
-      languageOptions: {
-        parser: parserPlain,
-      },
-      name: 'rotki/formatter/html',
-      rules: {
-        'format/prettier': [
-          'error',
-          mergePrettierOptions(prettierOptions, {
-            parser: 'html',
-          }),
-        ],
-      },
-    });
-  }
-
-  if (options.xml) {
-    configs.push({
-      files: [GLOB_XML],
-      languageOptions: {
-        parser: parserPlain,
-      },
-      name: 'rotki/formatter/xml',
-      rules: {
-        'format/prettier': [
-          'error',
-          mergePrettierOptions({
-            ...prettierXmlOptions,
-            ...prettierOptions,
-          }, {
-            parser: 'xml',
-            plugins: [
-              '@prettier/plugin-xml',
-            ],
-          }),
-        ],
-      },
-    });
-  }
-
-  if (options.markdown) {
-    const formater = options.markdown === true
-      ? 'prettier'
-      : options.markdown;
-
-    configs.push({
-      files: [GLOB_MARKDOWN],
-      languageOptions: {
-        parser: parserPlain,
-      },
-      name: 'rotki/formatter/markdown',
-      rules: {
-        [`format/${formater}`]: [
-          'error',
-          formater === 'prettier'
-            ? mergePrettierOptions(prettierOptions, {
-                embeddedLanguageFormatting: 'off',
-                parser: 'markdown',
-              })
-            : {
-                ...dprintOptions,
-                language: 'markdown',
-              },
-        ],
-      },
-    });
-  }
+  configs.push(
+    ...cssFormatters(resolvedOptions, prettierOptions),
+    ...htmlFormatter(resolvedOptions, prettierOptions),
+    ...xmlFormatter(resolvedOptions, prettierOptions),
+    ...markdownFormatter(resolvedOptions, prettierOptions, dprintOptions),
+  );
 
   return configs;
 }
