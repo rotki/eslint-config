@@ -1494,6 +1494,14 @@
       "yaml/no-empty-key": "error",
       "yaml/no-empty-sequence-entry": "error",
       "yaml/no-irregular-whitespace": "error",
+      "yaml/no-multiple-empty-lines": [
+        "error",
+        {
+          "max": 1,
+          "maxBOF": 0,
+          "maxEOF": 0
+        }
+      ],
       "yaml/no-tab-indent": "error",
       "yaml/plain-scalar": "error",
       "yaml/quotes": [

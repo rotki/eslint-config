@@ -84,6 +84,7 @@ export async function pnpm(
       rules: {
         'pnpm/yaml-enforce-settings': ['error', {
           settings: {
+            minimumReleaseAgeExcludePrune: true,
             shellEmulator: true,
             trustPolicy: 'no-downgrade',
           },
@@ -128,6 +129,9 @@ export async function pnpm(
                   'managePackageManagerVersions',
                   'minimumReleaseAge',
                   'minimumReleaseAgeExclude',
+                  'minimumReleaseAgeExcludePrune',
+                  'minimumReleaseAgeIgnoreMissingTime',
+                  'minimumReleaseAgeStrict',
                   'modulesDir',
                   'nodeLinker',
                   'nodeVersion',
