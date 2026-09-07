@@ -2,6 +2,9 @@ blockExoticSubdeps: true
 minimumReleaseAge: 10080
 minimumReleaseAgeExclude:
   - '@rotki/eslint-plugin'
+  # TEMPORARY, remove after 2026-09-10: eslint-plugin-slop 0.1.3 was published 2026-09-03 and
+  # the lockfile entry fails the cooldown check on every pnpm command until it matures.
+  - eslint-plugin-slop
 minimumReleaseAgeExcludePrune: true
 saveExact: true
 shamefullyHoist: true

@@ -12,6 +12,7 @@ import type {
   OptionsProjectType,
   OptionsRegExp,
   OptionsRotkiPlugin,
+  OptionsSlop,
   OptionsSonarjs,
   OptionsTypescript,
   OptionsUnicorn,
@@ -35,6 +36,7 @@ export type {
   OptionsProjectType,
   OptionsRegExp,
   OptionsRotkiPlugin,
+  OptionsSlop,
   OptionsSonarjs,
   OptionsStylistic,
   OptionsTypescript,
@@ -244,6 +246,20 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    * @defaultValue true
    */
   e18e?: boolean | OptionsE18e;
+
+  /**
+   * Enable the anti-slop rules: em dashes, inflated vocabulary, overlong comments,
+   * laundered type assertions and type aliases that name nothing.
+   *
+   * Pair with `slop.inspection` to report only on changed code while an existing tree
+   * catches up.
+   *
+   * Requires installing:
+   * - `eslint-plugin-slop`
+   *
+   * @defaultValue false
+   */
+  slop?: boolean | OptionsSlop;
 
   /**
    * Enable a curated set of SonarJS rules that report duplicated, dead and

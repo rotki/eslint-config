@@ -155,6 +155,45 @@ export interface OptionsJsdoc extends OptionsOverrides, OptionsStylistic {
   tsdoc?: boolean;
 }
 
+export type SlopInspection = 'full' | 'uncommitted' | 'recent-changes' | {
+  mode: 'full' | 'uncommitted';
+} | {
+  mode: 'recent-changes';
+  tracebackCommits?: number;
+};
+
+export interface OptionsSlop extends OptionsOverrides {
+  /**
+   * Directory the inspection resolves the git repository from.
+   *
+   * @defaultValue the linter's cwd
+   */
+  cwd?: string;
+
+  /**
+   * Restrict reporting to code the working tree has actually touched, so a large existing
+   * tree can adopt these rules without a backlog. `recent-changes` diffs against
+   * `HEAD~tracebackCommits` (5 by default), `uncommitted` against `HEAD`.
+   *
+   * @defaultValue full
+   */
+  inspection?: SlopInspection;
+
+  /**
+   * Report inflated vocabulary in prose.
+   *
+   * @defaultValue true
+   */
+  jargon?: boolean;
+
+  /**
+   * Word budget for a single comment before it counts as documentation in the wrong place.
+   *
+   * @defaultValue 50
+   */
+  maximumWords?: number;
+}
+
 export interface OptionsSonarjs extends OptionsOverrides {
   /**
    * Report functions above this cognitive complexity score.

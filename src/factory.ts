@@ -19,6 +19,7 @@ import {
   perfectionist,
   regexp,
   rotkiPlugin,
+  slop,
   sonarjs,
   sortPackageJson,
   sortTsconfig,
@@ -183,6 +184,13 @@ function buildQualityConfigs(configs: Awaitable<TypedFlatConfigItem[]>[], option
       ...resolveSubOptions(options, 'jsdoc'),
       overrides: getOverrides(options, 'jsdoc'),
       stylistic: !!resolved.stylisticOptions,
+    }));
+  }
+
+  if (options.slop) {
+    configs.push(slop({
+      ...resolveSubOptions(options, 'slop'),
+      overrides: getOverrides(options, 'slop'),
     }));
   }
 

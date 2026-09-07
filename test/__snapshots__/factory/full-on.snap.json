@@ -634,6 +634,29 @@
       "**/*.?([cm])[jt]s?(x)",
       "**/*.vue"
     ],
+    "name": "rotki/slop/rules",
+    "plugins": [
+      "slop"
+    ],
+    "rules": {
+      "slop/max-comment-length": [
+        "error",
+        {
+          "ignoreJSDoc": true,
+          "maximumWords": 50
+        }
+      ],
+      "slop/no-chained-type-assertions": "error",
+      "slop/no-em-dash": "error",
+      "slop/no-jargon": "error",
+      "slop/no-trivial-type-aliases": "error"
+    }
+  },
+  {
+    "files": [
+      "**/*.?([cm])[jt]s?(x)",
+      "**/*.vue"
+    ],
     "name": "rotki/sonarjs/rules",
     "plugins": [
       "sonarjs"

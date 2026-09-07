@@ -28,6 +28,8 @@ export * from './regexp';
 
 export * from './rotki-plugin';
 
+export * from './slop';
+
 export * from './sonarjs';
 
 export * from './sort';
