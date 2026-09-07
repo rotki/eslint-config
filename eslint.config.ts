@@ -21,4 +21,12 @@ export default rotki({
   rules: {
     'unicorn/no-barrel-files': 'off',
   },
+}, {
+  // Vendored upstream types. Their doc comments are copied verbatim and stay that way.
+  name: 'config/vendor',
+  files: ['src/vendor/**'],
+  rules: {
+    'jsdoc/check-alignment': 'off',
+    'tsdoc/syntax': 'off',
+  },
 });

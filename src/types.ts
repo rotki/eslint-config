@@ -5,6 +5,7 @@ import type {
   OptionsComponentExts,
   OptionsE18e,
   OptionsFormatters,
+  OptionsJsdoc,
   OptionsMarkdown,
   OptionsOverrides,
   OptionsPnpm,
@@ -26,6 +27,7 @@ export type {
   OptionsFormatters,
   OptionsHasTypeScript,
   OptionsIsInEditor,
+  OptionsJsdoc,
   OptionsMarkdown,
   OptionsOverrides,
   OptionsPnpm,
@@ -64,13 +66,13 @@ export type TypedFlatConfigItem = Omit<ConfigWithExtends, 'plugins' | 'rules'> &
 
 export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType {
   /**
-     * Enable gitignore support.
-     *
-     * Passing an object to configure the options.
-     *
-     * @see https://github.com/antfu/eslint-config-flat-gitignore
-     * @default true
-     */
+   * Enable gitignore support.
+   *
+   * Passing an object to configure the options.
+   *
+   * @see https://github.com/antfu/eslint-config-flat-gitignore
+   * @defaultValue true
+   */
   gitignore?: boolean | FlatGitignoreOptions;
 
   /**
@@ -80,31 +82,31 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    * - `antfu/top-level-function`
    * - `antfu/if-newline`
    *
-   * @default false
+   * @defaultValue false
    */
   lessOpinionated?: boolean;
 
   /**
-     * Core rules. Can't be disabled.
-     */
+   * Core rules. Can't be disabled.
+   */
   javascript?: OptionsOverrides;
 
   /**
-     * Enable TypeScript support.
-     *
-     * Passing an object to enable TypeScript Language Server support.
-     *
-     * @default auto-detect based on the dependencies
-     */
+   * Enable TypeScript support.
+   *
+   * Passing an object to enable TypeScript Language Server support.
+   *
+   * @defaultValue auto-detect based on the dependencies
+   */
   typescript?: boolean | OptionsTypescript;
 
   /**
-     * Enable JSX related rules.
-     *
-     * Currently only stylistic rules are included.
-     *
-     * @default true
-     */
+   * Enable JSX related rules.
+   *
+   * Currently only stylistic rules are included.
+   *
+   * @defaultValue true
+   */
   jsx?: boolean;
 
   /**
@@ -115,60 +117,70 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
   /**
    * Options for eslint-plugin-unicorn.
    *
-   * @default true
+   * @defaultValue true
    */
   unicorn?: boolean | OptionsUnicorn;
 
   /**
-     * Enable test support.
-     *
-     * @default true
-     */
+   * Enable test support.
+   *
+   * @defaultValue true
+   */
   test?: boolean | OptionsOverrides;
 
   /**
-     * Enable Vue support.
-     *
-     * @default auto-detect based on the dependencies
-     */
+   * Enable Vue support.
+   *
+   * @defaultValue auto-detect based on the dependencies
+   */
   vue?: boolean | OptionsVue;
 
   /**
-     * Enable JSONC support.
-     *
-     * @default true
-     */
+   * Enable doc-comment linting for JSDoc and TSDoc blocks.
+   *
+   * `tsdoc/syntax` comes with it and requires installing:
+   * - `eslint-plugin-tsdoc`
+   *
+   * @defaultValue true
+   */
+  jsdoc?: boolean | OptionsJsdoc;
+
+  /**
+   * Enable JSONC support.
+   *
+   * @defaultValue true
+   */
   jsonc?: boolean | OptionsOverrides;
 
   /**
-     * Enable YAML support.
-     *
-     * @default true
-     */
+   * Enable YAML support.
+   *
+   * @defaultValue true
+   */
   yaml?: boolean | OptionsOverrides;
 
   /**
-     * Enable linting for **code snippets** in Markdown.
-     *
-     * For formatting Markdown content, enable also `formatters.markdown`.
-     *
-     * @default true
-     */
+   * Enable linting for **code snippets** in Markdown.
+   *
+   * For formatting Markdown content, enable also `formatters.markdown`.
+   *
+   * @defaultValue true
+   */
   markdown?: boolean | OptionsMarkdown;
 
   /**
-     * Enable stylistic rules.
-     *
-     * @see https://eslint.style/
-     * @default true
-     */
+   * Enable stylistic rules.
+   *
+   * @see https://eslint.style/
+   * @defaultValue true
+   */
   stylistic?: boolean | StylisticConfig;
 
   /**
    * Enable perfectionist (imports/exports sorting) rules.
    *
    * @see https://github.com/azat-io/eslint-plugin-perfectionist
-   * @default true
+   * @defaultValue true
    */
   perfectionist?: boolean | OptionsOverrides;
 
@@ -176,7 +188,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    * Enable regexp rules.
    *
    * @see https://ota-meshi.github.io/eslint-plugin-regexp/
-   * @default true
+   * @defaultValue true
    */
   regexp?: boolean | (OptionsRegExp & OptionsOverrides);
 
@@ -190,7 +202,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    * Auto-detected based on pnpm-workspace.yaml presence.
    *
    * @see https://github.com/antfu/pnpm-workspace-utils
-   * @default auto-detect
+   * @defaultValue auto-detect
    */
   pnpm?: boolean | OptionsPnpm;
 
@@ -202,7 +214,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    *
    * When set to `true`, it will enable all formatters.
    *
-   * @default false
+   * @defaultValue false
    */
   formatters?: boolean | OptionsFormatters;
 
@@ -211,7 +223,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    * Requires installing:
    * - `@rotki/eslint-plugin`
    *
-   * @default false
+   * @defaultValue false
    */
   rotki?: boolean | OptionsRotkiPlugin;
 
@@ -220,35 +232,37 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    * Requires installing:
    * - `@intlify/eslint-plugin-vue-i18n`
    *
-   * @default false
+   * @defaultValue false
    */
   vueI18n?: boolean | OptionsVueI18n;
 
   /**
    * Enable e18e rules for modernization and performance.
    *
-   * @default true
+   * @defaultValue true
    */
   e18e?: boolean | OptionsE18e;
 
   /**
    * Enable storybook linting support
    *
-   * Requires installing
-   * - `eslint-plugin-storybook
+   * Requires installing:
+   * - `eslint-plugin-storybook`
+   *
+   * @defaultValue false
    */
   storybook?: boolean | OptionsOverrides;
 
   /**
-     * Control to disable some rules in editors.
-     * @default auto-detect based on the process.env
-     */
+   * Control to disable some rules in editors.
+   * @defaultValue auto-detect based on the process.env
+   */
   isInEditor?: boolean;
 
   /**
    * Automatically rename plugins in the config.
    *
-   * @default true
+   * @defaultValue true
    */
   autoRenamePlugins?: boolean;
 }

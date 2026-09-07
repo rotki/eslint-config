@@ -574,6 +574,62 @@
     ]
   },
   {
+    "name": "rotki/jsdoc/setup",
+    "plugins": [
+      "jsdoc"
+    ]
+  },
+  {
+    "files": [
+      "**/*.?([cm])[jt]s?(x)",
+      "**/*.vue"
+    ],
+    "name": "rotki/jsdoc/rules",
+    "rules": {
+      "jsdoc/check-access": "error",
+      "jsdoc/check-alignment": "error",
+      "jsdoc/check-param-names": [
+        "error",
+        {
+          "checkDestructured": false
+        }
+      ],
+      "jsdoc/check-property-names": "error",
+      "jsdoc/empty-tags": "error",
+      "jsdoc/escape-inline-tags": "error",
+      "jsdoc/implements-on-classes": "error",
+      "jsdoc/informative-docs": "error",
+      "jsdoc/no-bad-blocks": "error",
+      "jsdoc/no-blank-block-descriptions": "error",
+      "jsdoc/no-blank-blocks": "error",
+      "jsdoc/no-multi-asterisks": "error",
+      "jsdoc/no-types": "error",
+      "jsdoc/require-asterisk-prefix": "error",
+      "jsdoc/require-hyphen-before-param-description": "error",
+      "jsdoc/require-param-description": "error",
+      "jsdoc/require-param-name": "error",
+      "jsdoc/require-property": "error",
+      "jsdoc/require-property-description": "error",
+      "jsdoc/require-property-name": "error",
+      "jsdoc/require-returns-check": "error",
+      "jsdoc/require-returns-description": "error",
+      "jsdoc/require-yields-check": "error"
+    }
+  },
+  {
+    "files": [
+      "**/*.?([cm])ts",
+      "**/*.vue"
+    ],
+    "name": "rotki/jsdoc/tsdoc",
+    "plugins": [
+      "tsdoc"
+    ],
+    "rules": {
+      "tsdoc/syntax": "error"
+    }
+  },
+  {
     "name": "rotki/typescript/setup",
     "plugins": [
       "@typescript-eslint",

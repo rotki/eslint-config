@@ -8,17 +8,17 @@ export type OptionsTypescript = (OptionsTypeScriptWithTypes & OptionsOverrides) 
 
 export interface OptionsFormatters {
   /**
-     * Enable formatting support for CSS, Less, Sass, and SCSS.
-     *
-     * Currently only support Prettier.
-     */
+   * Enable formatting support for CSS, Less, Sass, and SCSS.
+   *
+   * Currently only support Prettier.
+   */
   css?: 'prettier' | boolean;
 
   /**
-     * Enable formatting support for HTML.
-     *
-     * Currently only support Prettier.
-     */
+   * Enable formatting support for HTML.
+   *
+   * Currently only support Prettier.
+   */
   html?: 'prettier' | boolean;
 
   /**
@@ -29,43 +29,43 @@ export interface OptionsFormatters {
   xml?: 'prettier' | boolean;
 
   /**
-     * Enable formatting support for Markdown.
-     *
-     * Support both Prettier and dprint.
-     *
-     * When set to `true`, it will use Prettier.
-     */
+   * Enable formatting support for Markdown.
+   *
+   * Support both Prettier and dprint.
+   *
+   * When set to `true`, it will use Prettier.
+   */
   markdown?: 'prettier' | 'dprint' | boolean;
 
   /**
-     * Custom options for Prettier.
-     *
-     * By default it's controlled by our own config.
-     */
+   * Custom options for Prettier.
+   *
+   * By default it's controlled by our own config.
+   */
   prettierOptions?: VendoredPrettierOptions;
 
   /**
-     * Custom options for dprint.
-     *
-     * By default it's controlled by our own config.
-     */
+   * Custom options for dprint.
+   *
+   * By default it's controlled by our own config.
+   */
   dprintOptions?: boolean;
 }
 
 export interface OptionsFiles {
   /**
-     * Override the `files` option to provide custom globs.
-     */
+   * Override the `files` option to provide custom globs.
+   */
   files?: string[];
 }
 
 export interface OptionsVue extends OptionsOverrides {
   /**
-     * Create virtual files for Vue SFC blocks to enable linting.
-     *
-     * @see https://github.com/antfu/eslint-processor-vue-blocks
-     * @default true
-     */
+   * Create virtual files for Vue SFC blocks to enable linting.
+   *
+   * @see https://github.com/antfu/eslint-processor-vue-blocks
+   * @defaultValue true
+   */
   sfcBlocks?: boolean | VueBlocksOptions;
 }
 
@@ -83,19 +83,19 @@ export interface OptionsVueI18n extends OptionsOverrides {
   /**
    * The locales directory under the source directory
    *
-   * @default locales
+   * @defaultValue locales
    */
   localesDirectory?: string;
   /**
-   * Optional configuration for @intlify/vue-i18n/no-raw-text rule
+   * Optional configuration for the `@intlify/vue-i18n/no-raw-text` rule
    */
   noRawTextIgnores?: VueI18nNoRawTextIgnores;
 }
 
 export interface OptionsRotkiPlugin extends OptionsOverrides {
-  /** Key patterns ignored by @rotki/no-unused-i18n-keys */
+  /** Key patterns ignored by `@rotki/no-unused-i18n-keys` */
   ignoreKeys?: string[];
-  /** @default 'src' */
+  /** @defaultValue 'src' */
   src?: string;
 }
 
@@ -107,7 +107,7 @@ export interface OptionsProjectType {
   /**
    * Type of the project. `lib` will enable more strict rules for libraries.
    *
-   * @default 'app'
+   * @defaultValue 'app'
    */
   type?: 'app' | 'lib';
 }
@@ -121,11 +121,11 @@ export interface OptionsRegExp {
 
 export interface OptionsComponentExts {
   /**
-     * Additional extensions for components.
-     *
-     * @example ['vue']
-     * @default []
-     */
+   * File extensions linted as components alongside the source globs.
+   *
+   * @example ['vue']
+   * @defaultValue []
+   */
   componentExts?: string[];
 }
 
@@ -133,7 +133,7 @@ export interface OptionsMarkdown extends OptionsOverrides {
   /**
    * Use GitHub Flavored Markdown
    *
-   * @default true
+   * @defaultValue true
    */
   gfm?: boolean;
 
@@ -143,25 +143,37 @@ export interface OptionsMarkdown extends OptionsOverrides {
   overridesMarkdown?: TypedFlatConfigItem['rules'];
 }
 
+export interface OptionsJsdoc extends OptionsOverrides, OptionsStylistic {
+  /**
+   * Validate that doc comments parse as TSDoc.
+   *
+   * Requires installing:
+   * - `eslint-plugin-tsdoc`
+   *
+   * @defaultValue true
+   */
+  tsdoc?: boolean;
+}
+
 export interface OptionsE18e extends OptionsOverrides {
   /**
    * Enable modernization rules.
    *
-   * @default true
+   * @defaultValue true
    */
   modernization?: boolean;
 
   /**
    * Enable module replacement rules.
    *
-   * @default true when `type === 'lib'` and `isInEditor`
+   * @defaultValue true when `type === 'lib'` and `isInEditor`
    */
   moduleReplacements?: boolean;
 
   /**
    * Enable performance improvement rules.
    *
-   * @default true
+   * @defaultValue true
    */
   performanceImprovements?: boolean;
 }
@@ -170,35 +182,35 @@ export interface OptionsUnicorn {
   /**
    * Include all rules recommended by `eslint-plugin-unicorn`, instead of only ones picked by Anthony.
    *
-   * @default false
+   * @defaultValue false
    */
   allRecommended?: boolean;
 }
 
 export interface OptionsTypeScriptParserOptions {
   /**
-     * Additional parser options for TypeScript.
-     */
+   * Additional parser options for TypeScript.
+   */
   parserOptions?: Partial<ParserOptions>;
 
   /**
-     * Glob patterns for files that should be type aware.
-     * @default ['**\/*.{ts,tsx}']
-     */
+   * Glob patterns for files that should be type aware.
+   * @defaultValue `['**\/*.{ts,tsx}']`
+   */
   filesTypeAware?: string[];
 
   /**
    * Glob patterns for files that should not be type aware.
-   * @default ['**\/*.md\/**', '**\/*.astro/*.ts']
+   * @defaultValue `['**\/*.md\/**', '**\/*.astro/*.ts']`
    */
   ignoresTypeAware?: string[];
 }
 
 export interface OptionsTypeScriptWithTypes {
   /**
-     * When this options is provided, type aware rules will be enabled.
-     * @see https://typescript-eslint.io/linting/typed-linting/
-     */
+   * When this options is provided, type aware rules will be enabled.
+   * @see https://typescript-eslint.io/linting/typed-linting/
+   */
   tsconfigPath?: string;
 
   /**
@@ -226,10 +238,22 @@ export interface OptionsIsInEditor {
 export interface OptionsPnpm extends OptionsIsInEditor {
   /** Requires catalogs usage. Detects automatically based on pnpm-workspace.yaml */
   catalogs?: boolean;
-  /** Enable linting for package.json @default true */
+  /**
+   * Enable linting for package.json
+   *
+   * @defaultValue true
+   */
   json?: boolean;
-  /** Enable linting for pnpm-workspace.yaml @default true */
+  /**
+   * Enable linting for pnpm-workspace.yaml
+   *
+   * @defaultValue true
+   */
   yaml?: boolean;
-  /** Sort entries in pnpm-workspace.yaml @default false */
+  /**
+   * Sort entries in pnpm-workspace.yaml
+   *
+   * @defaultValue false
+   */
   sort?: boolean;
 }

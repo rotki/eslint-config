@@ -4,6 +4,7 @@ export const CONFIG_PRESET_FULL_ON: OptionsConfig = {
   formatters: true,
   gitignore: true,
   imports: {},
+  jsdoc: true,
   jsonc: true,
   jsx: true,
   markdown: true,
@@ -20,6 +21,7 @@ export const CONFIG_PRESET_FULL_ON: OptionsConfig = {
 export const CONFIG_PRESET_FULL_OFF: OptionsConfig = {
   formatters: false,
   gitignore: false,
+  jsdoc: false,
   jsonc: false,
   jsx: false,
   markdown: false,

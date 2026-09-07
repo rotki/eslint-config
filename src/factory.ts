@@ -12,6 +12,7 @@ import {
   ignores,
   imports,
   javascript,
+  jsdoc,
   jsonc,
   markdown,
   node,
@@ -171,6 +172,14 @@ function buildLanguageConfigs(configs: Awaitable<TypedFlatConfigItem[]>[], optio
       ...(typeof enableE18e === 'boolean' ? {} : enableE18e),
       isInEditor,
       type: options.type,
+    }));
+  }
+
+  if (options.jsdoc ?? true) {
+    configs.push(jsdoc({
+      ...resolveSubOptions(options, 'jsdoc'),
+      overrides: getOverrides(options, 'jsdoc'),
+      stylistic: !!stylisticOptions,
     }));
   }
 }
