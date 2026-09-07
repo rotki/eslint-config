@@ -2,7 +2,10 @@ import type { OptionsUnicorn, TypedFlatConfigItem } from '../types';
 import { GLOB_SRC, GLOB_VUE } from '../globs';
 import { pluginUnicorn } from '../plugins';
 
-const FILENAME_CASE_IGNORE = /^[A-Z]+\..*$/;
+// A string entry is compiled by the rule as `new RegExp(pattern, 'u')`. Kept as a
+// string because unicorn 74 types `ignore` as `(string | object)[]`, which a RegExp
+// literal no longer satisfies.
+const FILENAME_CASE_IGNORE = '^[A-Z]+\\..*$';
 
 export async function unicorn(options: OptionsUnicorn = {}): Promise<TypedFlatConfigItem[]> {
   return [

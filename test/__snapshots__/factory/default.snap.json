@@ -494,7 +494,7 @@
             "pascalCase": true
           },
           "ignore": [
-            {}
+            "^[A-Z]+\\..*$"
           ]
         }
       ],
