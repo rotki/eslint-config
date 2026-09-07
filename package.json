@@ -99,7 +99,7 @@
     "@rotki/eslint-plugin": "1.5.1",
     "@types/node": "24.13.3",
     "@types/prompts": "2.4.9",
-    "bumpp": "11.1.0",
+    "bumpp": "12.2.2",
     "eslint": "10.9.1",
     "eslint-typegen": "2.3.1",
     "execa": "10.0.1",
