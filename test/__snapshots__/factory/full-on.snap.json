@@ -501,6 +501,7 @@
       "unicorn/new-for-builtins": "error",
       "unicorn/no-array-method-this-argument": "error",
       "unicorn/no-array-push-push": "error",
+      "unicorn/no-barrel-files": "error",
       "unicorn/no-console-spaces": "error",
       "unicorn/no-for-loop": "error",
       "unicorn/no-hex-escape": "error",
@@ -535,6 +536,10 @@
       "unicorn/prefer-string-trim-start-end": "error",
       "unicorn/prefer-top-level-await": "error",
       "unicorn/prefer-type-error": "error",
+      "unicorn/single-line-block-comment-style": [
+        "error",
+        "single-line"
+      ],
       "unicorn/throw-new-error": "error"
     }
   },
@@ -551,11 +556,13 @@
       "e18e/prefer-array-to-reversed": "off",
       "e18e/prefer-array-to-sorted": "off",
       "e18e/prefer-array-to-spliced": "off",
+      "e18e/prefer-charcode-at-in-loop": "error",
       "e18e/prefer-date-now": "error",
       "e18e/prefer-includes": "error",
       "e18e/prefer-nullish-coalescing": "error",
       "e18e/prefer-object-has-own": "error",
       "e18e/prefer-regex-test": "error",
+      "e18e/prefer-slice-over-split-index": "error",
       "e18e/prefer-spread-syntax": "off",
       "e18e/prefer-static-regex": "off",
       "e18e/prefer-string-fromcharcode": "error",

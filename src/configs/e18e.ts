@@ -31,6 +31,14 @@ export async function e18e(options: OptionsE18e & OptionsProjectType & OptionsIs
         ...moduleReplacements ? { ...configs.moduleReplacements!.rules } : {},
         ...performanceImprovements ? { ...configs.performanceImprovements!.rules } : {},
 
+        // Added in 0.6.0 and shipped in no preset, so they have to be named here
+        ...performanceImprovements
+          ? {
+              'e18e/prefer-charcode-at-in-loop': 'error',
+              'e18e/prefer-slice-over-split-index': 'error',
+            }
+          : {},
+
         // e18e/prefer-static-regex is too strict for non-lib projects, and most of the time the performance improvement is negligible
         ...(type === 'lib'
           ? {}
