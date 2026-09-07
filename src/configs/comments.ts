@@ -17,6 +17,9 @@ export async function comments(): Promise<TypedFlatConfigItem[]> {
         'eslint-comments/no-duplicate-disable': 'error',
         'eslint-comments/no-unlimited-disable': 'error',
         'eslint-comments/no-unused-enable': 'error',
+        // A suppression without a reason is a decision nobody can review later. Write it as
+        // `-- why`, which is the shape the codebase already uses where it bothers.
+        'eslint-comments/require-description': 'error',
       },
     },
   ];

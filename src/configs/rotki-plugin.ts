@@ -76,7 +76,11 @@ export async function rotkiPlugin(options: OptionsRotkiPlugin & OptionsHasTypeSc
           ? {
               '@rotki/composable-input-flexibility': 'error' as const,
               '@rotki/composable-naming-convention': 'error' as const,
+              // A run of `//` lines is narration, and a declaration documented with `//` reaches
+              // neither the editor at the call site nor the jsdoc and tsdoc rules.
+              '@rotki/no-comment-run': 'error' as const,
               '@rotki/require-jsdoc-on-composable-options': 'error' as const,
+              '@rotki/tsdoc-on-declaration': 'error' as const,
             }
           : {},
 

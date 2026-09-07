@@ -21,7 +21,7 @@ declare module '@intlify/eslint-plugin-vue-i18n' {
     rules: Prefix<VueI18nRules, '@intlify/vue-i18n/'>,
   };
 
-  // eslint-disable-next-line import/no-default-export
+  // eslint-disable-next-line import/no-default-export -- mirrors the shape @intlify/eslint-plugin-vue-i18n actually exports
   export default vueI18n;
 
 }

@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- most eslint plugins still ship no or wrong types, so this re-export barrel is checked at its call sites instead
 // @ts-nocheck
 
 export { default as pluginE18e } from '@e18e/eslint-plugin';

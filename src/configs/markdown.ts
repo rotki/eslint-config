@@ -79,6 +79,10 @@ export async function markdown(
 
         'e18e/prefer-static-regex': 'off',
 
+        // A directive in a documentation sample illustrates the directive; it is not a
+        // suppression anyone has to justify.
+        'eslint-comments/require-description': 'off',
+
         'import/newline-after-import': 'off',
         'no-alert': 'off',
         'no-console': 'off',

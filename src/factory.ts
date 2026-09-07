@@ -111,7 +111,7 @@ function resolveIsInEditor(options: OptionsConfig): boolean {
   if (isInEditor === null) {
     isInEditor = isInEditorEnv();
     if (isInEditor) {
-      // eslint-disable-next-line no-console
+      // eslint-disable-next-line no-console -- the editor detection is worth announcing once, and a config has no logger of its own
       console.log('[@rotki/eslint-config] Detected running in editor, some rules are disabled.');
     }
   }

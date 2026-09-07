@@ -334,7 +334,8 @@
       "eslint-comments/no-aggregating-enable": "error",
       "eslint-comments/no-duplicate-disable": "error",
       "eslint-comments/no-unlimited-disable": "error",
-      "eslint-comments/no-unused-enable": "error"
+      "eslint-comments/no-unused-enable": "error",
+      "eslint-comments/require-description": "error"
     },
     "ignores": [
       "**/*.md"
@@ -2535,6 +2536,7 @@
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-use-before-define": "off",
       "e18e/prefer-static-regex": "off",
+      "eslint-comments/require-description": "off",
       "import/newline-after-import": "off",
       "no-alert": "off",
       "no-console": "off",

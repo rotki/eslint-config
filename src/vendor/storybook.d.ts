@@ -5,6 +5,6 @@ declare module 'eslint-plugin-storybook' {
     rules: StorybookRules,
   };
 
-  // eslint-disable-next-line import/no-default-export
+  // eslint-disable-next-line import/no-default-export -- mirrors the shape eslint-plugin-storybook actually exports
   export default storybook;
 }
