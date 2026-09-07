@@ -55,7 +55,7 @@
     }
   },
   "dependencies": {
-    "@antfu/install-pkg": "1.1.0",
+    "@antfu/install-pkg": "2.0.1",
     "@clack/prompts": "1.7.0",
     "@e18e/eslint-plugin": "0.5.1",
     "@eslint-community/eslint-plugin-eslint-comments": "4.7.2",
