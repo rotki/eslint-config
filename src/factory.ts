@@ -19,6 +19,7 @@ import {
   perfectionist,
   regexp,
   rotkiPlugin,
+  sonarjs,
   sortPackageJson,
   sortTsconfig,
   storybook,
@@ -174,12 +175,21 @@ function buildLanguageConfigs(configs: Awaitable<TypedFlatConfigItem[]>[], optio
       type: options.type,
     }));
   }
+}
 
+function buildQualityConfigs(configs: Awaitable<TypedFlatConfigItem[]>[], options: OptionsConfig, resolved: ResolvedConfig): void {
   if (options.jsdoc ?? true) {
     configs.push(jsdoc({
       ...resolveSubOptions(options, 'jsdoc'),
       overrides: getOverrides(options, 'jsdoc'),
-      stylistic: !!stylisticOptions,
+      stylistic: !!resolved.stylisticOptions,
+    }));
+  }
+
+  if (options.sonarjs) {
+    configs.push(sonarjs({
+      ...resolveSubOptions(options, 'sonarjs'),
+      overrides: getOverrides(options, 'sonarjs'),
     }));
   }
 }
@@ -365,6 +375,7 @@ export function rotki(
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
 
   buildLanguageConfigs(configs, options, resolved);
+  buildQualityConfigs(configs, options, resolved);
   buildTypeScriptAndStyleConfigs(configs, options, resolved);
   buildFrameworkConfigs(configs, options, resolved);
   buildFileFormatConfigs(configs, options, resolved);

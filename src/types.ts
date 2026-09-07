@@ -12,6 +12,7 @@ import type {
   OptionsProjectType,
   OptionsRegExp,
   OptionsRotkiPlugin,
+  OptionsSonarjs,
   OptionsTypescript,
   OptionsUnicorn,
   OptionsVue,
@@ -34,6 +35,7 @@ export type {
   OptionsProjectType,
   OptionsRegExp,
   OptionsRotkiPlugin,
+  OptionsSonarjs,
   OptionsStylistic,
   OptionsTypescript,
   OptionsTypeScriptParserOptions,
@@ -242,6 +244,17 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    * @defaultValue true
    */
   e18e?: boolean | OptionsE18e;
+
+  /**
+   * Enable a curated set of SonarJS rules that report duplicated, dead and
+   * redundant code, the shapes generated code arrives in.
+   *
+   * Requires installing:
+   * - `eslint-plugin-sonarjs`
+   *
+   * @defaultValue false
+   */
+  sonarjs?: boolean | OptionsSonarjs;
 
   /**
    * Enable storybook linting support

@@ -155,6 +155,32 @@ export interface OptionsJsdoc extends OptionsOverrides, OptionsStylistic {
   tsdoc?: boolean;
 }
 
+export interface OptionsSonarjs extends OptionsOverrides {
+  /**
+   * Report functions above this cognitive complexity score.
+   *
+   * Off by default, for two reasons: on an existing tree it produces a backlog that has to
+   * be scheduled rather than absorbed, and the javascript config already gates functions on
+   * cyclomatic `complexity` (max 10). The two measure different things, so this is a second
+   * gate rather than a replacement: cyclomatic counts branches and treats flat and nested
+   * code alike, cognitive charges extra for each level of nesting and reads a wide `switch`
+   * as simple. Turn it on to catch deep nesting that stays under the branch count.
+   *
+   * SonarJS itself defaults to 15.
+   *
+   * @defaultValue false
+   */
+  cognitiveComplexity?: number | false;
+
+  /**
+   * Enable the rules that report code which can be written more directly:
+   * collapsible ifs, redundant booleans, single-boolean returns.
+   *
+   * @defaultValue true
+   */
+  simplification?: boolean;
+}
+
 export interface OptionsE18e extends OptionsOverrides {
   /**
    * Enable modernization rules.

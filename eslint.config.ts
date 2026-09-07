@@ -22,6 +22,14 @@ export default rotki({
     'unicorn/no-barrel-files': 'off',
   },
 }, {
+  // The factory is a dispatcher: every config module this package gains adds a fixed block
+  // to it, so its length tracks the number of configs rather than any complexity of its own.
+  name: 'config/factory',
+  files: ['src/factory.ts'],
+  rules: {
+    'max-lines': ['error', { max: 500 }],
+  },
+}, {
   // Vendored upstream types. Their doc comments are copied verbatim and stay that way.
   name: 'config/vendor',
   files: ['src/vendor/**'],
