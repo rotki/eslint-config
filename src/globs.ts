@@ -73,6 +73,7 @@ export const GLOB_EXCLUDE = [
   '**/output',
   '**/coverage',
   '**/coverage-final.json',
+  '**/.v8-coverage',
   '**/temp',
   '**/.temp',
   '**/tmp',
