@@ -36,7 +36,7 @@
   "peerDependencies": {
     "@intlify/eslint-plugin-vue-i18n": "^4.2.0",
     "@prettier/plugin-xml": "^3.4.1",
-    "@rotki/eslint-plugin": ">=1.7.0",
+    "@rotki/eslint-plugin": ">=1.8.0",
     "eslint": "^9.20.0 || ^10.0.0",
     "eslint-plugin-slop": ">=0.1.3",
     "eslint-plugin-sonarjs": ">=4.0.0",
@@ -109,7 +109,7 @@
     "@commitlint/config-conventional": "21.2.2",
     "@eslint/config-inspector": "3.3.0",
     "@rotki/eslint-config": "workspace:*",
-    "@rotki/eslint-plugin": "1.7.0",
+    "@rotki/eslint-plugin": "1.8.0",
     "@types/node": "24.13.3",
     "@types/prompts": "2.4.9",
     "bumpp": "12.2.2",

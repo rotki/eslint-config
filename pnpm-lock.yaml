@@ -139,8 +139,8 @@ importers:
         specifier: workspace:*
         version: 'link:'
       '@rotki/eslint-plugin':
-        specifier: 1.7.0
-        version: 1.7.0(eslint@10.9.1(jiti@2.7.0))(typescript@6.0.3)
+        specifier: 1.8.0
+        version: 1.8.0(eslint@10.9.1(jiti@2.7.0))(typescript@6.0.3)
       '@types/node':
         specifier: 24.13.3
         version: 24.13.3
@@ -1393,8 +1393,8 @@ packages:
   '@rolldown/pluginutils@1.0.1':
     resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
 
-  '@rotki/eslint-plugin@1.7.0':
-    resolution: {integrity: sha512-h+ts+/fBpZx8iPUUVHozQgqI1UA+KyhgAmHvwZu7NSLHfMsFytTIAJyJVd4bIfo920Yj4ewZTZ5ENQOrjgAPHQ==}
+  '@rotki/eslint-plugin@1.8.0':
+    resolution: {integrity: sha512-6o7A8VOKyadmOg+vGTK1IrZy27e3dN/QQbPeQDD8OOXFefO0tYT3HPQ1+lSB1nXxazLb676NjQQs1lelRKdwRQ==}
     engines: {node: '>=24 <25', pnpm: '>=10 <12'}
     peerDependencies:
       eslint: ^9.20.0 || ^10.0.0
@@ -4864,7 +4864,7 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.1': {}
 
-  '@rotki/eslint-plugin@1.7.0(eslint@10.9.1(jiti@2.7.0))(typescript@6.0.3)':
+  '@rotki/eslint-plugin@1.8.0(eslint@10.9.1(jiti@2.7.0))(typescript@6.0.3)':
     dependencies:
       '@typescript-eslint/parser': 8.68.0(eslint@10.9.1(jiti@2.7.0))(typescript@6.0.3)
       '@typescript-eslint/utils': 8.68.0(eslint@10.9.1(jiti@2.7.0))(typescript@6.0.3)
