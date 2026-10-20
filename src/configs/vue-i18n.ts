@@ -1,7 +1,9 @@
 import type { ParserOptions } from '@typescript-eslint/parser';
 import type { OptionsFiles, OptionsHasTypeScript, OptionsIsInEditor, OptionsVueI18n, TypedFlatConfigItem } from '../types';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import process from 'node:process';
+import { pathToFileURL } from 'node:url';
 import globals from 'globals';
 import { GLOB_JSON, GLOB_JSON5, GLOB_TS, GLOB_VUE, GLOB_YAML } from '../globs';
 import { ensurePackages, interopDefault } from '../utils';
@@ -34,6 +36,22 @@ function resolveVueI18nOptions(options: OptionsHasTypeScript & OptionsIsInEditor
   };
 }
 
+/**
+ * Fully loads the parsers that `@intlify/eslint-plugin-vue-i18n` `require()`s.
+ *
+ * @remarks
+ * Both parsers are ESM-only, and the jsonc and yaml configs `import()` them while the configs
+ * compose concurrently. A `require()` that lands mid-import throws
+ * `ERR_REQUIRE_ESM_RACE_CONDITION`. The paths resolve from the plugin, so the warmed copy is the
+ * one it requires even when the consumer's tree holds another.
+ */
+async function preloadPluginParsers(): Promise<void> {
+  const requireFromPlugin = createRequire(import.meta.resolve('@intlify/eslint-plugin-vue-i18n'));
+  await Promise.all(
+    ['jsonc-eslint-parser', 'yaml-eslint-parser'].map(async name => import(pathToFileURL(requireFromPlugin.resolve(name)).href)),
+  );
+}
+
 export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor & OptionsFiles & OptionsVueI18n = {}): Promise<TypedFlatConfigItem[]> {
   const {
     files,
@@ -58,6 +76,7 @@ export async function vueI18n(options: OptionsHasTypeScript & OptionsIsInEditor 
   const localeDir = path.resolve(path.join(process.cwd(), src, localesDirectory));
 
   await ensurePackages(['@intlify/eslint-plugin-vue-i18n']);
+  await preloadPluginParsers();
 
   const [pluginVueI18n, parserVue] = await Promise.all([
     interopDefault(import('@intlify/eslint-plugin-vue-i18n')),
