@@ -1295,6 +1295,25 @@
   },
   {
     "files": [
+      "**/*.jsonc",
+      "**/tsconfig.json",
+      "**/tsconfig.*.json",
+      "**/jsconfig.json",
+      "**/jsconfig.*.json",
+      "**/.vscode/*.json"
+    ],
+    "language": "jsonc/jsonc",
+    "name": "rotki/jsonc/jsonc-language"
+  },
+  {
+    "files": [
+      "**/*.json5"
+    ],
+    "language": "jsonc/json5",
+    "name": "rotki/jsonc/json5-language"
+  },
+  {
+    "files": [
       "**/package.json"
     ],
     "name": "rotki/sort/package-json",

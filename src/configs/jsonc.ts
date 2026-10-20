@@ -1,5 +1,5 @@
 import type { OptionsFiles, OptionsOverrides, OptionsStylistic, TypedFlatConfigItem } from '../types';
-import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs';
+import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSONC_BY_CONVENTION } from '../globs';
 import { interopDefault } from '../utils';
 
 export async function jsonc(
@@ -80,6 +80,17 @@ export async function jsonc(
         ...customRules,
         ...overrides,
       },
+    },
+    // Plain `.json` stays strict, where a comment breaks the tools that read the file.
+    {
+      files: [GLOB_JSONC, ...GLOB_JSONC_BY_CONVENTION],
+      language: 'jsonc/jsonc',
+      name: 'rotki/jsonc/jsonc-language',
+    },
+    {
+      files: [GLOB_JSON5],
+      language: 'jsonc/json5',
+      name: 'rotki/jsonc/json5-language',
     },
   ];
 }

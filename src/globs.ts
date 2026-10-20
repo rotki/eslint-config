@@ -26,6 +26,15 @@ export const GLOB_JSON5 = '**/*.json5';
 
 export const GLOB_JSONC = '**/*.jsonc';
 
+/** `.json` files whose tools read them as JSONC, so comments and trailing commas parse. */
+export const GLOB_JSONC_BY_CONVENTION = [
+  '**/tsconfig.json',
+  '**/tsconfig.*.json',
+  '**/jsconfig.json',
+  '**/jsconfig.*.json',
+  '**/.vscode/*.json',
+];
+
 export const GLOB_MARKDOWN = '**/*.md';
 
 export const GLOB_MARKDOWN_IN_MARKDOWN = '**/*.md/*.md';
