@@ -63,6 +63,7 @@ export async function rotkiPlugin(options: OptionsRotkiPlugin & OptionsHasTypeSc
         '@rotki/no-interpolated-i18n-key': 'error',
         '@rotki/no-redundant-flex-row': 'error',
         '@rotki/no-shared-pinia': 'error',
+        '@rotki/no-template-root-comment': 'error',
 
         '@rotki/no-unused-i18n-keys': [
           'error',
