@@ -1,12 +1,15 @@
 blockExoticSubdeps: true
+
 minimumReleaseAge: 10080
 minimumReleaseAgeExcludePrune: true
 minimumReleaseAgeExclude:
   - '@rotki/eslint-plugin'
+
 trustPolicy: no-downgrade
 shamefullyHoist: true
 shellEmulator: true
 strictDepBuilds: true
 saveExact: true
+
 allowBuilds:
   esbuild: true

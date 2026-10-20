@@ -2231,6 +2231,21 @@
     "languageOptions": {
       "parser": "yaml-eslint-parser"
     },
+    "name": "rotki/pnpm/pnpm-workspace-yaml-stylistic",
+    "plugins": [
+      "pnpm"
+    ],
+    "rules": {
+      "pnpm/yaml-blank-lines": "error"
+    }
+  },
+  {
+    "files": [
+      "pnpm-workspace.yaml"
+    ],
+    "languageOptions": {
+      "parser": "yaml-eslint-parser"
+    },
     "name": "rotki/pnpm/pnpm-workspace-yaml-sort",
     "plugins": [
       "yaml"

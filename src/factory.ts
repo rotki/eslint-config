@@ -289,6 +289,7 @@ function buildFileFormatConfigs(configs: Awaitable<TypedFlatConfigItem[]>[], opt
       pnpm({
         isInEditor,
         json: options.jsonc !== false,
+        stylistic: stylisticOptions,
         yaml: options.yaml !== false,
         ...resolveSubOptions(options, 'pnpm'),
       }),
