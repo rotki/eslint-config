@@ -1,7 +1,7 @@
 {
   "name": "@rotki/eslint-config",
   "version": "8.3.0",
-  "packageManager": "pnpm@11.25.0",
+  "packageManager": "pnpm@12.12.1",
   "type": "module",
   "license": "AGPL-3.0",
   "bugs": {
@@ -130,7 +130,7 @@
   },
   "engines": {
     "node": ">=24 <25",
-    "pnpm": ">=11 <12"
+    "pnpm": ">=12 <13"
   },
   "lint-staged": {
     "*": "eslint --fix"
