@@ -1,4 +1,6 @@
 import type { OptionsSlop, TypedFlatConfigItem } from '../types';
+import { resolve } from 'node:path';
+import process from 'node:process';
 import { GLOB_SRC, GLOB_VUE } from '../globs';
 import { ensurePackages, interopDefault } from '../utils';
 
@@ -17,8 +19,10 @@ export async function slop(options: OptionsSlop = {}): Promise<TypedFlatConfigIt
     interopDefault(import('eslint-plugin-slop')),
   ] as const);
 
+  // The plugin ignores `settings.slop` unless `cwd` is a string, so an `inspection` passed
+  // without it would silently fall back to whole files.
   const settings = {
-    ...(cwd ? { cwd } : {}),
+    cwd: resolve(cwd ?? process.cwd()),
     ...(inspection ? { inspection } : {}),
   };
 
@@ -29,8 +33,6 @@ export async function slop(options: OptionsSlop = {}): Promise<TypedFlatConfigIt
       plugins: {
         slop: pluginSlop,
       },
-      // Each rule also accepts these per-rule; setting them here applies to all of them.
-      ...(Object.keys(settings).length > 0 ? { settings: { slop: settings } } : {}),
       rules: {
         // A comment long enough to need a word count is documentation in the wrong place.
         'slop/max-comment-length': ['error', { ignoreJSDoc: true, maximumWords }],
@@ -51,6 +53,8 @@ export async function slop(options: OptionsSlop = {}): Promise<TypedFlatConfigIt
 
         ...overrides,
       },
+      // Each rule also accepts these per-rule; setting them here applies to all of them.
+      settings: { slop: settings },
     },
   ];
 }

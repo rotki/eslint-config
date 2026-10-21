@@ -674,6 +674,11 @@
       "slop/no-em-dash": "error",
       "slop/no-jargon": "error",
       "slop/no-trivial-type-aliases": "error"
+    },
+    "settings": {
+      "slop": {
+        "cwd": "/* cwd */"
+      }
     }
   },
   {

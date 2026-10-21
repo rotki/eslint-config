@@ -53,6 +53,12 @@ function stripNonDeterministic(clone: Record<string, any>): void {
       tsconfigRootDir: '/* tsconfigRootDir */',
     };
   }
+  if (typeof clone.settings?.slop?.cwd === 'string') {
+    clone.settings = {
+      ...clone.settings,
+      slop: { ...clone.settings.slop, cwd: '/* cwd */' },
+    };
+  }
 }
 
 function serialize(configs: Record<string, any>[]): Record<string, any>[] {
