@@ -264,7 +264,7 @@ What counts is the effect on consumers' lint results:
 These live in GitHub and npm, not in the repository. Keep this list current when they change.
 
 - `main` is protected: 1 approving review with code owner review required, and the
-  `license/cla`, `Commit Lint` and `Build & Test` checks must pass.
+  `license/cla`, `Commit Lint`, `Workflow lint` and `Build & Test` checks must pass.
 - `CODEOWNERS` assigns everything to `@rotki/maintainers`, which has write access.
 - The `npm` environment allows only `v*` tags and requires a reviewer to approve each publish.
 - npm package owners are managed on npmjs.com.
