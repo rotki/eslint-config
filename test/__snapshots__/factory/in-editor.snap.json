@@ -1389,6 +1389,7 @@
             "dependencies",
             "devDependencies",
             "engines",
+            "devEngines",
             "config",
             "overrides",
             "pnpm",
@@ -1398,6 +1399,16 @@
             "prettier"
           ],
           "pathPattern": "^$"
+        },
+        {
+          "order": [
+            "cpu",
+            "os",
+            "libc",
+            "runtime",
+            "packageManager"
+          ],
+          "pathPattern": "^devEngines$"
         },
         {
           "order": {

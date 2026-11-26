@@ -53,6 +53,7 @@ export async function sortPackageJson(): Promise<TypedFlatConfigItem[]> {
               'dependencies',
               'devDependencies',
               'engines',
+              'devEngines',
               'config',
               'overrides',
               'pnpm',
@@ -62,6 +63,10 @@ export async function sortPackageJson(): Promise<TypedFlatConfigItem[]> {
               'prettier',
             ],
             pathPattern: '^$',
+          },
+          {
+            order: ['cpu', 'os', 'libc', 'runtime', 'packageManager'],
+            pathPattern: '^devEngines$',
           },
           {
             order: { type: 'asc' },
