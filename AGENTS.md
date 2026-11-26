@@ -51,6 +51,71 @@ contributor-facing basics (commit style, linting, pull requests).
 CI (`.github/workflows/ci.yml`) runs commitlint, then build, typecheck, tests and lint. Run the same
 before opening a pull request.
 
+## Hard rules
+
+Follow these in every change.
+
+- **Build before you test.** The fixture test lints with the built `dist/`; a stale or missing build
+  tests old code or deletes expected outputs while still passing (see Tests and snapshots).
+- **Never accept snapshot changes unread.** Every change in `test/__snapshots__/` and
+  `fixtures/output/` must be explained by the commit that causes it.
+- **Do not change consumers' lint results silently.** A rule that reports new errors by default, a
+  removed or renamed option or config, or a raised peer or Node requirement is a breaking change
+  (see Versioning). Measure rule changes against the rotki frontend before calling them minor.
+- **Keep rotki-specific choices explained.** A rule configured differently from upstream gets a
+  comment saying why, next to the rule.
+- **Do not lower a check to make it pass.** No `eslint-disable`, `@ts-expect-error`, skipped tests,
+  raised lint limits or zizmor ignores, unless the commit explains why the check is wrong for this
+  case.
+- **Do not bypass the git hooks** (`--no-verify`). They run lint-staged and commitlint.
+
+## Verify before you finish
+
+A change is done when the checks for it pass locally. Report which commands you ran and their
+result; if you skipped one, say so and why.
+
+| You changed                                                   | Run                                                                                   |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Anything                                                      | `pnpm run build`, `pnpm run typecheck`, `pnpm run lint`                               |
+| A config, rule or option                                      | `pnpm run build`, then `pnpm exec vitest run`; read every snapshot and fixture diff   |
+| Anything that can change lint results (rules, plugin updates) | The frontend check in "Checking a change against the rotki frontend"                  |
+| Options or types                                              | `pnpm run gen` (part of `build`), then `typecheck`                                    |
+| `.github/workflows/`                                          | `GH_TOKEN=$(gh auth token) pnpm run lint:workflows`; pin every action to a commit SHA |
+
+When a check fails, find the cause. Do not retry until it passes, and do not update a snapshot to
+match broken behavior.
+
+## Git and pull requests
+
+For agents, on top of the commit style in `CONTRIBUTING.md`:
+
+- Branch names: `type/short-description` (`fix/vue-i18n-parser`), never an agent-tool prefix such
+  as `claude/`.
+- End every commit you create or amend with exactly one of each trailer, after a blank line:
+
+  ```text
+  LLM-Model: <provider>/<model-id>
+  Harness: <harness-name> <version>
+  ```
+
+  Use the model selected in the current session, and the version of the harness process that runs
+  you, not of a CLI on `PATH` (a desktop app ships its own copy). Walk up the parent processes
+  (`ps -o pid=,ppid=,args= -p <pid>`) to the binary and ask it for `--version`. If you cannot
+  verify either value, ask before committing.
+
+- No AI `Co-Authored-By` trailers and no "generated with" lines in commits, pull requests or code.
+- Do not push to `main`, merge pull requests, create tags or run `pnpm run release` unless the
+  maintainer asks for that specific step.
+- When a change is built in several commits that each move snapshots, regenerate the snapshots at
+  every step so each commit carries its own.
+
+## Recording what you learn
+
+Before you finish, ask whether you hit something the next person would trip over. If you did, first
+try to make a tool catch it: a lint rule, a test or a CI check. Write it down only when no tool can,
+short and with the fix or the reason, in this file and in the same pull request. Unfinished work
+goes to the maintainer as a proposed GitHub issue, never as a to-do list in this file.
+
 ## Tests and snapshots
 
 - **Build before testing.** The fixture test writes an `eslint.config.js` that imports
