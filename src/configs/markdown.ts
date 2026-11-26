@@ -45,6 +45,8 @@ export async function markdown(
       name: 'rotki/markdown/rules',
       rules: {
         ...markdown.configs.recommended.at(0)?.rules,
+        // Since @eslint/markdown v9 the recommended preset targets CommonMark and leaves out GFM-only rules.
+        ...(gfm ? { 'markdown/table-column-count': 'error' } : {}),
         'markdown/fenced-code-language': 'off',
         // https://github.com/eslint/markdown/issues/294
         'markdown/no-missing-label-refs': 'off',

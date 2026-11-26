@@ -38,16 +38,16 @@ function buildPrettierOptions(
   options: OptionsFormatters,
 ): VendoredPrettierOptions {
   return Object.assign(
-        {
-          endOfLine: 'auto',
-          printWidth: 120,
-          semi,
-          singleQuote: quotes === 'single',
-          tabWidth: typeof indent === 'number' ? indent : 2,
-          trailingComma: 'all',
-          useTabs: indent === 'tab',
-        } satisfies VendoredPrettierOptions,
-        options.prettierOptions || {},
+    {
+      endOfLine: 'auto',
+      printWidth: 120,
+      semi,
+      singleQuote: quotes === 'single',
+      tabWidth: typeof indent === 'number' ? indent : 2,
+      trailingComma: 'all',
+      useTabs: indent === 'tab',
+    } satisfies VendoredPrettierOptions,
+    options.prettierOptions || {},
   );
 }
 

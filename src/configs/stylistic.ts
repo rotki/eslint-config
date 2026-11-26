@@ -78,8 +78,28 @@ export async function stylistic(
       rules: {
         ...config.rules as Required<TypedFlatConfigItem['rules']>,
 
+        // Since @stylistic v6, customize() enables `@stylistic/list-style` for bracket spacing and list
+        // line breaks. It overlaps with `antfu/consistent-list-newline`, and running both on the same
+        // node inserts duplicate line breaks. For parenthesized lists, `list-style` would also pull up
+        // the `)` in `computed(() =>\n  value,\n)`, so the antfu rule keeps handling those and JSX
+        // attributes (which `list-style` does not cover), and `list-style` handles everything else.
+        '@stylistic/list-style': ['error', { overrides: { '()': 'off' } }],
         'antfu/consistent-chaining': 'error',
-        'antfu/consistent-list-newline': 'error',
+        'antfu/consistent-list-newline': ['error', {
+          ArrayExpression: false,
+          ArrayPattern: false,
+          ExportNamedDeclaration: false,
+          ImportDeclaration: false,
+          JSONArrayExpression: false,
+          JSONObjectExpression: false,
+          ObjectExpression: false,
+          ObjectPattern: false,
+          TSInterfaceDeclaration: false,
+          TSTupleType: false,
+          TSTypeLiteral: false,
+          TSTypeParameterDeclaration: false,
+          TSTypeParameterInstantiation: false,
+        }],
 
         ...(lessOpinionated
           ? {

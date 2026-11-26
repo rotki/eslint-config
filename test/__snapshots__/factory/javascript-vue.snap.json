@@ -660,10 +660,6 @@
       "antfu"
     ],
     "rules": {
-      "@stylistic/array-bracket-spacing": [
-        "error",
-        "never"
-      ],
       "@stylistic/arrow-parens": [
         "error",
         "as-needed",
@@ -711,10 +707,7 @@
           "enforceForClassMembers": true
         }
       ],
-      "@stylistic/dot-location": [
-        "error",
-        "property"
-      ],
+      "@stylistic/dot-location": "error",
       "@stylistic/eol-last": "error",
       "@stylistic/generator-star-spacing": [
         "error",
@@ -841,6 +834,14 @@
           "exceptAfterSingleLine": true
         }
       ],
+      "@stylistic/list-style": [
+        "error",
+        {
+          "overrides": {
+            "()": "off"
+          }
+        }
+      ],
       "@stylistic/max-statements-per-line": [
         "error",
         {
@@ -910,10 +911,6 @@
       "@stylistic/no-tabs": "error",
       "@stylistic/no-trailing-spaces": "error",
       "@stylistic/no-whitespace-before-property": "error",
-      "@stylistic/object-curly-spacing": [
-        "error",
-        "always"
-      ],
       "@stylistic/operator-linebreak": "off",
       "@stylistic/padded-blocks": [
         "error",
@@ -1038,7 +1035,24 @@
         }
       ],
       "antfu/consistent-chaining": "error",
-      "antfu/consistent-list-newline": "error",
+      "antfu/consistent-list-newline": [
+        "error",
+        {
+          "ArrayExpression": false,
+          "ArrayPattern": false,
+          "ExportNamedDeclaration": false,
+          "ImportDeclaration": false,
+          "JSONArrayExpression": false,
+          "JSONObjectExpression": false,
+          "ObjectExpression": false,
+          "ObjectPattern": false,
+          "TSInterfaceDeclaration": false,
+          "TSTupleType": false,
+          "TSTypeLiteral": false,
+          "TSTypeParameterDeclaration": false,
+          "TSTypeParameterInstantiation": false
+        }
+      ],
       "antfu/curly": "error",
       "antfu/if-newline": "error",
       "antfu/top-level-function": "error"
