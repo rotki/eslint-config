@@ -29,7 +29,7 @@ A comprehensive ESLint configuration preset for [rotki](https://github.com/rotki
 ## Requirements
 
 - Node.js >=24 < 25
-- ESLint >=9.10.0
+- ESLint ^9.20.0 or ^10.0.0
 - TypeScript >=5.0.0 (for TypeScript support)
 
 ## Installation
